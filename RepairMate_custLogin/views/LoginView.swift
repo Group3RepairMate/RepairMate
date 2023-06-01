@@ -44,12 +44,12 @@ struct LoginView: View {
                     TextField("Email", text: $email)
                     
                     Spacer()
-                    
-                    if(email.count != 0){
-                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(email.isValidEmail() ? .green : .red)
-                    }
+                    //Email fix
+//                    if(email.count != 0){
+//                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(email.isValidEmail() ? .green : .red)
+//                    }
                     
                    
                 }
@@ -66,12 +66,12 @@ struct LoginView: View {
                     SecureField("Password", text: $password)
                     
                     Spacer()
-                    
-                    if(password.count != 0){
-                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(isValidPassword(password) ? .green : .red)
-                    }
+                    //Password Fix
+//                    if(password.count != 0){
+//                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(isValidPassword(password) ? .green : .red)
+//                    }
                    
                 }
                 .padding()
@@ -97,7 +97,7 @@ struct LoginView: View {
                     
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
                         if let error = error{
-                            print(error) 
+                            print(error)
                             return
                         }
                         if let authResult = authResult{

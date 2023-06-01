@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		03615BDD2A1D866000141A88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		038630A22A1C1824004BD44F /* RepairMate_custLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepairMate_custLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		038630A22A1C1824004BD44F /* RepairMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepairMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairMate_custLoginApp.swift; sourceTree = "<group>"; };
 		038630A72A1C1824004BD44F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		038630A92A1C1825004BD44F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		038630A32A1C1824004BD44F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				038630A22A1C1824004BD44F /* RepairMate_custLogin.app */,
+				038630A22A1C1824004BD44F /* RepairMate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,9 +107,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		038630A12A1C1824004BD44F /* RepairMate_custLogin */ = {
+		038630A12A1C1824004BD44F /* RepairMate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 038630B02A1C1825004BD44F /* Build configuration list for PBXNativeTarget "RepairMate_custLogin" */;
+			buildConfigurationList = 038630B02A1C1825004BD44F /* Build configuration list for PBXNativeTarget "RepairMate" */;
 			buildPhases = (
 				0386309E2A1C1824004BD44F /* Sources */,
 				0386309F2A1C1824004BD44F /* Frameworks */,
@@ -119,13 +119,13 @@
 			);
 			dependencies = (
 			);
-			name = RepairMate_custLogin;
+			name = RepairMate;
 			packageProductDependencies = (
 				038630C32A1D7F10004BD44F /* FirebaseAuth */,
 				038630C52A1D7F10004BD44F /* FirebaseFirestore */,
 			);
 			productName = RepairMate_custLogin;
-			productReference = 038630A22A1C1824004BD44F /* RepairMate_custLogin.app */;
+			productReference = 038630A22A1C1824004BD44F /* RepairMate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -143,7 +143,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0386309D2A1C1824004BD44F /* Build configuration list for PBXProject "RepairMate_custLogin" */;
+			buildConfigurationList = 0386309D2A1C1824004BD44F /* Build configuration list for PBXProject "RepairMate" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -159,7 +159,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				038630A12A1C1824004BD44F /* RepairMate_custLogin */,
+				038630A12A1C1824004BD44F /* RepairMate */,
 			);
 		};
 /* End PBXProject section */
@@ -371,7 +371,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0386309D2A1C1824004BD44F /* Build configuration list for PBXProject "RepairMate_custLogin" */ = {
+		0386309D2A1C1824004BD44F /* Build configuration list for PBXProject "RepairMate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				038630AE2A1C1825004BD44F /* Debug */,
@@ -380,7 +380,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		038630B02A1C1825004BD44F /* Build configuration list for PBXNativeTarget "RepairMate_custLogin" */ = {
+		038630B02A1C1825004BD44F /* Build configuration list for PBXNativeTarget "RepairMate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				038630B12A1C1825004BD44F /* Debug */,
