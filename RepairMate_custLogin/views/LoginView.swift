@@ -44,7 +44,7 @@ struct LoginView: View {
                     TextField("Email", text: $email)
                     
                     Spacer()
-                    //Email fix
+                    //Email fix for tick issue
 //                    if(email.count != 0){
 //                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
 //                            .fontWeight(.bold)
@@ -66,7 +66,7 @@ struct LoginView: View {
                     SecureField("Password", text: $password)
                     
                     Spacer()
-                    //Password Fix
+                    //Password fix for tick issue
 //                    if(password.count != 0){
 //                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
 //                            .fontWeight(.bold)
