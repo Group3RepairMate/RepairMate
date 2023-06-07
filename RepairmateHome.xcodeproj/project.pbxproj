@@ -11,6 +11,12 @@
 		9D57C6E72A2FA1090028C10A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6E62A2FA1090028C10A /* ContentView.swift */; };
 		9D57C6E92A2FA10B0028C10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D57C6E82A2FA10B0028C10A /* Assets.xcassets */; };
 		9D57C6EC2A2FA10B0028C10A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D57C6EB2A2FA10B0028C10A /* Preview Assets.xcassets */; };
+		9D57C6F32A2FC5F50028C10A /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6F22A2FC5F50028C10A /* Homescreen.swift */; };
+		9D57C6F92A2FCBAB0028C10A /* Autoparts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6F82A2FCBAB0028C10A /* Autoparts.swift */; };
+		9D57C6FB2A2FCBBC0028C10A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6FA2A2FCBBC0028C10A /* Profile.swift */; };
+		9D57C6FD2A2FEC540028C10A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6FC2A2FEC540028C10A /* ImagePicker.swift */; };
+		9D57C6FF2A3132F80028C10A /* Updateprofile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6FE2A3132F80028C10A /* Updateprofile.swift */; };
+		9D57C7012A3133060028C10A /* Viewhistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C7002A3133060028C10A /* Viewhistory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		9D57C6E62A2FA1090028C10A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9D57C6E82A2FA10B0028C10A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D57C6EB2A2FA10B0028C10A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9D57C6F22A2FC5F50028C10A /* Homescreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
+		9D57C6F82A2FCBAB0028C10A /* Autoparts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autoparts.swift; sourceTree = "<group>"; };
+		9D57C6FA2A2FCBBC0028C10A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		9D57C6FC2A2FEC540028C10A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		9D57C6FE2A3132F80028C10A /* Updateprofile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updateprofile.swift; sourceTree = "<group>"; };
+		9D57C7002A3133060028C10A /* Viewhistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewhistory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +63,14 @@
 		9D57C6E32A2FA1090028C10A /* RepairmateHome */ = {
 			isa = PBXGroup;
 			children = (
+				9D57C6FC2A2FEC540028C10A /* ImagePicker.swift */,
 				9D57C6E42A2FA1090028C10A /* RepairmateHomeApp.swift */,
 				9D57C6E62A2FA1090028C10A /* ContentView.swift */,
+				9D57C6F22A2FC5F50028C10A /* Homescreen.swift */,
+				9D57C6F82A2FCBAB0028C10A /* Autoparts.swift */,
+				9D57C6FA2A2FCBBC0028C10A /* Profile.swift */,
+				9D57C6FE2A3132F80028C10A /* Updateprofile.swift */,
+				9D57C7002A3133060028C10A /* Viewhistory.swift */,
 				9D57C6E82A2FA10B0028C10A /* Assets.xcassets */,
 				9D57C6EA2A2FA10B0028C10A /* Preview Content */,
 			);
@@ -138,6 +156,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D57C6E72A2FA1090028C10A /* ContentView.swift in Sources */,
+				9D57C7012A3133060028C10A /* Viewhistory.swift in Sources */,
+				9D57C6FB2A2FCBBC0028C10A /* Profile.swift in Sources */,
+				9D57C6FF2A3132F80028C10A /* Updateprofile.swift in Sources */,
+				9D57C6F92A2FCBAB0028C10A /* Autoparts.swift in Sources */,
+				9D57C6FD2A2FEC540028C10A /* ImagePicker.swift in Sources */,
+				9D57C6F32A2FC5F50028C10A /* Homescreen.swift in Sources */,
 				9D57C6E52A2FA1090028C10A /* RepairmateHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

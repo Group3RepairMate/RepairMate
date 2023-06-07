@@ -1,22 +1,30 @@
-//
-//  ContentView.swift
-//  RepairmateHome
-//
-//  Created by Patel Chintan on 2023-06-06.
-//
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+        NavigationView{
+         
+            TabView{
+                Homescreen().tabItem{
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+                
+                Autoparts().tabItem{
+                    Image(systemName: "key.horizontal.fill")
+                    Text("Autoparts")
+                }
+                
+                Profile().tabItem{
+                    Image(systemName: "person.2.circle.fill")
+                    Text("Profile")
+                }
+            }
+            .accentColor(.blue)
+            .background(.red)
+        }//NavigationView ends
+    }//body ends
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -24,3 +32,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
