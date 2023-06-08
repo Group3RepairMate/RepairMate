@@ -35,7 +35,7 @@ struct Homescreen: View {
                                     .foregroundColor(.gray)
                                 
                             }
-                            .padding(10)
+                            .padding(11)
                         }
                     }
                 }
