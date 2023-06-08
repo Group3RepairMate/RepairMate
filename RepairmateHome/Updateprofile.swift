@@ -16,8 +16,7 @@ struct Updateprofile: View {
         VStack{
             TextField("Enter Your Name", text:$name)
             TextField("Enter Your Contact Number", text: $contact)
-//            TextField("Enter Your Email Address")
-//            TextField("Enter Your Home Address")
+
             
         }
     }
