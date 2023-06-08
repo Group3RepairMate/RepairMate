@@ -19,7 +19,7 @@ struct Updateprofile: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(10)
-            TextField("Enter Your Building Code",text: $name)
+            TextField("Enter Your Name",text: $name)
                 .padding(15)
                 .foregroundColor(Color.blue)
                 .textInputAutocapitalization(.never)
@@ -27,7 +27,7 @@ struct Updateprofile: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
-            TextField("Enter Your Building Code",text: $contact)
+            TextField("Enter Your Email Address",text: $contact)
                 .padding(15)
                 .foregroundColor(Color.blue)
                 .textInputAutocapitalization(.never)
@@ -35,7 +35,7 @@ struct Updateprofile: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
-            TextField("Enter Your Building Code",text: $email)
+            TextField("Enter Your Password",text: $email)
                 .padding(15)
                 .foregroundColor(Color.blue)
                 .textInputAutocapitalization(.never)
@@ -43,7 +43,7 @@ struct Updateprofile: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
-            TextField("Enter Your Building Code",text: $address)
+            TextField("Enter Your Address",text: $address)
                 .padding(15)
                 .foregroundColor(Color.blue)
                 .textInputAutocapitalization(.never)
@@ -52,6 +52,25 @@ struct Updateprofile: View {
                 .font(.headline)
                 .cornerRadius(20)
             Spacer()
+            Button(action:{
+                
+            })
+            {
+                Text("Update")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(15)
+                    .frame(maxWidth: 120)
+            }
+            .background(Color.blue)
+            .cornerRadius(70)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.blue,lineWidth: 0)
+                    .foregroundColor(.black)
+            )
+            
         }
         .padding(10)
     }

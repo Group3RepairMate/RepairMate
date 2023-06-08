@@ -25,7 +25,7 @@ struct Profile: View {
             Button(action: {
                 isShowingImagePicker = true
             }) {
-                Text("Choose Image")
+                Text("Edit")
                     .foregroundColor(.white)
                     .font(.headline)
                     .padding()

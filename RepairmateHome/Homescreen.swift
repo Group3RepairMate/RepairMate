@@ -23,21 +23,22 @@ struct Homescreen: View {
                     .padding(10)
                 List {
                     ForEach(searchlist, id: \.self) { index in
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(garagehelper.garagelist[index].name)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text(garagehelper.garagelist[index].location)
-                                .foregroundColor(.gray)
+                        NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])){
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(garagehelper.garagelist[index].name)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                
+                                Text(garagehelper.garagelist[index].location)
+                                    .foregroundColor(.gray)
+                                Text("Service Type:\(garagehelper.garagelist[index].availability)")
+                                    .foregroundColor(.gray)
+                                
+                            }
+                            .padding(10)
                         }
-                        .padding(10)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                       
                     }
                 }
-                .listStyle(PlainListStyle())
                 Spacer()
             }
             .onAppear(){
