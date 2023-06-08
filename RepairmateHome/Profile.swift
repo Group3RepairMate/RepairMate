@@ -4,7 +4,7 @@ import SwiftUI
 struct Profile: View {
     @State private var selectedImage: Image?
     @State private var isShowingImagePicker = false
-    
+    @State private var linkselection:Int? = nil
     var body: some View {
         
         VStack {
@@ -37,11 +37,11 @@ struct Profile: View {
             .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
                 ImagePicker(selectedImage: $selectedImage)
             }
-            
+            NavigationLink(destination: Updateprofile(), tag: 1, selection: self.$linkselection){}
             List {
-                
+               
                 Button(action: {
-                
+                linkselection = 1
                 }) {
                     Text("Update Profile")
                         .foregroundColor(.black)

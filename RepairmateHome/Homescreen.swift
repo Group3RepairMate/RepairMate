@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct Homescreen: View {
@@ -11,44 +10,56 @@ struct Homescreen: View {
     @State var isAlert = false
     @State private var searchlocation = ""
     @State private var searchText = ""
+    @EnvironmentObject var garagehelper : Garagehelper
     
     var body: some View {
         NavigationView{
             VStack {
                 
-                Text("Login")
+                Text("Garages List")
                     .foregroundColor(.blue)
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(10)
-            
-              Spacer()
-        
-//                Button(action:{
-//                    self.createaccount = 1
-//                })
-//                {
-//                    Text("SignUp")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.white)
-//                        .multilineTextAlignment(.center)
-//                        .padding(15)
-//                        .frame(maxWidth: 120)
-//                }
-//                .background(Color.blue)
-//                .cornerRadius(70)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 60)
-//                        .stroke(Color.blue,lineWidth: 0)
-//                        .foregroundColor(.black)
-//                )
-                
+                List {
+                    ForEach(searchlist, id: \.self) { index in
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(garagehelper.garagelist[index].name)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                            
+                            Text(garagehelper.garagelist[index].location)
+                                .foregroundColor(.gray)
+                        }
+                        .padding(10)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                       
+                    }
+                }
+                .listStyle(PlainListStyle())
+                Spacer()
+            }
+            .onAppear(){
+                self.garagehelper.fetchGaragelist()
+
             }
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
             
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    var searchlist: [Int] {
+        if searchlocation.isEmpty {
+            return Array(0..<self.garagehelper.garagelist.count)
+        } else {
+            return self.garagehelper.garagelist.indices.filter { index in
+                let slot = self.garagehelper.garagelist[index]
+                return slot.name.localizedCaseInsensitiveContains(searchlocation)
+            }
+        }
     }
     
     

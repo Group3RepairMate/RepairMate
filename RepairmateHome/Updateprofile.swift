@@ -14,11 +14,46 @@ struct Updateprofile: View {
     @State private var address:String = ""
     var body: some View {
         VStack{
-            TextField("Enter Your Name", text:$name)
-            TextField("Enter Your Contact Number", text: $contact)
-
-            
+            Text("Update Profile")
+                .foregroundColor(.blue)
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(10)
+            TextField("Enter Your Building Code",text: $name)
+                .padding(15)
+                .foregroundColor(Color.blue)
+                .textInputAutocapitalization(.never)
+                .background(Color.gray.opacity(0.3))
+                .disableAutocorrection(true)
+                .font(.headline)
+                .cornerRadius(20)
+            TextField("Enter Your Building Code",text: $contact)
+                .padding(15)
+                .foregroundColor(Color.blue)
+                .textInputAutocapitalization(.never)
+                .background(Color.gray.opacity(0.3))
+                .disableAutocorrection(true)
+                .font(.headline)
+                .cornerRadius(20)
+            TextField("Enter Your Building Code",text: $email)
+                .padding(15)
+                .foregroundColor(Color.blue)
+                .textInputAutocapitalization(.never)
+                .background(Color.gray.opacity(0.3))
+                .disableAutocorrection(true)
+                .font(.headline)
+                .cornerRadius(20)
+            TextField("Enter Your Building Code",text: $address)
+                .padding(15)
+                .foregroundColor(Color.blue)
+                .textInputAutocapitalization(.never)
+                .background(Color.gray.opacity(0.3))
+                .disableAutocorrection(true)
+                .font(.headline)
+                .cornerRadius(20)
+            Spacer()
         }
+        .padding(10)
     }
 }
 

@@ -17,6 +17,8 @@
 		9D57C6FD2A2FEC540028C10A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6FC2A2FEC540028C10A /* ImagePicker.swift */; };
 		9D57C6FF2A3132F80028C10A /* Updateprofile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C6FE2A3132F80028C10A /* Updateprofile.swift */; };
 		9D57C7012A3133060028C10A /* Viewhistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C7002A3133060028C10A /* Viewhistory.swift */; };
+		9D57C7032A3158440028C10A /* Garage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C7022A3158440028C10A /* Garage.swift */; };
+		9D57C7052A315A240028C10A /* Garagehelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57C7042A315A240028C10A /* Garagehelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		9D57C6FC2A2FEC540028C10A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		9D57C6FE2A3132F80028C10A /* Updateprofile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updateprofile.swift; sourceTree = "<group>"; };
 		9D57C7002A3133060028C10A /* Viewhistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewhistory.swift; sourceTree = "<group>"; };
+		9D57C7022A3158440028C10A /* Garage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garage.swift; sourceTree = "<group>"; };
+		9D57C7042A315A240028C10A /* Garagehelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garagehelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				9D57C6FA2A2FCBBC0028C10A /* Profile.swift */,
 				9D57C6FE2A3132F80028C10A /* Updateprofile.swift */,
 				9D57C7002A3133060028C10A /* Viewhistory.swift */,
+				9D57C7022A3158440028C10A /* Garage.swift */,
+				9D57C7042A315A240028C10A /* Garagehelper.swift */,
 				9D57C6E82A2FA10B0028C10A /* Assets.xcassets */,
 				9D57C6EA2A2FA10B0028C10A /* Preview Content */,
 			);
@@ -155,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D57C7052A315A240028C10A /* Garagehelper.swift in Sources */,
 				9D57C6E72A2FA1090028C10A /* ContentView.swift in Sources */,
 				9D57C7012A3133060028C10A /* Viewhistory.swift in Sources */,
 				9D57C6FB2A2FCBBC0028C10A /* Profile.swift in Sources */,
@@ -163,6 +170,7 @@
 				9D57C6FD2A2FEC540028C10A /* ImagePicker.swift in Sources */,
 				9D57C6F32A2FC5F50028C10A /* Homescreen.swift in Sources */,
 				9D57C6E52A2FA1090028C10A /* RepairmateHomeApp.swift in Sources */,
+				9D57C7032A3158440028C10A /* Garage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
