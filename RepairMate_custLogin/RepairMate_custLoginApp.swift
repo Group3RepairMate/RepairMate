@@ -15,7 +15,7 @@ struct RepairMate_custLoginApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView()
         }
     }
 }

@@ -1,48 +1,32 @@
 //
-//  SignUpView.swift
-//  RepairMate_custLogin
+//  MechanicSignUpView.swift
+//  RepairMate
 //
-//  Created by Arjun Roperia on 2023-05-23.
+//  Created by Bhuvesh Aggarwal on 2023-06-06.
 //
 
 import SwiftUI
 import FirebaseAuth
-import FirebaseFirestore
 
-struct SignUpView: View {
+struct MechanicSignUpView: View {
     @Binding var currentShowingView : String
-    @AppStorage("uid") var userID : String = ""
+    @AppStorage("mechanicId") var mechanicId : String = ""
     @State private var email : String = ""
     @State private var password : String = ""
     
     private func isValidPassword(_ password : String) -> Bool{
-        
-        //atleast 6 characters Long
-        //1 upper case letter
-        //1 special character
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
-
         return passwordRegex.evaluate(with: password)
-    }
-    
-    private func createNewUser(email : String, password : String) {
-        var userData : [String:Any] = [
-            "email" : email,
-            "password" : password,
-        ]
-        Firestore.firestore().collection("RepairMate").document(email).setData(userData,merge: false)
     }
     var body: some View {
         ZStack{
             Color.black.edgesIgnoringSafeArea(.all)
-            
             VStack{
                 HStack{
-                    Text("Create an account!")
+                    Text("Mechanic Registration")
                         .foregroundColor(.white)
                         .font(.largeTitle)
                         .bold()
-                    
                     Spacer()
                 }
                 .padding()
@@ -53,16 +37,7 @@ struct SignUpView: View {
                 HStack{
                     Image(systemName: "mail" )
                     TextField("Email", text: $email)
-                    
                     Spacer()
-                    
-                    if(email.count != 0){
-                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(email.isValidEmail() ? .green : .red)
-                    }
-                    
-                   
                 }
                 .foregroundColor(.white)
                 .padding()
@@ -76,15 +51,7 @@ struct SignUpView: View {
                 HStack{
                     Image(systemName: "lock")
                     SecureField("Password", text: $password)
-                    
                     Spacer()
-                    
-                    if(password.count != 0){
-                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(isValidPassword(password) ? .green : .red)
-                    }
-                   
                 }
                 .foregroundColor(.white)
                 .padding()
@@ -97,7 +64,7 @@ struct SignUpView: View {
                 
                 Button(action : {
                     withAnimation{
-                        self.currentShowingView = "login"
+                        self.currentShowingView = "mechanic_login"
                     }
                 }){
                     Text("Already have an account ?")
@@ -107,34 +74,25 @@ struct SignUpView: View {
                 Spacer()
                 
                 Button{
-                    
-                    
-                    
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        
                         if let error = error{
                             print(error)
-                            return 
+                            return
                         }
-                        
                         if let authResult = authResult {
                             print(authResult.user.uid)
                             withAnimation{
-                                userID = authResult.user.uid
+                                mechanicId = authResult.user.uid
                             }
                         }
-                        createNewUser(email: email, password: password)
                     }
-                    
                 } label: {
                     Text("Create Account")
                         .foregroundColor(.black)
                         .font(.title3)
                         .bold()
-                    
                         .frame(maxWidth : .infinity)
                         .padding()
-                    
                         .background(
                             RoundedRectangle(cornerRadius:10)
                                 .fill(Color.white)
@@ -142,11 +100,12 @@ struct SignUpView: View {
                         .padding(.horizontal)
                 }
             }
-            .preferredColorScheme(.dark)
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
         }
     }
 }
 
-
+struct MechanicSignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        MechanicSignUpView(currentShowingView: .constant("mechanic_signup"))
+    }
+}

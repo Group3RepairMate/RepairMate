@@ -1,41 +1,33 @@
 //
-//  LoginView.swift
-//  RepairMate_custLogin
+//  MechanicLoginView.swift
+//  RepairMate
 //
-//  Created by Arjun Roperia on 2023-05-22.
+//  Created by Bhuvesh Aggarwal on 2023-06-06.
 //
 
 import SwiftUI
 import FirebaseAuth
-import FirebaseFirestore
-struct LoginView: View {
-    let database = Firestore.firestore()
-    @Binding var currentShowingView : String
-    @AppStorage("uid") var userID : String = ""
-    @State private var email : String = ""
-    @State private var password : String = ""
-    
-    private func isValidPassword(_ password : String) -> Bool{
-        
-        //atleast 6 characters Long
-        //1 upper case letter
-        //1 special character
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
 
+struct MechanicLoginView: View {
+    @Binding var currentShowingView: String
+    @AppStorage("mechanicId") var mechanicId: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         return passwordRegex.evaluate(with: password)
     }
     
-    
     var body: some View {
-        ZStack{
+        ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
             
-            VStack{
-                HStack{
-                    Text("Welcome Back!")
+            VStack {
+                HStack {
+                    Text("Mechanic Login")
                         .font(.largeTitle)
                         .bold()
-                    
                     Spacer()
                 }
                 .padding()
@@ -43,19 +35,10 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                HStack{
-                    Image(systemName: "mail" )
+                HStack {
+                    Image(systemName: "mail")
                     TextField("Email", text: $email)
-                    
                     Spacer()
-                    //Email fix for tick issue
-//                    if(email.count != 0){
-//                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-//                            .fontWeight(.bold)
-//                            .foregroundColor(email.isValidEmail() ? .green : .red)
-//                    }
-                    
-                   
                 }
                 .padding()
                 .overlay(
@@ -65,18 +48,10 @@ struct LoginView: View {
                 )
                 .padding()
                 
-                HStack{
+                HStack {
                     Image(systemName: "lock")
                     SecureField("Password", text: $password)
-                    
                     Spacer()
-                    //Password fix for tick issue
-//                    if(password.count != 0){
-//                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
-//                            .fontWeight(.bold)
-//                            .foregroundColor(isValidPassword(password) ? .green : .red)
-//                    }
-                   
                 }
                 .padding()
                 .overlay(
@@ -86,41 +61,37 @@ struct LoginView: View {
                 )
                 .padding()
                 
-                Button(action : {
-                    withAnimation{
-                        self.currentShowingView = "signup"
+                Button(action: {
+                    withAnimation {
+                        self.currentShowingView = "mechanic_signup"
                     }
-                }){
+                }) {
                     Text("Don't have an account?")
                         .foregroundColor(.black.opacity(0.7))
                 }
                 Spacer()
                 Spacer()
                 
-                Button{
-                    
+                Button {
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
-                        if let error = error{
+                        if let error = error {
                             print(error)
                             return
                         }
-                        if let authResult = authResult{
-                            print(authResult.user.uid )
-                            withAnimation{
-                                userID = authResult.user.uid 
+                        if let authResult = authResult {
+                            print(authResult.user.uid)
+                            withAnimation {
+                                mechanicId = authResult.user.uid
                             }
                         }
-                      
                     }
                 } label: {
                     Text("Sign In")
                         .foregroundColor(.white)
                         .font(.title3)
                         .bold()
-                    
-                        .frame(maxWidth : .infinity)
+                        .frame(maxWidth: .infinity)
                         .padding()
-                    
                         .background(
                             RoundedRectangle(cornerRadius:10)
                                 .fill(Color.black)
@@ -132,4 +103,8 @@ struct LoginView: View {
     }
 }
 
-
+struct MechanicLoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        MechanicLoginView(currentShowingView: .constant("mechanic_login"))
+    }
+}
