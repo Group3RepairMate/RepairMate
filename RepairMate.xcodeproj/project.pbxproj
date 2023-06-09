@@ -37,7 +37,7 @@
 		038630BE2A1D7AA9004BD44F /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		03C47AEC2A1D8A1E0057ADFF /* RepairMate-custLogin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RepairMate-custLogin-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9EF43E552A2FE3C6001A4A66 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
-		9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionView.swift; sourceTree = "<group>"; };
+		9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleSelectionView.swift; path = RepairMate_custLogin/views/RoleSelectionView.swift; sourceTree = SOURCE_ROOT; };
 		9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicLoginView.swift; sourceTree = "<group>"; };
 		9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicSignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
