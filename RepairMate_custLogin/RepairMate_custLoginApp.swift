@@ -9,13 +9,13 @@ import SwiftUI
 import FirebaseCore
 @main
 struct RepairMate_custLoginApp: App {
-    
+    var garagehelper = Garagehelper()
     init(){
         FirebaseApp.configure() 
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView().environmentObject(garagehelper)
         }
     }
 }
