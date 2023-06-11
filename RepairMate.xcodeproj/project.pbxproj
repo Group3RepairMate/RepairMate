@@ -94,6 +94,7 @@
 			children = (
 				03C47AEC2A1D8A1E0057ADFF /* RepairMate-custLogin-Info.plist */,
 				03615BDD2A1D866000141A88 /* GoogleService-Info.plist */,
+				9D8EE1F32A35026D0069B605 /* Helper */,
 				038630B92A1C65C3004BD44F /* extensions */,
 				038630B32A1C41DB004BD44F /* views */,
 				038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */,
@@ -124,7 +125,6 @@
 				9DF6AB872A34F77D00DA095B /* ImagePicker.swift */,
 				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
 				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
-				9DF6AB852A34F77800DA095B /* Garagehelper.swift */,
 				9DF6AB832A34F77300DA095B /* Garage.swift */,
 				9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */,
 				9DF6AB792A34F73C00DA095B /* Autoparts.swift */,
@@ -141,6 +141,14 @@
 				038630BA2A1C65DC004BD44F /* String.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		9D8EE1F32A35026D0069B605 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9DF6AB852A34F77800DA095B /* Garagehelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

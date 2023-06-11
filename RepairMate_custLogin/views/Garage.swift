@@ -5,7 +5,7 @@ struct Garagesstruct : Codable{
     var list = [Garage]()
 }
 
-struct Garage : Codable{
+struct Garage : Codable,Hashable{
     var id : Int
     var name : String
     var location : String
