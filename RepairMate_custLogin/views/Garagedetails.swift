@@ -14,6 +14,8 @@ struct Garagedetails: View {
     @State private var email : String = ""
     @State private var phone_no : String = ""
     @State private var availability:String = ""
+    @State private var goToProfileSetting : Bool = false
+    @State var goToCustomerDetailScreen : Bool = false
     
     var body: some View {
         VStack{
@@ -29,9 +31,30 @@ struct Garagedetails: View {
             Text("Contact Details")
             Text("Email Address:\(detailsview.email)")
             Text("Phone Number:\(detailsview.phone_no)")
+            Spacer()
+            NavigationLink(destination : CustomerDetailsForm(), isActive: $goToCustomerDetailScreen){
+                Button(action : {
+                    self.goToCustomerDetailScreen = true
+                })
+                {
+                    Text("Book Now")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color.blue)
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+            }
             
         }
-        Spacer()
+      
         
     }
 }

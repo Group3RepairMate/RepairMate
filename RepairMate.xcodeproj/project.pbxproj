@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03615BDE2A1D866000141A88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03615BDD2A1D866000141A88 /* GoogleService-Info.plist */; };
 		038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */; };
 		038630A82A1C1824004BD44F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630A72A1C1824004BD44F /* ContentView.swift */; };
 		038630AA2A1C1825004BD44F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 038630A92A1C1825004BD44F /* Assets.xcassets */; };
@@ -18,6 +17,9 @@
 		038630BF2A1D7AA9004BD44F /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630BE2A1D7AA9004BD44F /* AuthView.swift */; };
 		038630C42A1D7F10004BD44F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 038630C32A1D7F10004BD44F /* FirebaseAuth */; };
 		038630C62A1D7F10004BD44F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 038630C52A1D7F10004BD44F /* FirebaseFirestore */; };
+		9D780F132A39628300189096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D780F122A39628300189096 /* GoogleService-Info.plist */; };
+		9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */; };
+		9D780F172A39634900189096 /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D780F162A39634900189096 /* ProfileSettingView.swift */; };
 		9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB772A34F71500DA095B /* Homescreen.swift */; };
 		9DF6AB7A2A34F73C00DA095B /* Autoparts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB792A34F73C00DA095B /* Autoparts.swift */; };
 		9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7B2A34F75600DA095B /* Profile.swift */; };
@@ -34,7 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03615BDD2A1D866000141A88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		038630A22A1C1824004BD44F /* RepairMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepairMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairMate_custLoginApp.swift; sourceTree = "<group>"; };
 		038630A72A1C1824004BD44F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +46,9 @@
 		038630BC2A1D792E004BD44F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		038630BE2A1D7AA9004BD44F /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		03C47AEC2A1D8A1E0057ADFF /* RepairMate-custLogin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RepairMate-custLogin-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9D780F122A39628300189096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailsForm.swift; sourceTree = "<group>"; };
+		9D780F162A39634900189096 /* ProfileSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
 		9DF6AB772A34F71500DA095B /* Homescreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
 		9DF6AB792A34F73C00DA095B /* Autoparts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Autoparts.swift; sourceTree = "<group>"; };
 		9DF6AB7B2A34F75600DA095B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -93,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				03C47AEC2A1D8A1E0057ADFF /* RepairMate-custLogin-Info.plist */,
-				03615BDD2A1D866000141A88 /* GoogleService-Info.plist */,
+				9D780F122A39628300189096 /* GoogleService-Info.plist */,
 				9D8EE1F32A35026D0069B605 /* Helper */,
 				038630B92A1C65C3004BD44F /* extensions */,
 				038630B32A1C41DB004BD44F /* views */,
@@ -127,9 +131,11 @@
 				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
 				9DF6AB832A34F77300DA095B /* Garage.swift */,
 				9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */,
+				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
 				9DF6AB792A34F73C00DA095B /* Autoparts.swift */,
 				9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */,
 				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
+				9D780F162A39634900189096 /* ProfileSettingView.swift */,
 				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
 			);
 			path = views;
@@ -218,7 +224,7 @@
 			files = (
 				038630AD2A1C1825004BD44F /* Preview Assets.xcassets in Resources */,
 				038630AA2A1C1825004BD44F /* Assets.xcassets in Resources */,
-				03615BDE2A1D866000141A88 /* GoogleService-Info.plist in Resources */,
+				9D780F132A39628300189096 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +244,7 @@
 				038630BD2A1D792E004BD44F /* SignUpView.swift in Sources */,
 				9DF6AB882A34F77D00DA095B /* ImagePicker.swift in Sources */,
 				9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */,
+				9D780F172A39634900189096 /* ProfileSettingView.swift in Sources */,
 				038630BF2A1D7AA9004BD44F /* AuthView.swift in Sources */,
 				038630A82A1C1824004BD44F /* ContentView.swift in Sources */,
 				9EF43E582A2FE425001A4A66 /* RoleSelectionView.swift in Sources */,
@@ -245,6 +252,7 @@
 				9DF6AB862A34F77800DA095B /* Garagehelper.swift in Sources */,
 				9DF6AB802A34F76800DA095B /* Viewhistory.swift in Sources */,
 				9DF6AB842A34F77300DA095B /* Garage.swift in Sources */,
+				9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */,
 				9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */,
 				038630BB2A1C65DC004BD44F /* String.swift in Sources */,
 				038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */,

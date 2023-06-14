@@ -11,90 +11,92 @@ struct Profile: View {
         if userID ==  ""{
             AuthView()
         }
-        VStack {
-            if let image = selectedImage {
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 180, height: 190)
-                    .clipShape(Circle())
-            } else {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 180, height: 190)
-                    .foregroundColor(.gray)
-            }
-            
-            Button(action: {
-                isShowingImagePicker = true
-            }) {
-                Text("Edit")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            .padding()
-            
-            .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
-                ImagePicker(selectedImage: $selectedImage)
-            }
-            NavigationLink(destination: Updateprofile(), tag: 1, selection: self.$linkselection){}
-            List {
-               
-                Button(action: {
-                linkselection = 1
-                }) {
-                    Text("Update Profile")
-                        .foregroundColor(.black)
-                        .font(.headline)
-                        .padding()
-                        .cornerRadius(20)
+        NavigationView(){
+            VStack {
+                if let image = selectedImage {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 180, height: 190)
+                        .clipShape(Circle())
+                } else {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 180, height: 190)
+                        .foregroundColor(.gray)
                 }
                 
                 Button(action: {
-                   
+                    isShowingImagePicker = true
                 }) {
-                    Text("View History")
-                        .foregroundColor(.black)
+                    Text("Edit")
+                        .foregroundColor(.white)
                         .font(.headline)
                         .padding()
-                        .cornerRadius(20)
+                        .background(Color.blue)
+                        .cornerRadius(10)
                 }
+                .padding()
                 
-                .listStyle(GroupedListStyle())
-            }
-            
-            Button(action:{
-                let firebaseAuth = Auth.auth()
-                do {
-                  try firebaseAuth.signOut()
-                    withAnimation{
-                        userID = ""
+                .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
+                    ImagePicker(selectedImage: $selectedImage)
+                }
+                NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
+                List {
+                    
+                    Button(action: {
+                        self.linkselection = 1
+                    }) {
+                        Text("Update Profile")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
                     }
-                } catch let signOutError as NSError {
-                  print("Error signing out: %@", signOutError)
+                    
+                    Button(action: {
+                        
+                    }) {
+                        Text("View History")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
+                    
+                    .listStyle(GroupedListStyle())
                 }
-            })
-            {
-                Text("Logout")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 120)
+                
+                Button(action:{
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                        withAnimation{
+                            userID = ""
+                        }
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                })
+                {
+                    Text("Logout")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color.blue)
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+                
+                
             }
-            .background(Color.blue)
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
-            
-            
         }
     }
     func loadimage(){
