@@ -1,101 +1,86 @@
-//
-//  CustomerDetailsForm.swift
-//  RepairMate
-//
-//  Created by Arjun Roperia on 2023-06-12.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
 struct CustomerDetailsForm: View {
     
-    @State private var firstName : String = ""
-    @State private var lastName : String = ""
-    @State private var emailAddress : String = ""
-    @State private var contactNumber : String = ""
-    @State private var location : String = ""
-    @State private var date : Date = Date.now
-    @State private var problemDesc : String = ""
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var emailAddress: String = ""
+    @State private var contactNumber: String = ""
+    @State private var location: String = ""
+    @State private var dateTime: Date = Date()
+    @State private var problemDesc: String = ""
+    var loginuser : String = ""
+    @State private var goToProfileSetting: Bool = false
     
-    @State private var goToProfileSetting : Bool = false
-    
-    
-//    private func createNewUser(email : String, password : String) {
-//        var userData : [String:Any] = [
-//            "email" : email,
-//            "password" : password,
-//        ]
-//        Firestore.firestore().collection("RepairMate").document(email).setData(userData,merge: false)
-//    }
-    private func addCustDetails(firstName : String, lastName : String, emailAddress : String, contactNumber : String, location : String, date : Date, problemDesc : String){
-        var userData : [String : Any] = [
-            "firstName" : firstName,
-            "lastName" : lastName,
-            "emailAddress" : emailAddress,
-            "contactNumber" : contactNumber,
-            "location" : location,
-            "dateTime" : date,
-            "problemDesc" : problemDesc
+    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String) {
+        
+        let userData: [String: Any] = [
+            "firstName": firstName,
+            "lastName": lastName,
+            "emailAddress": emailAddress,
+            "contactNumber": contactNumber,
+            "location": location,
+            "dateTime": dateTime,
+            "problemDesc": problemDesc
         ]
         
-        Firestore.firestore().collection("Repairmate").document(emailAddress).setData(userData,merge : true)
+        Firestore.firestore().collection("Repairmate").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").setData(userData, merge: true)
     }
+    
     var body: some View {
-        
-       
-        VStack{
-            
+        VStack {
             Text("Customer Details")
                 .font(.largeTitle)
-                .padding()
-            Form{
-                Section{
-                    TextField("First Name",text: $firstName)
+            
+            Form {
+                Section(header: Text("Personal Information")) {
+                    TextField("First Name", text: $firstName)
+                    TextField("Last Name", text: $lastName)
+                    TextField("Email Address", text: $emailAddress)
+                        .keyboardType(.emailAddress)
+                    TextField("Contact Number", text: $contactNumber)
+                        .keyboardType(.numberPad)
                 }
-                Section{
-                    TextField("Last Name",text: $lastName)
-                }
-                Section{
-                    TextField("Email Address",text : $emailAddress)
-                }
-                Section{
-                    TextField("Contact Number",text: $contactNumber)
-                }
-                Section{
-                    TextField("Location",text: $location)
-                }
-                Section{
-                    DatePicker(selection: $date){
-                        Text("Select date")
-                    }
-                    
-                }
-                Section{
-                    TextField("Problem Desctiption",text: $problemDesc)
-                        
-                }
-                NavigationLink(destination : ProfileSettingView(), isActive: $goToProfileSetting){
-                    Button(
-                        action : {
-                       
-                        self.goToProfileSetting = true
-                    }){
-                        Text("Book Now")
-                    }
-            }
+                .padding(8)
                 
-                Button{
-                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, date: date, problemDesc: problemDesc)
-                } label: {
-                    Text("Save Details")
+                Section(header: Text("Booking Details")) {
+                    TextField("Location", text: $location)
+                    DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                    TextField("Problem Description", text: $problemDesc)
+                        .multilineTextAlignment(.leading)
+                        .frame(height: 120)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray, lineWidth: 0)
+                        )
                 }
             }
             
+            Button(action: {
+                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc)
+            }) {
+                Text("Book")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(15)
+                    .frame(maxWidth: 120)
+            }
+            .background(Color.blue)
+            .cornerRadius(70)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.blue, lineWidth: 0)
+                    .foregroundColor(.black)
+            )
+            .onAppear(){
+                    print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                
+            }
         }
-        
-        
+        Spacer()
     }
 }
 

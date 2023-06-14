@@ -83,13 +83,13 @@ struct LoginView: View {
                 Spacer()
                 
                 Button{
-                    
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
                         if let error = error{
                             print(error)
                             return
                         }
                         if let authResult = authResult{
+                            UserDefaults.standard.set(email,forKey: "EMAIL")
                             print(authResult.user.uid )
                             withAnimation{
                                 userID = authResult.user.uid 

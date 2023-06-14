@@ -100,7 +100,7 @@ struct SignUpView: View {
                 Button{
                     
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        
+                        UserDefaults.standard.set(email,forKey: "EMAIL")
                         if let error = error{
                             print(error)
                             return 
