@@ -39,7 +39,6 @@ struct Homescreen: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                // .background(Color.white)
                 .padding(.horizontal)
                 
                 
@@ -51,14 +50,14 @@ struct Homescreen: View {
                                 Text(garagehelper.garagelist[index].name)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color("darkgray"))
-                                    .font(.system(size: 23))
+                                    .font(.system(size: 22))
                                 Text(garagehelper.garagelist[index].location)
                                     .foregroundColor(.gray)
                                     .fontWeight(.semibold)
-                                    .font(.system(size: 16))
+                                    .font(.system(size: 15.5))
                                 Text("Service Type: \(garagehelper.garagelist[index].availability)")
                                     .foregroundColor(.gray)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 14))
                             }
                             .padding(11)
                         }

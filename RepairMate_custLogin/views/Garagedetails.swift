@@ -54,8 +54,7 @@ struct Garagedetails: View {
                         .foregroundColor(.black)
                 )
             }
-           
-            //.navigationBarHidden(true)
+
             .navigationBarTitle("", displayMode: .inline)
         }
       
