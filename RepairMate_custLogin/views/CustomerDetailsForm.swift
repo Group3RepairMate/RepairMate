@@ -44,7 +44,6 @@ struct CustomerDetailsForm: View {
         }
     }
     
-    
     var body: some View {
         VStack {
             Text("Customer Details")
