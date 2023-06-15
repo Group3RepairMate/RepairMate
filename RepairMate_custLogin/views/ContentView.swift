@@ -30,7 +30,7 @@ struct ContentView: View {
                     Text("Profile")
                 }
             }
-            .accentColor(.blue)
+            .accentColor(Color("darkgray"))
             .background(.red)
             .navigationBarBackButtonHidden(true)
         }

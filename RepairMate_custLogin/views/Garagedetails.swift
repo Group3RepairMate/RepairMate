@@ -20,7 +20,7 @@ struct Garagedetails: View {
     var body: some View {
         VStack{
             Text(detailsview.name)
-                .foregroundColor(.blue)
+                .foregroundColor(Color("darkgray"))
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(5)
@@ -35,6 +35,8 @@ struct Garagedetails: View {
             NavigationLink(destination : CustomerDetailsForm(), isActive: $goToCustomerDetailScreen){
                 Button(action : {
                     self.goToCustomerDetailScreen = true
+                    UserDefaults.standard.set(detailsview.name, forKey: "GARAGE")
+                    UserDefaults.standard.set(detailsview.availability, forKey: "SERVICE")
                 })
                 {
                     Text("Book Now")
@@ -44,7 +46,7 @@ struct Garagedetails: View {
                         .padding(15)
                         .frame(maxWidth: 120)
                 }
-                .background(Color.blue)
+                .background(Color("darkgray"))
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
@@ -52,7 +54,9 @@ struct Garagedetails: View {
                         .foregroundColor(.black)
                 )
             }
-            
+           
+            //.navigationBarHidden(true)
+            .navigationBarTitle("", displayMode: .inline)
         }
       
         

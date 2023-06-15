@@ -23,8 +23,8 @@ struct Homescreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Garages List")
-                    .foregroundColor(.blue)
+                Text("Garage List")
+                    .foregroundColor(Color("darkgray"))
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(10)
@@ -39,20 +39,26 @@ struct Homescreen: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                // .background(Color.white)
                 .padding(.horizontal)
+                
+                
                 
                 List {
                     ForEach(searchlist, id: \.self) { index in
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(garagehelper.garagelist[index].name)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.black)
-                                
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color("darkgray"))
+                                    .font(.system(size: 23))
                                 Text(garagehelper.garagelist[index].location)
                                     .foregroundColor(.gray)
+                                    .fontWeight(.semibold)
+                                    .font(.system(size: 16))
                                 Text("Service Type: \(garagehelper.garagelist[index].availability)")
                                     .foregroundColor(.gray)
+                                    .font(.system(size: 15))
                             }
                             .padding(11)
                         }
@@ -72,6 +78,7 @@ struct Homescreen: View {
             .navigationBarBackButtonHidden(true)
         }
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitle("", displayMode: .inline)
     }
     
     var searchlist: [Int] {

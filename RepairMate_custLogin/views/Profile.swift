@@ -6,6 +6,7 @@ struct Profile: View {
     @State private var selectedImage: Image?
     @State private var isShowingImagePicker = false
     @State private var linkselection:Int? = nil
+    @State private var historyselection:Int? = nil
     @AppStorage("uid") var userID : String = ""
     var body: some View {
         if userID ==  ""{
@@ -34,8 +35,9 @@ struct Profile: View {
                         .foregroundColor(.white)
                         .font(.headline)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color("darkgray"))
                         .cornerRadius(10)
+                        .frame(width: 180)
                 }
                 .padding()
                 
@@ -43,6 +45,7 @@ struct Profile: View {
                     ImagePicker(selectedImage: $selectedImage)
                 }
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
+                NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 List {
                     
                     Button(action: {
@@ -56,7 +59,7 @@ struct Profile: View {
                     }
                     
                     Button(action: {
-                        
+                        self.historyselection = 1
                     }) {
                         Text("View History")
                             .foregroundColor(.black)
@@ -87,7 +90,7 @@ struct Profile: View {
                         .padding(15)
                         .frame(maxWidth: 120)
                 }
-                .background(Color.blue)
+                .background(Color("darkgray"))
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)

@@ -16,21 +16,17 @@ struct SignUpView: View {
     
     private func isValidPassword(_ password : String) -> Bool{
         
-        //atleast 6 characters Long
-        //1 upper case letter
-        //1 special character
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
-
+        
         return passwordRegex.evaluate(with: password)
     }
     var body: some View {
         ZStack{
-            Color.black.edgesIgnoringSafeArea(.all)
             
             VStack{
                 HStack{
                     Text("Create an account!")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("darkgray"))
                         .font(.largeTitle)
                         .bold()
                     
@@ -46,21 +42,14 @@ struct SignUpView: View {
                     TextField("Email", text: $email)
                     
                     Spacer()
-                    
-                    if(email.count != 0){
-                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(email.isValidEmail() ? .green : .red)
-                    }
-                    
-                   
+
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                 )
                 .padding()
                 
@@ -70,19 +59,13 @@ struct SignUpView: View {
                     
                     Spacer()
                     
-                    if(password.count != 0){
-                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
-                            .fontWeight(.bold)
-                            .foregroundColor(isValidPassword(password) ? .green : .red)
-                    }
-                   
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                 )
                 .padding()
                 
@@ -97,13 +80,13 @@ struct SignUpView: View {
                 Spacer()
                 Spacer()
                 
-                Button{
+                Button(action:{
                     
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         UserDefaults.standard.set(email,forKey: "EMAIL")
                         if let error = error{
                             print(error)
-                            return 
+                            return
                         }
                         
                         if let authResult = authResult {
@@ -114,23 +97,26 @@ struct SignUpView: View {
                         }
                     }
                     
-                } label: {
-                    Text("Create Account")
-                        .foregroundColor(.black)
-                        .font(.title3)
-                        .bold()
-                    
-                        .frame(maxWidth : .infinity)
-                        .padding()
-                    
-                        .background(
-                            RoundedRectangle(cornerRadius:10)
-                                .fill(Color.white)
-                        )
-                        .padding(.horizontal)
                 }
+                )
+                {
+                    Text("Create Account")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 180)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+                
             }
-            .preferredColorScheme(.dark)
+  
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
         }

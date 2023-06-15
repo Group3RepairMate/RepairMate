@@ -31,6 +31,7 @@ struct LoginView: View {
                 HStack{
                     Text("Welcome Back!")
                         .font(.largeTitle)
+                        .foregroundColor(Color("darkgray"))
                         .bold()
                     
                     Spacer()
@@ -82,7 +83,7 @@ struct LoginView: View {
                 Spacer()
                 Spacer()
                 
-                Button{
+                Button(action:{
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
                         if let error = error{
                             print(error)
@@ -97,21 +98,23 @@ struct LoginView: View {
                         }
                       
                     }
-                } label: {
-                    Text("Sign In")
+                })
+                {
+                    Text("SignIn")
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .font(.title3)
-                        .bold()
-                    
-                        .frame(maxWidth : .infinity)
-                        .padding()
-                    
-                        .background(
-                            RoundedRectangle(cornerRadius:10)
-                                .fill(Color.black)
-                        )
-                        .padding(.horizontal)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 180)
                 }
+                .background(Color("darkgray")
+)
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
             }
         }
     }

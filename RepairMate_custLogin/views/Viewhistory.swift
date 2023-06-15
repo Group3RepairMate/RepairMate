@@ -1,21 +1,72 @@
-//
-//  Viewhistory.swift
-//  RepairmateHome
-//
-//  Created by Patel Chintan on 2023-06-07.
-//
-
 import SwiftUI
+import FirebaseFirestore
 
 struct Viewhistory: View {
+    @State private var orderList: [History] = []
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Booking History")
+                .font(.largeTitle)
+                .foregroundColor(Color("darkgray"))
+            if orderList.isEmpty {
+                Text("No orders found")
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                List(orderList, id: \.id) { order in
+                    VStack(alignment: .leading) {
+                        Text("Garage Name: \(order.garagename)")
+                            .font(.headline)
+                        Text("Date and Time: \(formattedDateTime(order.dateTime))")
+                            .font(.subheadline)
+                        
+                    }
+                    .padding()
+                }
+            }
+        }
+        .onAppear {
+            fetchOrderList()
+        }
     }
-}
+   
+    private func fetchOrderList() {
+        guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+            print("User document ID not found")
+            return
+        }
+        
+        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error retrieving order list: \(error)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found")
+                return
+            }
+            
+            let orders = documents.compactMap { document -> History? in
+                let data = document.data()
+                let location = data["location"] as? String ?? ""
+                let timestamp = data["dateTime"] as? Timestamp ?? Timestamp()
+                let garagename = data["garagename"] as? String ?? ""
+                
+             
+                let dateTime = timestamp.dateValue()
+                
+                return History(location: location, dateTime: dateTime, garagename: garagename)
+            }
+            
+            self.orderList = orders
+        }
+    }
 
-struct Viewhistory_Previews: PreviewProvider {
-    static var previews: some View {
-        Viewhistory()
+    private func formattedDateTime(_ dateTime: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.string(from: dateTime)
     }
 }

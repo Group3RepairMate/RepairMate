@@ -11,11 +11,14 @@ struct CustomerDetailsForm: View {
     @State private var location: String = ""
     @State private var dateTime: Date = Date()
     @State private var problemDesc: String = ""
+    @State private var garagedetail: String = ""
+    @State private var date: Date = Date()
+    @State private var time: Date = Date()
+    
     var loginuser : String = ""
     @State private var goToProfileSetting: Bool = false
     
-    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String) {
-        
+    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String, garagedetail: String) {
         let userData: [String: Any] = [
             "firstName": firstName,
             "lastName": lastName,
@@ -23,16 +26,30 @@ struct CustomerDetailsForm: View {
             "contactNumber": contactNumber,
             "location": location,
             "dateTime": dateTime,
-            "problemDesc": problemDesc
+            "problemDesc": problemDesc,
+            "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? ""
         ]
         
-        Firestore.firestore().collection("Repairmate").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").setData(userData, merge: true)
+        guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+            print("User document ID not found")
+            return
+        }
+        
+        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").addDocument(data: userData) { error in
+            if let error = error {
+                print("Error\(error)")
+            } else {
+                print("Document added ")
+            }
+        }
     }
+    
     
     var body: some View {
         VStack {
             Text("Customer Details")
                 .font(.largeTitle)
+                .foregroundColor(Color("darkgray"))
             
             Form {
                 Section(header: Text("Personal Information")) {
@@ -47,7 +64,15 @@ struct CustomerDetailsForm: View {
                 
                 Section(header: Text("Booking Details")) {
                     TextField("Location", text: $location)
-                    DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                    if(UserDefaults.standard.string(forKey: "SERVICE") == "Immediate"){
+                        DatePicker(selection: $time, displayedComponents: .hourAndMinute) {
+                            Text("Time")
+                        }
+                    }
+                    else{
+                        DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                    }
+                    
                     TextField("Problem Description", text: $problemDesc)
                         .multilineTextAlignment(.leading)
                         .frame(height: 120)
@@ -59,7 +84,7 @@ struct CustomerDetailsForm: View {
             }
             
             Button(action: {
-                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc)
+                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
             }) {
                 Text("Book")
                     .fontWeight(.bold)
@@ -68,7 +93,7 @@ struct CustomerDetailsForm: View {
                     .padding(15)
                     .frame(maxWidth: 120)
             }
-            .background(Color.blue)
+            .background(Color("darkgray"))
             .cornerRadius(70)
             .overlay(
                 RoundedRectangle(cornerRadius: 0)
@@ -76,7 +101,8 @@ struct CustomerDetailsForm: View {
                     .foregroundColor(.black)
             )
             .onAppear(){
-                    print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
                 
             }
         }

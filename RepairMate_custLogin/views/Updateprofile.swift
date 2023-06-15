@@ -15,7 +15,7 @@ struct Updateprofile: View {
     var body: some View {
         VStack{
             Text("Update Profile")
-                .foregroundColor(.blue)
+                .foregroundColor(Color("darkgray"))
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(10)
@@ -63,7 +63,7 @@ struct Updateprofile: View {
                     .padding(15)
                     .frame(maxWidth: 120)
             }
-            .background(Color.blue)
+            .background(Color("darkgray"))
             .cornerRadius(70)
             .overlay(
                 RoundedRectangle(cornerRadius: 0)
