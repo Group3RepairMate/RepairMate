@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 struct ContentView: View {
     @AppStorage("uid") var userID : String = ""
     var body: some View {
