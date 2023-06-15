@@ -16,10 +16,13 @@ struct Viewhistory: View {
             } else {
                 List(orderList, id: \.id) { order in
                     VStack(alignment: .leading) {
-                        Text("Garage Name: \(order.garagename)")
-                            .font(.headline)
+                        Text("\(order.garagename)")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .font(.system(size: 18))
+                        Text("")
                         Text("Date and Time: \(formattedDateTime(order.dateTime))")
-                            .font(.subheadline)
+                            .font(.system(size: 14))
                         
                     }
                     .padding()

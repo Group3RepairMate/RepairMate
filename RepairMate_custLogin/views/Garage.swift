@@ -1,5 +1,6 @@
 
 import Foundation
+import CoreLocation
 
 struct Garagesstruct : Codable{
     var list = [Garage]()

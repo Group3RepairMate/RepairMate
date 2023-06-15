@@ -15,10 +15,8 @@ struct Updateprofile: View {
     var body: some View {
         VStack{
             Text("Update Profile")
+                .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(10)
             TextField("Enter Your Name",text: $name)
                 .padding(15)
                 .foregroundColor(Color.blue)

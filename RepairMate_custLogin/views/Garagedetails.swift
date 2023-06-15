@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreLocation
+import _MapKit_SwiftUI
 
 struct Garagedetails: View {
     var detailsview:Garage
@@ -16,21 +18,66 @@ struct Garagedetails: View {
     @State private var availability:String = ""
     @State private var goToProfileSetting : Bool = false
     @State var goToCustomerDetailScreen : Bool = false
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     var body: some View {
         VStack{
             Text(detailsview.name)
+//                .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .font(.title)
-                .fontWeight(.bold)
+                .font(.system(size: 30))
+            Text("")
+            VStack{
+                
+                Text("Location: \(detailsview.location)")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 17))
+                    .foregroundColor(.gray)
+                Text("")
+                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+                    .frame(width: 400, height: 300)
+//                Image(systemName: "arrow.turn.up.right")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 40, height: 40)
+//                    .foregroundColor(.white)
+//                    .background(Color.blue)
+//                    .clipShape(Circle())
+                Text("")
+                Text("")
+                Text("Contact Details")
+                    .padding(.top, 10)
+                    .font(.system(size: 20))
+                    .fontWeight(.semibold)
+                Text("")
+            }
+            VStack{
+                HStack {
+                    Image(systemName: "envelope")
+                        .foregroundColor(.blue)
+                    Text("Email Address:")
+                        .fontWeight(.semibold)
+                        .font(.system(size: 15))
+                    Text(detailsview.email)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 15))
+                    Spacer()
+                }
                 .padding(5)
-            
-            Text("Location: \(detailsview.location)")
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.leading)
-            Text("Contact Details")
-            Text("Email Address:\(detailsview.email)")
-            Text("Phone Number:\(detailsview.phone_no)")
+                Text("")
+                HStack {
+                    Image(systemName: "phone")
+                        .foregroundColor(.blue)
+                    Text("Phone Number:")
+                        .fontWeight(.semibold)
+                        .font(.system(size: 15))
+                    Text(detailsview.phone_no)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 15))
+                    Spacer()
+                }
+                .padding(5)
+            }
             Spacer()
             NavigationLink(destination : CustomerDetailsForm(), isActive: $goToCustomerDetailScreen){
                 Button(action : {
@@ -54,10 +101,10 @@ struct Garagedetails: View {
                         .foregroundColor(.black)
                 )
             }
-
-            .navigationBarTitle("", displayMode: .inline)
+            
+            .navigationBarBackButtonHidden(false)
         }
-      
+        
         
     }
 }

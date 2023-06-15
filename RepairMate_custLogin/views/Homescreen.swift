@@ -25,9 +25,8 @@ struct Homescreen: View {
             VStack {
                 Text("Garage List")
                     .foregroundColor(Color("darkgray"))
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(10)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
                 
                 Picker("Service", selection: $selectedServiceType) {
                     Text("All").tag(ServiceType.all)
@@ -48,7 +47,7 @@ struct Homescreen: View {
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(garagehelper.garagelist[index].name)
-                                    .fontWeight(.bold)
+                                    .fontWeight(.semibold)
                                     .foregroundColor(Color("darkgray"))
                                     .font(.system(size: 22))
                                 Text(garagehelper.garagelist[index].location)
@@ -74,10 +73,9 @@ struct Homescreen: View {
             }
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
-            .navigationBarBackButtonHidden(true)
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarTitle("", displayMode: .inline)
+       
     }
     
     var searchlist: [Int] {
