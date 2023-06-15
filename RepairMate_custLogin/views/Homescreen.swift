@@ -1,4 +1,5 @@
 import SwiftUI
+import Firebase
 
 struct Homescreen: View {
     
@@ -39,9 +40,7 @@ struct Homescreen: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                
-                
-                
+            
                 List {
                     ForEach(searchlist, id: \.self) { index in
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
