@@ -38,7 +38,7 @@ struct SignUpView: View {
                 Spacer()
                 
                 HStack{
-                    Image(systemName: "mail" )
+                    Image(systemName: "envelope")
                     TextField("Email", text: $email)
                     
                     Spacer()
@@ -47,9 +47,9 @@ struct SignUpView: View {
                 .foregroundColor(.black)
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("darkgray"))
                 )
                 .padding()
                 
@@ -63,9 +63,9 @@ struct SignUpView: View {
                 .foregroundColor(.black)
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("darkgray"))
                 )
                 .padding()
                 
@@ -75,7 +75,7 @@ struct SignUpView: View {
                     }
                 }){
                     Text("Already have an account ?")
-                        .foregroundColor(.gray.opacity(1.0))
+                        .foregroundColor(.gray.opacity(0.7))
                 }
                 Spacer()
                 Spacer()

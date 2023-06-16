@@ -15,7 +15,7 @@ struct RepairMate_custLoginApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(garagehelper)
+            SplashScreenView().environmentObject(garagehelper)
         }
     }
 }

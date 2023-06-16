@@ -16,19 +16,20 @@ struct SplashScreenView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("darkgray"))
                 
                     Text("Welcome to our service!")
                         .font(.headline)
                         .fontWeight(.medium)
                         .padding()
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color("darkgray"))
 
                  
                     Image(systemName: "wrench.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 100)
+                        .foregroundColor(Color("darkgray"))
                         .padding()
                 }
             }

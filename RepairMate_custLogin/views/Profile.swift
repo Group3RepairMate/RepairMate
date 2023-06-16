@@ -67,6 +67,24 @@ struct Profile: View {
                             .padding()
                             .cornerRadius(20)
                     }
+//                    Button(action: {
+//                        self.historyselection = 1
+//                    }) {
+//                        Text("About US")
+//                            .foregroundColor(.black)
+//                            .font(.headline)
+//                            .padding()
+//                            .cornerRadius(20)
+//                    }
+//                    Button(action: {
+//
+//                    }) {
+//                        Text("")
+//                            .foregroundColor(.black)
+//                            .font(.headline)
+//                            .padding()
+//                            .cornerRadius(20)
+//                    }
                     
                     .listStyle(GroupedListStyle())
                 }

@@ -19,25 +19,9 @@ struct RoleSelectionView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("darkgray"))
 
                 Spacer()
-
-                // Passed currentShowingView state to MechanicLoginView
-                NavigationLink(destination: MechanicLoginView(currentShowingView: $currentShowingView)) {
-                    Text("Mechanic")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.blue)
-                        )
-                        .padding(.horizontal)
-                }
-                .padding(.bottom)
 
                 NavigationLink(destination: ContentView()) {
                     Text("Customer")
@@ -47,12 +31,26 @@ struct RoleSelectionView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("darkgray"))
+                        )
+                        .padding(.horizontal)
+                }
+                .padding(.bottom)
+                // Passed currentShowingView state to MechanicLoginView
+                NavigationLink(destination: MechanicLoginView(currentShowingView: $currentShowingView)) {
+                    Text("Mechanic")
+                        .foregroundColor(.white)
+                        .font(.title3)
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
                                 .fill(Color.green)
                         )
                         .padding(.horizontal)
                 }
-
                 Spacer()
             }
         }

@@ -20,7 +20,7 @@ struct LoginView: View {
         //1 upper case letter
         //1 special character
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
-
+        
         return passwordRegex.evaluate(with: password)
     }
     var body: some View {
@@ -42,18 +42,18 @@ struct LoginView: View {
                 Spacer()
                 
                 HStack{
-                    Image(systemName: "mail" )
+                    Image(systemName: "envelope")
                     TextField("Email", text: $email)
                     
                     Spacer()
                     
-                   
+                    
                 }
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("darkgray"))
                 )
                 .padding()
                 
@@ -62,13 +62,13 @@ struct LoginView: View {
                     SecureField("Password", text: $password)
                     
                     Spacer()
-                   
+                    
                 }
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("darkgray"))
                 )
                 .padding()
                 
@@ -78,7 +78,7 @@ struct LoginView: View {
                     }
                 }){
                     Text("Don't have an account?")
-                        .foregroundColor(.black.opacity(0.7))
+                        .foregroundColor(.gray.opacity(0.7))
                 }
                 Spacer()
                 Spacer()
@@ -93,10 +93,10 @@ struct LoginView: View {
                             UserDefaults.standard.set(email,forKey: "EMAIL")
                             print(authResult.user.uid )
                             withAnimation{
-                                userID = authResult.user.uid 
+                                userID = authResult.user.uid
                             }
                         }
-                      
+                        
                     }
                 })
                 {
@@ -108,7 +108,7 @@ struct LoginView: View {
                         .frame(maxWidth: 180)
                 }
                 .background(Color("darkgray")
-)
+                )
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
