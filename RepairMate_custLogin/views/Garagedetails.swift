@@ -96,7 +96,7 @@ struct Garagedetails: View {
                 )
             }
             
-            .navigationBarBackButtonHidden(false)
+            .navigationBarTitle("", displayMode: .inline)
         }
         
         

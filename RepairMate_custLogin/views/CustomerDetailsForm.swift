@@ -84,8 +84,9 @@ struct CustomerDetailsForm: View {
                     TextField("Location", text: $location)
                         .autocorrectionDisabled()
                     if(UserDefaults.standard.string(forKey: "SERVICE") == "Immediate"){
-                        DatePicker(selection: $time, displayedComponents: .hourAndMinute) {
-                            Text("Time")
+                        let now = Date()
+                            DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
+                                Text("Time")
                         }
                     }
                     else{
@@ -138,7 +139,7 @@ struct CustomerDetailsForm: View {
             }
         }
         
-        
+        .navigationBarTitle("", displayMode: .inline)
         Spacer()
     }
 }

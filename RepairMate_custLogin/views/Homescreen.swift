@@ -72,8 +72,11 @@ struct Homescreen: View {
             }
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
+            .navigationBarTitle("", displayMode: .inline)
         }
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+       
        
     }
     

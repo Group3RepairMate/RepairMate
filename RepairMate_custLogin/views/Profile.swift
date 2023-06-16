@@ -118,6 +118,7 @@ struct Profile: View {
                 
                 
             }
+            .navigationBarTitle("", displayMode: .inline)
         }
     }
     func loadimage(){

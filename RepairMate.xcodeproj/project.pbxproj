@@ -17,6 +17,7 @@
 		038630BF2A1D7AA9004BD44F /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630BE2A1D7AA9004BD44F /* AuthView.swift */; };
 		038630C42A1D7F10004BD44F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 038630C32A1D7F10004BD44F /* FirebaseAuth */; };
 		038630C62A1D7F10004BD44F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 038630C52A1D7F10004BD44F /* FirebaseFirestore */; };
+		9D4EDF062A3CC80100CA8390 /* Editview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4EDF052A3CC80100CA8390 /* Editview.swift */; };
 		9D780F132A39628300189096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D780F122A39628300189096 /* GoogleService-Info.plist */; };
 		9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */; };
 		9DE5E7BF2A3A8E3E00D9913F /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5E7BE2A3A8E3E00D9913F /* History.swift */; };
@@ -46,6 +47,7 @@
 		038630BC2A1D792E004BD44F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		038630BE2A1D7AA9004BD44F /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		03C47AEC2A1D8A1E0057ADFF /* RepairMate-custLogin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RepairMate-custLogin-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9D4EDF052A3CC80100CA8390 /* Editview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editview.swift; sourceTree = "<group>"; };
 		9D780F122A39628300189096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailsForm.swift; sourceTree = "<group>"; };
 		9DE5E7BE2A3A8E3E00D9913F /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
 				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
 				9DE5E7BE2A3A8E3E00D9913F /* History.swift */,
+				9D4EDF052A3CC80100CA8390 /* Editview.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */,
 				038630BD2A1D792E004BD44F /* SignUpView.swift in Sources */,
 				9DF6AB882A34F77D00DA095B /* ImagePicker.swift in Sources */,
+				9D4EDF062A3CC80100CA8390 /* Editview.swift in Sources */,
 				9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */,
 				9DE5E7BF2A3A8E3E00D9913F /* History.swift in Sources */,
 				038630BF2A1D7AA9004BD44F /* AuthView.swift in Sources */,
