@@ -1,13 +1,5 @@
-//
-//  Garagedetails.swift
-//  RepairmateHome
-//
-//  Created by Patel Chintan on 2023-06-08.
-//
-
 import SwiftUI
 import CoreLocation
-import _MapKit_SwiftUI
 import MapKit
 
 struct Place: Identifiable {
@@ -16,42 +8,37 @@ struct Place: Identifiable {
 }
 
 struct Garagedetails: View {
-    var detailsview:Garage
-    @State private var place : [Place] = []
-    @State private var name : String = ""
-    @State private var location : String = ""
-    @State private var email : String = ""
-    @State private var phone_no : String = ""
-    @State private var availability:String = ""
-    @State private var goToProfileSetting : Bool = false
-    @State var goToCustomerDetailScreen : Bool = false
+    var detailsview: Garage
+    @State private var place: [Place] = []
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+
+    @StateObject private var locationManager = LocationManager()
+    @State var goToCustomerDetailScreen: Bool = false
     
+
     var body: some View {
-        VStack{
+        VStack {
             Text(detailsview.name)
-            //                .font(.title)
                 .foregroundColor(Color("darkgray"))
                 .font(.system(size: 30))
                 .fontWeight(.semibold)
             Text("")
-            VStack{
-                
+
+            VStack {
                 Text("Location: \(detailsview.location)")
                     .fontWeight(.semibold)
                     .font(.system(size: 17))
                     .foregroundColor(.gray)
                 Text("")
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow),annotationItems: place){
-                    MapMarker(coordinate: $0.coordinate,
-                              tint: Color("darkgray"))
+                Map(coordinateRegion: $region, annotationItems: place) { place in
+                    MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
                 }
                 .frame(width: 400, height: 300)
-                
+
                 Button(action: {
-                    openAppleMaps(latitude: self.place[0].coordinate.latitude, longitude: self.place[0].coordinate.longitude)
+                    openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
-                    Text("Get Direction")
+                    Text("Get Directions")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -62,19 +49,19 @@ struct Garagedetails: View {
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
+                        .stroke(Color.blue, lineWidth: 0)
                         .foregroundColor(.black)
                 )
-                
-                Text("")
-                Text("")
-                Text("Contact Details")
-                    .padding(.top, 9)
-                    .font(.system(size: 20))
-                    .fontWeight(.semibold)
-                Text("")
             }
-            VStack{
+            .onAppear {
+                forwardGeocoding(address: detailsview.location)
+            }
+            .onReceive(locationManager.$lastKnownLocation) { location in
+                guard let userLocation = location else { return }
+                region.center = userLocation.coordinate
+            }
+
+            VStack {
                 HStack {
                     Image(systemName: "envelope")
                         .foregroundColor(.blue)
@@ -100,73 +87,84 @@ struct Garagedetails: View {
                     Spacer()
                 }
                 .padding(5)
+                NavigationLink(destination: CustomerDetailsForm(), isActive: $goToCustomerDetailScreen) {
+                                Button(action: {
+                                    self.goToCustomerDetailScreen = true
+                                    UserDefaults.standard.set(detailsview.name, forKey: "GARAGE")
+                                    UserDefaults.standard.set(detailsview.availability, forKey: "SERVICE")
+                                }) {
+                                    Text("Book Now")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .padding(15)
+                                        .frame(maxWidth: 120)
+                                }
+                                .background(Color("darkgray"))
+                                .cornerRadius(70)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 0)
+                                        .stroke(Color.blue, lineWidth: 0)
+                                        .foregroundColor(.black)
+                                )
+                            }
+                            .navigationBarTitle("", displayMode: .inline)
             }
-            
-            NavigationLink(destination : CustomerDetailsForm(), isActive: $goToCustomerDetailScreen){
-                Button(action : {
-                    self.goToCustomerDetailScreen = true
-                    UserDefaults.standard.set(detailsview.name, forKey: "GARAGE")
-                    UserDefaults.standard.set(detailsview.availability, forKey: "SERVICE")
-                })
-                {
-                    Text("Book Now")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
-                }
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
-                        .foregroundColor(.black)
-                )
-            }
-            
-            .navigationBarTitle("", displayMode: .inline)
+
+            Spacer()
         }
-        .onAppear(){
-            self.forwardGeocoding(address: detailsview.location)
-        }
-        
     }
-    
+
     func forwardGeocoding(address: String) {
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address, completionHandler: { (placemarks, error) in
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
             if error != nil {
                 print("Failed to retrieve location")
                 return
             }
-            
-            var location: CLLocation?
-            
-            if let placemarks = placemarks, placemarks.count > 0 {
-                location = placemarks.first?.location
-            }
-            
-            if let location = location {
+
+            if let placemark = placemarks?.first,
+               let location = placemark.location {
                 let coordinate = location.coordinate
                 self.place.append(Place(coordinate: coordinate))
                 print("\(address)")
                 print("\nlat: \(coordinate.latitude), long: \(coordinate.longitude)")
-            }
-            else
-            {
+            } else {
                 print("No Matching Location Found")
             }
-        })
+        }
     }
-    
-    func openAppleMaps(latitude:CLLocationDegrees,longitude:CLLocationDegrees) {
+
+    func openAppleMaps(latitude: CLLocationDegrees?, longitude: CLLocationDegrees?) {
+        guard let latitude = latitude, let longitude = longitude else {
+            return
+        }
+
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = name
+        mapItem.name = detailsview.name
         mapItem.openInMaps(launchOptions: nil)
     }
 }
 
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
+    @Published var lastKnownLocation: CLLocation?
 
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        self.lastKnownLocation = location
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager error: \(error.localizedDescription)")
+    }
+}
