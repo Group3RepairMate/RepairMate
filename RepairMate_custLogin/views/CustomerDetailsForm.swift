@@ -2,8 +2,12 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
+enum PaymentOption: String, CaseIterable {
+    case cash = "Cash"
+    case card = "Card (Booking Charge $50)"
+}
+
 struct CustomerDetailsForm: View {
-    
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var emailAddress: String = ""
@@ -16,15 +20,13 @@ struct CustomerDetailsForm: View {
     @State private var time: Date = Date()
     @State private var showAlert = false
     @State private var showsuccess = false
-    @State private var linkselection:Int? = nil
-    
-    
-    var loginuser : String = ""
+    @State private var linkselection: Int? = nil
+    @State private var selectedPaymentOption: PaymentOption = .cash
     @State private var goToProfileSetting: Bool = false
+    @State private var goToPayment: Bool = false // State variable for navigation to payment view
     
     private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String, garagedetail: String) {
         if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || location.isEmpty || problemDesc.isEmpty {
-          
             showAlert = true
             return
         }
@@ -48,12 +50,10 @@ struct CustomerDetailsForm: View {
         Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").addDocument(data: userData) { error in
             if let error = error {
                 print("Error\(error)")
-                
             } else {
-                print("Document added ")
+                print("Document added")
                 showAlert = true
                 showsuccess = true
-               
             }
         }
     }
@@ -64,7 +64,9 @@ struct CustomerDetailsForm: View {
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
                 .padding(10)
-            NavigationLink(destination: Homescreen(), tag: 1, selection:self.$linkselection){}
+            
+            NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
+            
             Form {
                 Section(header: Text("Personal Information")) {
                     TextField("First Name", text: $firstName)
@@ -79,17 +81,17 @@ struct CustomerDetailsForm: View {
                         .keyboardType(.numberPad)
                 }
                 .padding(8)
-              
+                
                 Section(header: Text("Booking Details")) {
                     TextField("Location", text: $location)
                         .autocorrectionDisabled()
-                    if(UserDefaults.standard.string(forKey: "SERVICE") == "Immediate"){
+                    
+                    if UserDefaults.standard.string(forKey: "SERVICE") == "Immediate" {
                         let now = Date()
-                            DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
-                                Text("Time")
+                        DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
+                            Text("Time")
                         }
-                    }
-                    else{
+                    } else {
                         DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
                     }
                     
@@ -102,11 +104,24 @@ struct CustomerDetailsForm: View {
                         )
                         .autocorrectionDisabled()
                 }
+                
+                Section(header: Text("Payment Option")) {
+                    ForEach(PaymentOption.allCases, id: \.self) { option in
+                        Toggle(option.rawValue, isOn: Binding<Bool>(
+                            get: { self.selectedPaymentOption == option },
+                            set: { _ in self.selectedPaymentOption = option }
+                        ))
+                        .toggleStyle(RadioButtonStyle())
+                    }
+                }
             }
             
             Button(action: {
                 addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
                 
+                if selectedPaymentOption == .card {
+                    goToPayment = true
+                }
             }) {
                 Text("Book")
                     .fontWeight(.bold)
@@ -122,25 +137,41 @@ struct CustomerDetailsForm: View {
                     .stroke(Color.blue, lineWidth: 0)
                     .foregroundColor(.black)
             )
-            .onAppear(){
+            .onAppear() {
                 print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
                 print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
-                
             }
         }
         .alert(isPresented: $showAlert) {
             if showsuccess {
-                
                 return Alert(title: Text("Successful"), message: Text("Booking Successful."), dismissButton: .default(Text("OK")))
-               
             } else {
                 return Alert(title: Text("Incomplete Form"), message: Text("Please check all the required details."), dismissButton: .default(Text("OK")))
-                linkselection = 1
+            }
+        }
+        .navigationBarTitle("", displayMode: .inline)
+        .sheet(isPresented: $goToPayment) {
+            if selectedPaymentOption == .card {
+                PaymentGateway()
             }
         }
         
-        .navigationBarTitle("", displayMode: .inline)
         Spacer()
+    }
+}
+
+struct RadioButtonStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        return HStack {
+            Image(systemName: configuration.isOn ? "largecircle.fill.circle" : "circle")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .foregroundColor(configuration.isOn ? .blue : .gray)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+            configuration.label
+        }
     }
 }
 

@@ -40,7 +40,7 @@ struct Viewhistory: View {
             return
         }
         
-        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").getDocuments { snapshot, error in
+        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").order(by: "dateTime", descending: true).getDocuments { snapshot, error in
             if let error = error {
                 print("Error retrieving order list: \(error)")
                 return
