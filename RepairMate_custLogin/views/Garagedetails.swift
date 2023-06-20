@@ -38,13 +38,20 @@ struct Garagedetails: View {
                 Button(action: {
                     openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
-                    Text("Get Directions")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .foregroundColor(.white)
+                            .padding(.leading,0)
+                            .frame(width: 1)
+                        Text("Get Directions")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.vertical, 15)
+                            .frame(width: 130)
+                    }
                 }
+                .padding(.horizontal, 25)
                 .background(Color("darkgray"))
                 .cornerRadius(70)
                 .overlay(
@@ -52,6 +59,9 @@ struct Garagedetails: View {
                         .stroke(Color.blue, lineWidth: 0)
                         .foregroundColor(.black)
                 )
+
+
+
             }
             .onAppear {
                 forwardGeocoding(address: detailsview.location)
@@ -74,6 +84,7 @@ struct Garagedetails: View {
                     Spacer()
                 }
                 .padding(5)
+                .padding(.top,10)
                 Text("")
                 HStack {
                     Image(systemName: "phone")
@@ -102,16 +113,17 @@ struct Garagedetails: View {
                                 }
                                 .background(Color("darkgray"))
                                 .cornerRadius(70)
+                                .padding(20)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.blue, lineWidth: 0)
                                         .foregroundColor(.black)
                                 )
+                                .padding(.top,50)
                             }
                             .navigationBarTitle("", displayMode: .inline)
             }
 
-            Spacer()
         }
     }
 

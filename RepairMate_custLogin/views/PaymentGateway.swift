@@ -76,7 +76,7 @@ struct PaymentGateway: View {
     private func processPayment() {
         STPAPIClient.shared.publishableKey = "pk_test_51NL5tXGqazpotKa3TAh4pTUeAUyNADf16KmzA0o6JVwEDSpRdD1myznjXzSm7CKcRQkq5F7amf5OUh4Bvd7Gf68b00gvi8wrbr"
         
-        // Check if the card number is provided
+       
         guard !cardNumber.isEmpty else {
             showAlert = true
             alertMessage = "Please enter a valid card number."
@@ -101,7 +101,7 @@ struct PaymentGateway: View {
     }
     
     private func processStripePayment(paymentMethod: STPPaymentMethod) {
-        // Perform server-side processing or any other required actions
+      
         self.showAlert = true
         self.alertMessage = "Payment successful! Thank you."
     }
