@@ -34,7 +34,8 @@ struct Garagedetails: View {
                     MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
                 }
                 .frame(width: 400, height: 300)
-
+                Text("")
+                Text("")
                 Button(action: {
                     openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
@@ -49,6 +50,7 @@ struct Garagedetails: View {
                             .multilineTextAlignment(.center)
                             .padding(.vertical, 15)
                             .frame(width: 130)
+                      
                     }
                 }
                 .padding(.horizontal, 25)
@@ -72,31 +74,52 @@ struct Garagedetails: View {
             }
 
             VStack {
-                HStack {
-                    Image(systemName: "envelope")
-                        .foregroundColor(.blue)
-                    Text("Email:")
-                        .fontWeight(.semibold)
-                        .font(.system(size: 15))
-                    Text(detailsview.email)
-                        .foregroundColor(.gray)
-                        .font(.system(size: 15))
-                    Spacer()
+                
+                Button(action: {
+                    let email = detailsview.email
+                    let urlgmail = URL(string: "googlegmail://co?to=\(email)")!
+                    if UIApplication.shared.canOpenURL(urlgmail) {
+                        UIApplication.shared.open(urlgmail)
+                    } else {
+                        let site = URL(string: "https://mail.google.com/mail/?view=cm&fs=1&to=\(email)")!
+                        UIApplication.shared.open(site)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "envelope")
+                            .foregroundColor(.blue)
+                        Text("Email:")
+                            .fontWeight(.semibold)
+                            .font(.system(size: 15))
+                        Text(detailsview.email)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 15))
+                        Spacer()
+                    }
                 }
                 .padding(5)
                 .padding(.top,10)
                 Text("")
-                HStack {
-                    Image(systemName: "phone")
-                        .foregroundColor(.blue)
-                    Text("Phone:")
-                        .fontWeight(.semibold)
-                        .font(.system(size: 15))
-                    Text(detailsview.phone_no)
-                        .foregroundColor(.gray)
-                        .font(.system(size: 15))
-                    Spacer()
+                Button(action: {
+                    let phone = detailsview.phone_no
+                    let dialstr = "tel://\(phone)"
+                    if let dial = URL(string: dialstr) {
+                        UIApplication.shared.open(dial)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "phone")
+                            .foregroundColor(.blue)
+                        Text("Phone:")
+                            .fontWeight(.semibold)
+                            .font(.system(size: 15))
+                        Text(detailsview.phone_no)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 15))
+                        Spacer()
+                    }
                 }
+
                 .padding(5)
                 NavigationLink(destination: CustomerDetailsForm(), isActive: $goToCustomerDetailScreen) {
                                 Button(action: {

@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct MechanicLoginView: View {
-    @Binding var currentShowingView: String
+    //@Binding var currentShowingView: String
     @AppStorage("mechanicId") var mechanicId: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
@@ -63,7 +63,7 @@ struct MechanicLoginView: View {
                 
                 Button(action: {
                     withAnimation {
-                        self.currentShowingView = "mechanic_signup"
+                       
                     }
                 }) {
                     Text("Don't have an account?")
@@ -103,8 +103,3 @@ struct MechanicLoginView: View {
     }
 }
 
-struct MechanicLoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        MechanicLoginView(currentShowingView: .constant("mechanic_login"))
-    }
-}

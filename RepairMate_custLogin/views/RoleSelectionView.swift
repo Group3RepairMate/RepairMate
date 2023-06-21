@@ -9,49 +9,60 @@ import SwiftUI
 
 struct RoleSelectionView: View {
     @State private var currentShowingView: String = "login"
-
+    
     var body: some View {
         NavigationView {
             VStack {
                 Spacer()
-
-                Text("Select Your Role")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-                    .foregroundColor(Color("darkgray"))
-
-                Spacer()
-
-                NavigationLink(destination: ContentView()) {
-                    Text("Customer")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .bold()
-                        .frame(maxWidth: .infinity)
+                VStack{
+                    Text("Select Your Role")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color("darkgray"))
-                        )
-                        .padding(.horizontal)
+                        .foregroundColor(Color("darkgray"))
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: ContentView()) {
+                        VStack{
+                            Image("profile")
+                                .resizable()
+                                .frame(width: 220.0, height: 220.0)
+                            Text("Customer")
+                                .foregroundColor(.white)
+                                .font(.title3)
+                                .bold()
+                                .frame(maxWidth:230)
+                                .padding(10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .fill(Color("darkgray"))
+                                )
+                        }
+                        
+                    }
+                    .padding(.bottom)
+                    // Passed currentShowingView state to MechanicLoginView
+                    NavigationLink(destination: MechanicLoginView()) {
+                        VStack{
+                            Image("mechanics")
+                                .resizable()
+                                .frame(width: 220.0, height: 220.0)
+                            Text("Mechanic")
+                                .foregroundColor(.white)
+                                .font(.title3)
+                                .bold()
+                                .frame(maxWidth:230)
+                                .padding(10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .fill(Color.green)
+                                )
+                            
+                        }
+                    }
+                    Spacer()
                 }
-                .padding(.bottom)
-                // Passed currentShowingView state to MechanicLoginView
-                NavigationLink(destination: MechanicLoginView(currentShowingView: $currentShowingView)) {
-                    Text("Mechanic")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.green)
-                        )
-                        .padding(.horizontal)
-                }
-                Spacer()
             }
         }
         // Added view based on the state of currentShowingView
@@ -59,7 +70,7 @@ struct RoleSelectionView: View {
             Group {
                 switch currentShowingView {
                 case "mechanic_login":
-                    MechanicLoginView(currentShowingView: $currentShowingView)
+                    MechanicLoginView()
                 case "mechanic_signup":
                     MechanicSignUpView(currentShowingView: $currentShowingView)
                 default:
