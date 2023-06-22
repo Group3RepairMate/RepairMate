@@ -11,6 +11,7 @@ import Firebase
 struct ContentView: View {
     @AppStorage("uid") var userID : String = ""
     var body: some View {
+        
         if userID ==  ""{
             AuthView()
         }
@@ -18,7 +19,9 @@ struct ContentView: View {
             TabView{
                 Homescreen().tabItem{
                     Image(systemName: "house.fill")
+                    
                     Text("Home")
+                    
                 }
                 
                 Autoparts().tabItem{
@@ -30,10 +33,19 @@ struct ContentView: View {
                     Image(systemName: "person.2.circle.fill")
                     Text("Profile")
                 }
+                
             }
-            .accentColor(Color("darkgray"))
-            .background(.red)
+            
+//            .onAppear() {
+//                
+//                UITabBar.appearance().backgroundColor = UIColor(.gray)
+//                UITabBar.appearance().unselectedItemTintColor = UIColor.white
+//           
+//                
+//            }
             .navigationBarBackButtonHidden(true)
+            
+            
         }
     }
 }

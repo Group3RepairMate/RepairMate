@@ -14,36 +14,53 @@ struct Profile: View {
         }
         NavigationView(){
             VStack {
-                if let image = selectedImage {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180, height: 190)
-                        .clipShape(Circle())
-                } else {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180, height: 190)
-                        .foregroundColor(.gray)
+                HStack{
+                    VStack(alignment: .leading, spacing: -1) {
+                        if let image = selectedImage {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .clipShape(Circle())
+                                .alignmentGuide(.leading) { _ in -30 }
+                                .padding(.top,15)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 90, height: 90)
+                                .foregroundColor(.white)
+                                .alignmentGuide(.leading) { _ in -30 }
+                                .padding(.top,15)
+                        }
+                        
+                        Button(action: {
+                            isShowingImagePicker = true
+                        }) {
+                            Text("Edit")
+                                .foregroundColor(.white)
+                                .font(.system(size: 22))
+                                .padding()
+                                .cornerRadius(10)
+                                .bold()
+                            
+                        }
+                        .padding(.leading, 40)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
+                            ImagePicker(selectedImage: $selectedImage)
+                        }
+                    }
+                    Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                          .foregroundColor(.white)
+                          .frame(maxWidth: .infinity, alignment: .leading)
+                          .padding(.leading,-60)
+                          .padding(.top, -50)
+                          .font(.system(size: 23))
                 }
-                
-                Button(action: {
-                    isShowingImagePicker = true
-                }) {
-                    Text("Edit")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .padding()
-                        .background(Color("darkgray"))
-                        .cornerRadius(10)
-                        .frame(width: 180)
-                }
-                .padding()
-                
-                .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
-                    ImagePicker(selectedImage: $selectedImage)
-                }
+                .background(Color("darkgray"))
+
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 List {
@@ -67,24 +84,24 @@ struct Profile: View {
                             .padding()
                             .cornerRadius(20)
                     }
-//                    Button(action: {
-//                        self.historyselection = 1
-//                    }) {
-//                        Text("About US")
-//                            .foregroundColor(.black)
-//                            .font(.headline)
-//                            .padding()
-//                            .cornerRadius(20)
-//                    }
-//                    Button(action: {
-//
-//                    }) {
-//                        Text("")
-//                            .foregroundColor(.black)
-//                            .font(.headline)
-//                            .padding()
-//                            .cornerRadius(20)
-//                    }
+                    Button(action: {
+                       
+                    }) {
+                        Text("About US")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
+                    Button(action: {
+
+                    }) {
+                        Text("FAQ")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
                     
                     .listStyle(GroupedListStyle())
                 }
@@ -117,7 +134,9 @@ struct Profile: View {
                 )
                 
                 
+              Spacer()
             }
+           
             .navigationBarTitle("", displayMode: .inline)
         }
     }
