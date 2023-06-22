@@ -3,17 +3,37 @@ import FirebaseFirestore
 
 struct Viewhistory: View {
     @State private var orderList: [History] = []
+    enum Status {
+        case processing
+        case done
+        case undone
+        case all
+    }
+    
+    @State private var status: Status = .all
     
     var body: some View {
         VStack {
             Text("Booking History")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
+            
             if orderList.isEmpty {
                 Text("No orders found")
                     .foregroundColor(.gray)
                     .padding()
             } else {
+                
+                Picker("Service", selection: $status) {
+                    Text("All").tag(Viewhistory.Status.all)
+                    Text("Processing").tag(Viewhistory.Status.processing)
+                    Text("Done").tag(Viewhistory.Status.done)
+                    Text("Undone").tag(Viewhistory.Status.undone)
+                    
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+                
                 List(orderList, id: \.id) { order in
                     VStack(alignment: .leading) {
                         Text("\(order.garagename)")

@@ -39,7 +39,8 @@ struct CustomerDetailsForm: View {
             "location": location,
             "dateTime": dateTime,
             "problemDesc": problemDesc,
-            "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? ""
+            "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? "",
+            "status": "processing"
         ]
         
         guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
