@@ -23,7 +23,7 @@ struct CustomerDetailsForm: View {
     @State private var linkselection: Int? = nil
     @State private var selectedPaymentOption: PaymentOption = .cash
     @State private var goToProfileSetting: Bool = false
-    @State private var goToPayment: Bool = false // State variable for navigation to payment view
+    @State private var goToPayment: Bool = false
     
     private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String, garagedetail: String) {
         if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || location.isEmpty || problemDesc.isEmpty {
@@ -119,8 +119,20 @@ struct CustomerDetailsForm: View {
             Button(action: {
                 addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
                 
+                
+                
                 if selectedPaymentOption == .card {
                     goToPayment = true
+                }
+                else if  selectedPaymentOption == .cash{
+                    firstName = ""
+                    lastName = ""
+                    emailAddress = ""
+                    contactNumber = ""
+                    location = ""
+                    dateTime = Date()
+                    problemDesc = ""
+                    linkselection = 1
                 }
             }) {
                 Text("Book")
@@ -145,6 +157,7 @@ struct CustomerDetailsForm: View {
         .alert(isPresented: $showAlert) {
             if showsuccess {
                 return Alert(title: Text("Successful"), message: Text("Booking Successful."), dismissButton: .default(Text("OK")))
+                
             } else {
                 return Alert(title: Text("Incomplete Form"), message: Text("Please check all the required details."), dismissButton: .default(Text("OK")))
             }
