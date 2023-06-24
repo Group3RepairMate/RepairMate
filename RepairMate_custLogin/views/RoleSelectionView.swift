@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoleSelectionView: View {
     @State private var currentShowingView: String = "login"
-    
+    @State private var linkselection: Int? = nil
     var body: some View {
         NavigationView {
             VStack {
@@ -43,7 +43,7 @@ struct RoleSelectionView: View {
                     }
                     .padding(.bottom)
                     // Passed currentShowingView state to MechanicLoginView
-                    NavigationLink(destination: MechanicLoginView()) {
+                    NavigationLink(destination: Mechanics_Home()){
                         VStack{
                             Image("mechanics")
                                 .resizable()
@@ -61,6 +61,7 @@ struct RoleSelectionView: View {
                             
                         }
                     }
+                    
                     Spacer()
                 }
             }
@@ -70,7 +71,7 @@ struct RoleSelectionView: View {
             Group {
                 switch currentShowingView {
                 case "mechanic_login":
-                    MechanicLoginView()
+                    MechanicLoginView(currentShowingView: $currentShowingView)
                 case "mechanic_signup":
                     MechanicSignUpView(currentShowingView: $currentShowingView)
                 default:

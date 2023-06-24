@@ -44,10 +44,7 @@ struct LoginView: View {
                 HStack{
                     Image(systemName: "envelope")
                     TextField("Email", text: $email)
-                    
                     Spacer()
-                    
-                    
                 }
                 .padding()
                 .overlay(
@@ -60,7 +57,6 @@ struct LoginView: View {
                 HStack{
                     Image(systemName: "lock")
                     SecureField("Password", text: $password)
-                    
                     Spacer()
                     
                 }
@@ -81,8 +77,6 @@ struct LoginView: View {
                         .foregroundColor(.gray.opacity(0.7))
                 }
                 Spacer()
-                Spacer()
-                
                 Button(action:{
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
                         if let error = error{

@@ -7,105 +7,135 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct MechanicSignUpView: View {
-    @Binding var currentShowingView : String
-    @AppStorage("mechanicId") var mechanicId : String = ""
-    @State private var email : String = ""
-    @State private var password : String = ""
+    @AppStorage("mechanicId") var mechanicId: String = ""
+    @Binding var currentShowingView: String
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var garageName: String = ""
+    @State private var garageAddress: String = ""
+    @State private var selectedBookingType: Int = 0
     
-    private func isValidPassword(_ password : String) -> Bool{
+    private let bookingTypes = ["Advance Booking", "Immediate Booking", "Both"]
+    
+    private func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         return passwordRegex.evaluate(with: password)
     }
+    
     var body: some View {
-        ZStack{
-            Color.black.edgesIgnoringSafeArea(.all)
-            VStack{
-                HStack{
-                    Text("Mechanic Registration")
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
-                }
-                .padding()
+        VStack {
+            Spacer()
+            
+            Text("Mechanic Registration")
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .bold()
                 .padding(.top)
+            
+            VStack(spacing: 16) {
+                TextField("Email", text: $email)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.white)
+                    )
                 
-                Spacer()
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.white)
+                    )
                 
-                HStack{
-                    Image(systemName: "mail" )
-                    TextField("Email", text: $email)
-                    Spacer()
-                }
-                .foregroundColor(.white)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(.white)
-                )
-                .padding()
+                TextField("Garage Name", text: $garageName)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.white)
+                    )
                 
-                HStack{
-                    Image(systemName: "lock")
-                    SecureField("Password", text: $password)
-                    Spacer()
-                }
-                .foregroundColor(.white)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(.white)
-                )
-                .padding()
+                TextField("Garage Address", text: $garageAddress)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.white)
+                    )
                 
-                Button(action : {
-                    withAnimation{
-                        self.currentShowingView = "mechanic_login"
+                Picker(selection: $selectedBookingType, label: Text("Booking Type")) {
+                    ForEach(0..<bookingTypes.count) { index in
+                        Text(bookingTypes[index]).tag(index)
                     }
-                }){
-                    Text("Already have an account ?")
-                        .foregroundColor(.gray.opacity(1.0))
                 }
-                Spacer()
-                Spacer()
+                .pickerStyle(SegmentedPickerStyle())
+                .foregroundColor(.white)
+                .padding()
                 
-                Button{
+                Button(action: {
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        if let error = error{
+                        if let error = error {
                             print(error)
                             return
                         }
                         if let authResult = authResult {
                             print(authResult.user.uid)
-                            withAnimation{
+                            withAnimation {
                                 mechanicId = authResult.user.uid
+                            }
+                            
+                            // Store mechanic details in Firestore
+                            let db = Firestore.firestore()
+                            let mechanicData: [String: Any] = [
+                                "email": email,
+                                "garageName": garageName,
+                                "garageAddress": garageAddress,
+                                "bookingType": bookingTypes[selectedBookingType]
+                            ]
+                            db.collection("mechanics").document(authResult.user.uid).setData(mechanicData) { error in
+                                if let error = error {
+                                    print("Error storing mechanic details: \(error)")
+                                } else {
+                                    print("Mechanic details stored successfully.")
+                                }
                             }
                         }
                     }
-                } label: {
+                }) {
                     Text("Create Account")
                         .foregroundColor(.black)
                         .font(.title3)
                         .bold()
-                        .frame(maxWidth : .infinity)
+                        .frame(maxWidth: .infinity)
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius:10)
+                            RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.white)
                         )
                         .padding(.horizontal)
                 }
+                
+                Spacer()
+                
+                Button(action: {
+                    withAnimation {
+                        currentShowingView = "login"
+                    }
+                }) {
+                    Text("Already have an account?")
+                        .foregroundColor(.gray.opacity(1.0))
+                }
             }
+            .padding()
+            .background(Color.white)
+            
+            Spacer()
         }
-    }
-}
-
-struct MechanicSignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        MechanicSignUpView(currentShowingView: .constant("mechanic_signup"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
