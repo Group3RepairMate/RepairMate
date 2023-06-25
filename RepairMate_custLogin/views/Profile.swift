@@ -52,59 +52,42 @@ struct Profile: View {
                             ImagePicker(selectedImage: $selectedImage)
                         }
                     }
-                    Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
-                          .foregroundColor(.white)
-                          .frame(maxWidth: .infinity, alignment: .leading)
-                          .padding(.leading,-60)
-                          .padding(.top, -50)
-                          .font(.system(size: 23))
+                    VStack{
+                        Text("\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,-60)
+                            .padding(.top, -50)
+                            .font(.system(size: 23))
+                    }
                 }
                 .background(Color("darkgray"))
-
+                
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 List {
-                    
-                    Button(action: {
-                        self.linkselection = 1
-                    }) {
-                        Text("Update Profile")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(20)
-                    }
-                    
                     Button(action: {
                         self.historyselection = 1
                     }) {
-                        Text("View History")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(20)
-                    }
-                    Button(action: {
-                       
-                    }) {
-                        Text("About US")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(20)
-                    }
-                    Button(action: {
-
-                    }) {
-                        Text("FAQ")
+                        Label("View History", systemImage: "text.book.closed")
                             .foregroundColor(.black)
                             .font(.headline)
                             .padding()
                             .cornerRadius(20)
                     }
                     
-                    .listStyle(GroupedListStyle())
+                    Button(action: {
+                        // Add action for "FAQ" button
+                    }) {
+                        Label("FAQ", systemImage: "questionmark.circle")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
                 }
+                .listStyle(GroupedListStyle())
+
                 
                 Button(action:{
                     let firebaseAuth = Auth.auth()
@@ -134,12 +117,28 @@ struct Profile: View {
                 )
                 
                 
-              Spacer()
+                Spacer()
             }
-           
+            
             .navigationBarTitle("", displayMode: .inline)
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button{
+                        self.linkselection = 1
+                    } label:{
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(.white)
+                    }
+                    
+                }
+                
+            }
+            
         }
+        
+       
     }
+        
     func loadimage(){
         
     }

@@ -2,6 +2,7 @@ import SwiftUI
 import Stripe
 
 struct PaymentGateway: View {
+    
     @State private var cardHolderName: String = ""
     @State private var cardNumber: String = ""
     @State private var expirationMonth: String = ""
@@ -9,74 +10,85 @@ struct PaymentGateway: View {
     @State private var cvc: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var linkselection:Int? = nil
     
     var body: some View {
-        VStack {
-            Text("Payment Gateway")
-                .font(.largeTitle)
-                .foregroundColor(Color("darkgray"))
-                .padding(10)
-            
+        NavigationView{
             VStack {
-                TextField("Cardholder Name", text: $cardHolderName)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
-                    .padding()
                 
-                TextField("Card Number", text: $cardNumber)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
-                    .padding()
+                Text("Payment Gateway")
+                    .font(.largeTitle)
+                    .foregroundColor(Color("darkgray"))
+                    .padding(10)
                 
-                HStack {
-                    TextField("Expiration Month", text: $expirationMonth)
+                VStack {
+                    TextField("Cardholder Name", text: $cardHolderName)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
                         .padding()
+                        .autocorrectionDisabled()
                     
-                    TextField("Expiration Year", text: $expirationYear)
+                    TextField("Card Number", text: $cardNumber)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
                         .padding()
+                        .autocorrectionDisabled()
+                    HStack {
+                        TextField("Expiration Month", text: $expirationMonth)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
+                            .padding()
+                            .autocorrectionDisabled()
+                        TextField("Expiration Year", text: $expirationYear)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
+                            .padding()
+                            .autocorrectionDisabled()
+                    }
+                    
+                    TextField("CVV", text: $cvc)
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
+                        .padding()
+                        .autocorrectionDisabled()
+                    
+                    NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
                 }
-                
-                TextField("CVV", text: $cvc)
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
-                    .padding()
+                .padding()
+                Spacer()
+                // Payment button
+                Button(action: {
+                    processPayment()
+                    linkselection = 1
+                    
+                }) {
+                    Text("Pay")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue, lineWidth: 0)
+                        .foregroundColor(.black)
+                )
             }
-            .padding()
-            Spacer()
-            // Payment button
-            Button(action: {
-                processPayment()
-            }) {
-                Text("Pay")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 120)
+            .navigationBarTitle("", displayMode: .inline)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Payment Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 0)
-                    .foregroundColor(.black)
-            )
-        }
-        .navigationBarTitle("", displayMode: .inline)
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Payment Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
     
     private func processPayment() {
         STPAPIClient.shared.publishableKey = "pk_test_51NL5tXGqazpotKa3TAh4pTUeAUyNADf16KmzA0o6JVwEDSpRdD1myznjXzSm7CKcRQkq5F7amf5OUh4Bvd7Gf68b00gvi8wrbr"
         
-       
+        
         guard !cardNumber.isEmpty else {
             showAlert = true
             alertMessage = "Please enter a valid card number."
@@ -101,9 +113,10 @@ struct PaymentGateway: View {
     }
     
     private func processStripePayment(paymentMethod: STPPaymentMethod) {
-      
+        
         self.showAlert = true
-        self.alertMessage = "Payment successful! Thank you."
+        self.alertMessage = "Payment successful!Thank you"
+       
     }
 }
 
