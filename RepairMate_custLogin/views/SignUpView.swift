@@ -110,7 +110,7 @@ struct SignUpView: View {
                                 "fullName": fullName,
                                 "address": address
                             ]
-                            db.collection("Repairmate").document(email).setData(signupData) { error in
+                            db.collection("Customers").document(email).setData(signupData) { error in
                                 if let error = error {
                                     print("Error storing signup details: \(error)")
                                 } else {
