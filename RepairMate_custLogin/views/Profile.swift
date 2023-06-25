@@ -59,18 +59,6 @@ struct Profile: View {
                             .padding(.leading,-60)
                             .padding(.top, -50)
                             .font(.system(size: 23))
-                        Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading,-60)
-                            .padding(.top, -30)
-                            .font(.system(size: 23))
-                        Text("\(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading,-60)
-                            .padding(.top, -10)
-                            .font(.system(size: 23))
                     }
                 }
                 .background(Color("darkgray"))
@@ -82,16 +70,6 @@ struct Profile: View {
                         self.historyselection = 1
                     }) {
                         Label("View History", systemImage: "text.book.closed")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(20)
-                    }
-                    
-                    Button(action: {
-                        // Add action for "About US" button
-                    }) {
-                        Label("About US", systemImage: "info.circle")
                             .foregroundColor(.black)
                             .font(.headline)
                             .padding()

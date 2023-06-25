@@ -82,7 +82,6 @@ struct RoleSelectionView: View {
     }
 }
 
-
 struct RoleSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         RoleSelectionView()
