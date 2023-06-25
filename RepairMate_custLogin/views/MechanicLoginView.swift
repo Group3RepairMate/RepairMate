@@ -15,6 +15,7 @@ struct MechanicLoginView: View {
     @State private var password: String = ""
     @Binding var currentShowingView: String
     @State private var linkselection: Int? = nil
+    @State private var showingAlert = false
     
     private func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
@@ -83,36 +84,33 @@ struct MechanicLoginView: View {
                         }
                         
                         if let authResult = authResult {
-                            print(authResult.user.uid)
-                            withAnimation {
-                                mechanicId = authResult.user.uid
-                            }
-                            
-                            // Retrieve mechanic details from Firestore
-                            let db = Firestore.firestore()
-                            db.collection("mechanics").document(email).getDocument { document, error in
+                            let mechanicCollection = Firestore.firestore().collection("mechanics")
+                            mechanicCollection.getDocuments { (snapshot, error) in
                                 if let error = error {
-                                    print("Error retrieving mechanic details: \(error)")
+                                    print("Error fetching customers: \(error.localizedDescription)")
                                     return
                                 }
                                 
-                                if let document = document, document.exists {
-                                    let data = document.data()
-                                    // Process mechanic details here
-                                    if let email = data?["email"] as? String {
-                                        print("Mechanic email: \(email)")
+                                guard let documents = snapshot?.documents else {
+                                    print("No documents found in customers collection")
+                                    return
+                                }
+                                var isMechanic:Bool = false
+                                for document in documents {
+                                    let mechanicData = document.data()
+                                    if(mechanicData["email"] as! String==email){
+                                        isMechanic = true
                                     }
-                                    if let garageName = data?["garageName"] as? String {
-                                        print("Garage Name: \(garageName)")
+                                }
+                                if(isMechanic){
+                                    UserDefaults.standard.set(email,forKey: "EMAIL")
+                                    print(authResult.user.uid )
+                                    withAnimation{
+                                        mechanicId = authResult.user.uid
                                     }
-                                    if let garageAddress = data?["garageAddress"] as? String {
-                                        print("Garage Address: \(garageAddress)")
-                                    }
-                                    if let bookingType = data?["bookingType"] as? String {
-                                        print("Booking Type: \(bookingType)")
-                                    }
-                                } else {
-                                    print("Mechanic document does not exist")
+                                }
+                                else{
+                                    showingAlert = true
                                 }
                             }
                         }
@@ -125,14 +123,16 @@ struct MechanicLoginView: View {
                         .padding(15)
                         .frame(maxWidth: 180)
                 }
-                .background(Color("darkgray")
-                )
+                .background(Color("darkgray"))
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
                         .stroke(Color.gray,lineWidth: 0)
                         .foregroundColor(.black)
                 )
+                .alert("User not found", isPresented: $showingAlert) {
+                        Button("OK", role: .cancel) { }
+                }
             }
         }
     }

@@ -7,12 +7,14 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 struct LoginView: View {
     @Binding var currentShowingView : String
     @AppStorage("uid") var userID : String = ""
     @State private var email : String = ""
     @State private var password : String = ""
+    @State private var showingAlert = false
     
     private func isValidPassword(_ password : String) -> Bool{
         
@@ -84,10 +86,35 @@ struct LoginView: View {
                             return
                         }
                         if let authResult = authResult{
-                            UserDefaults.standard.set(email,forKey: "EMAIL")
-                            print(authResult.user.uid )
-                            withAnimation{
-                                userID = authResult.user.uid
+                            let customersCollection = Firestore.firestore().collection("customers")
+                            customersCollection.getDocuments { (snapshot, error) in
+                                if let error = error {
+                                    print("Error fetching customers: \(error.localizedDescription)")
+                                    return
+                                }
+                                
+                                guard let documents = snapshot?.documents else {
+                                    print("No documents found in customers collection")
+                                    return
+                                }
+                                var isCustomer:Bool = false
+                                for document in documents {
+                                    let customerId = document.documentID
+                                    let customerData = document.data()
+                                    if(customerData["email"] as! String==email){
+                                        isCustomer = true
+                                    }
+                                }
+                                if(isCustomer){
+                                    UserDefaults.standard.set(email,forKey: "EMAIL")
+                                    print(authResult.user.uid )
+                                    withAnimation{
+                                        userID = authResult.user.uid
+                                    }
+                                }
+                                else{
+                                    showingAlert = true
+                                }
                             }
                         }
                     }
@@ -100,14 +127,16 @@ struct LoginView: View {
                         .padding(15)
                         .frame(maxWidth: 180)
                 }
-                .background(Color("darkgray")
-                )
+                .background(Color("darkgray"))
                 .cornerRadius(70)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
                         .stroke(Color.gray,lineWidth: 0)
                         .foregroundColor(.black)
                 )
+                .alert("User not found", isPresented: $showingAlert) {
+                        Button("OK", role: .cancel) { }
+                }
             }
         }
     }
