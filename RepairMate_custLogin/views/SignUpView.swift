@@ -17,11 +17,6 @@ struct SignUpView: View {
     @State private var fullName: String = ""
     @State private var address: String = ""
     
-    private func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
-        return passwordRegex.evaluate(with: password)
-    }
-    
     var body: some View {
         ZStack {
             VStack {
@@ -92,21 +87,12 @@ struct SignUpView: View {
                         .foregroundColor(Color("darkgray"))
                 )
                 .padding()
-                
-                Button(action: {
-                    withAnimation {
-                        self.currentShowingView = "login"
-                    }
-                }) {
-                    Text("Already have an account?")
-                        .foregroundColor(.gray.opacity(0.7))
-                }
                 Spacer()
-                Spacer()
-                
                 Button(action: {
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         UserDefaults.standard.set(email, forKey: "EMAIL")
+                        UserDefaults.standard.set(fullName, forKey: "NAME")
+                        UserDefaults.standard.set(address, forKey: "ADDRESS")
                         if let error = error {
                             print(error)
                             return
@@ -117,18 +103,18 @@ struct SignUpView: View {
                                 userID = authResult.user.uid
                             }
                             
-                            // Store customer details in Firestore
+                         
                             let db = Firestore.firestore()
-                            let customerData: [String: Any] = [
+                            let signupData: [String: Any] = [
                                 "email": email,
                                 "fullName": fullName,
                                 "address": address
                             ]
-                            db.collection("customers").document(authResult.user.uid).setData(customerData) { error in
+                            db.collection("Repairmate").document(email).setData(signupData) { error in
                                 if let error = error {
-                                    print("Error storing customer details: \(error)")
+                                    print("Error storing signup details: \(error)")
                                 } else {
-                                    print("Customer details stored successfully.")
+                                    print("Signup details stored successfully.")
                                 }
                             }
                         }
@@ -148,7 +134,9 @@ struct SignUpView: View {
                         .stroke(Color.gray, lineWidth: 0)
                         .foregroundColor(.black)
                 )
+                
             }
+            Spacer()
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
         }

@@ -52,12 +52,26 @@ struct Profile: View {
                             ImagePicker(selectedImage: $selectedImage)
                         }
                     }
-                    Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading,-60)
-                        .padding(.top, -50)
-                        .font(.system(size: 23))
+                    VStack{
+                        Text("\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,-60)
+                            .padding(.top, -50)
+                            .font(.system(size: 23))
+                        Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,-60)
+                            .padding(.top, -30)
+                            .font(.system(size: 23))
+                        Text("\(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,-60)
+                            .padding(.top, -10)
+                            .font(.system(size: 23))
+                    }
                 }
                 .background(Color("darkgray"))
                 

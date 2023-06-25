@@ -90,7 +90,7 @@ struct MechanicLoginView: View {
                             
                             // Retrieve mechanic details from Firestore
                             let db = Firestore.firestore()
-                            db.collection("mechanics").document(authResult.user.uid).getDocument { document, error in
+                            db.collection("mechanics").document(email).getDocument { document, error in
                                 if let error = error {
                                     print("Error retrieving mechanic details: \(error)")
                                     return

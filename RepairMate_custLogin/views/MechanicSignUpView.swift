@@ -18,7 +18,7 @@ struct MechanicSignUpView: View {
     @State private var garageAddress: String = ""
     @State private var selectedBookingType: Int = 0
     
-    private let bookingTypes = ["Advance Booking", "Immediate Booking", "Both"]
+    private let bookingTypes = ["Advance", "Immediate", "Both"]
     
     private func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
@@ -67,7 +67,7 @@ struct MechanicSignUpView: View {
                             .stroke(lineWidth: 2)
                             .foregroundColor(.white)
                     )
-                
+                Text("Select Garage Booking Type")
                 Picker(selection: $selectedBookingType, label: Text("Booking Type")) {
                     ForEach(0..<bookingTypes.count) { index in
                         Text(bookingTypes[index]).tag(index)

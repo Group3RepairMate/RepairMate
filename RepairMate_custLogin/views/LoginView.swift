@@ -90,7 +90,6 @@ struct LoginView: View {
                                 userID = authResult.user.uid
                             }
                         }
-                        
                     }
                 })
                 {
