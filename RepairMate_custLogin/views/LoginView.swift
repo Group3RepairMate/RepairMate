@@ -97,6 +97,7 @@ struct LoginView: View {
                                     print("No documents found in customers collection")
                                     return
                                 }
+                                
                                 var isCustomer:Bool = false
                                 for document in documents {
                                     let customerId = document.documentID
@@ -105,6 +106,7 @@ struct LoginView: View {
                                         isCustomer = true
                                     }
                                 }
+                                
                                 if(isCustomer){
                                     UserDefaults.standard.set(email,forKey: "EMAIL")
                                     print(authResult.user.uid )
