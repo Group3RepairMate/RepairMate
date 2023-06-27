@@ -47,7 +47,7 @@ struct Updateprofile: View {
                     return
                 }
                 
-                db.collection("Repairmate").document(userDocumentID).updateData([
+                db.collection("customers").document(userDocumentID).updateData([
                     "fullName": fullName,
                     "address": address
                 ]) { error in

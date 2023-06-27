@@ -28,7 +28,7 @@ struct Viewhistory: View {
                     Text("All").tag(Viewhistory.Status.all)
                     Text("Processing").tag(Viewhistory.Status.processing)
                     Text("Done").tag(Viewhistory.Status.done)
-                    Text("Undone").tag(Viewhistory.Status.undone)
+                    Text("Pending").tag(Viewhistory.Status.undone)
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -60,7 +60,7 @@ struct Viewhistory: View {
             return
         }
         
-        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").order(by: "dateTime", descending: true).getDocuments { snapshot, error in
+        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").order(by: "dateTime", descending: true).getDocuments { snapshot, error in
             if let error = error {
                 print("Error retrieving order list: \(error)")
                 return

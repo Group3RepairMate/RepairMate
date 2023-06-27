@@ -48,7 +48,7 @@ struct CustomerDetailsForm: View {
             return
         }
         
-        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").addDocument(data: userData) { error in
+        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").addDocument(data: userData) { error in
             if let error = error {
                 print("Error\(error)")
             } else {
