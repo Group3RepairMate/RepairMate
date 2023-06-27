@@ -20,7 +20,7 @@ struct Garagedetails: View {
         VStack {
             Text(detailsview.name)
                 .foregroundColor(Color("darkgray"))
-                .font(.system(size: 30))
+                .font(.system(size: 28))
                 .fontWeight(.semibold)
             Text("")
 
