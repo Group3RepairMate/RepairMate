@@ -7,6 +7,7 @@ struct Profile: View {
     @State private var isShowingImagePicker = false
     @State private var linkselection:Int? = nil
     @State private var historyselection:Int? = nil
+    @State private var resetPasswordSelection:Int? = nil
     @AppStorage("uid") var userID : String = ""
     var body: some View {
         if userID ==  ""{
@@ -65,6 +66,7 @@ struct Profile: View {
                 
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
+                NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                 List {
                     Button(action: {
                         self.historyselection = 1
@@ -80,6 +82,16 @@ struct Profile: View {
                         // Add action for "FAQ" button
                     }) {
                         Label("FAQ", systemImage: "questionmark.circle")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
+                    Button(action: {
+                        // Add action for "reset password" button
+                        self.resetPasswordSelection = 1
+                    }) {
+                        Label("Reset password", systemImage: "key.horizontal.fill")
                             .foregroundColor(.black)
                             .font(.headline)
                             .padding()
@@ -115,6 +127,7 @@ struct Profile: View {
                         .stroke(Color.blue,lineWidth: 0)
                         .foregroundColor(.black)
                 )
+                
                 
                 
                 Spacer()
