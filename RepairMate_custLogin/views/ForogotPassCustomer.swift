@@ -4,7 +4,7 @@ import Firebase
 struct ForgotPassCustomer: View {
     @State private var email : String = ""
     
-    private func resetPassword(){
+    private func forgotPassword(){
         let auth = Auth.auth()
         auth.sendPasswordReset(withEmail: email){(error) in
             if let error = error {
@@ -31,7 +31,7 @@ struct ForgotPassCustomer: View {
                 .cornerRadius(10)
             Spacer()
             Button(action : {
-                resetPassword()
+                forgotPassword()
             }){
                 Text("Reset Password")
                     .fontWeight(.bold)
