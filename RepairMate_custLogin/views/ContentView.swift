@@ -24,9 +24,9 @@ struct ContentView: View {
                     
                 }
                 
-                Autoparts().tabItem{
-                    Image(systemName: "key.horizontal.fill")
-                    Text("Autoparts")
+                Viewhistory().tabItem{
+                    Image(systemName: "text.book.closed")
+                    Text("History")
                 }
                 
                 Profile().tabItem{
@@ -35,14 +35,7 @@ struct ContentView: View {
                 }
                 
             }
-            
-//            .onAppear() {
-//                
-//                UITabBar.appearance().backgroundColor = UIColor(.gray)
-//                UITabBar.appearance().unselectedItemTintColor = UIColor.white
-//           
-//                
-//            }
+         
             .navigationBarBackButtonHidden(true)
             
             

@@ -14,12 +14,17 @@ struct Updateprofile: View {
             Text("User Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-            
+                .padding(.top,10)
+            Spacer()
             VStack(alignment: .leading, spacing: 4) {
+                
                 HStack {
                     Image(systemName: "person.fill")
-                    Text("Name: \(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                    Text("Name:")
                         .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
                     
                 }
                 
@@ -27,37 +32,50 @@ struct Updateprofile: View {
                 
                 HStack {
                     Image(systemName: "envelope.fill")
-                    Text("Email: \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                    Text("Email:")
                         .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
                 
                 HStack {
                     Image(systemName: "house.fill")
-                    Text("Street Name: \(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                    Text("Street Name:")
                         .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
                 HStack {
                     Image(systemName: "number")
-                    Text("Postal Code: \(UserDefaults.standard.string(forKey: "POSTAL") ?? "")")
+                    Text("Postal Code:")
                         .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "POSTAL") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
                 HStack {
                     Image(systemName: "window.vertical.closed")
-                    Text("City: \(UserDefaults.standard.string(forKey: "CITY") ?? "")")
+                    Text("City:")
                         .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "CITY") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
                 
-            
             }
-            .padding(.horizontal, 16)
+            // .padding(.top, 20)
+            //.padding(.top,20)
             .background(Color.white)
             .cornerRadius(12)
-            .shadow(color: Color.black.opacity(0.1), radius: 15, x: 0, y: 2)
-         
+            .shadow(color: Color.blue.opacity(0.1), radius: 15, x: 1, y: 2)
+            // .cornerRadius(2)
+            Spacer()
             NavigationLink(destination: Editview(), tag: 1, selection:self.$linkselection){}
             Button(action: {
                 self.linkselection = 1
@@ -71,13 +89,13 @@ struct Updateprofile: View {
                     .cornerRadius(70)
             }
             
-            Spacer()
+            
         }
-
+        
         .navigationBarTitle("", displayMode: .inline)
         .padding(20)
         .background(Color.white)
-                    
+        
     }
 }
 
