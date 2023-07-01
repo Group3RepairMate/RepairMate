@@ -21,7 +21,7 @@ struct SignUpView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text("Create an account!")
+                    Text("Create an account!!")
                         .foregroundColor(Color("darkgray"))
                         .font(.largeTitle)
                         .bold()
