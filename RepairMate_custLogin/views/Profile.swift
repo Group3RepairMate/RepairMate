@@ -85,6 +85,15 @@ struct Profile: View {
                             .padding()
                             .cornerRadius(20)
                     }
+                    Button(action: {
+                        // Add action for "FAQ" button
+                    }) {
+                        Label("Privacy", systemImage: "checkmark.seal")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
                 }
                 .listStyle(GroupedListStyle())
 

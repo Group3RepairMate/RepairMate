@@ -16,6 +16,9 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var fullName: String = ""
     @State private var address: String = ""
+    @State private var city: String = ""
+    @State private var postal: String = ""
+    
     
     var body: some View {
         ZStack {
@@ -76,7 +79,33 @@ struct SignUpView: View {
                 
                 HStack {
                     Image(systemName: "house")
-                    TextField("Address", text: $address)
+                    TextField("Street Name", text: $address)
+                    Spacer()
+                }
+                .foregroundColor(.black)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Color("darkgray"))
+                )
+                .padding()
+                HStack {
+                    Image(systemName: "house")
+                    TextField("City", text: $city)
+                    Spacer()
+                }
+                .foregroundColor(.black)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Color("darkgray"))
+                )
+                .padding()
+                HStack {
+                    Image(systemName: "house")
+                    TextField("Postal Code", text: $postal)
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -108,7 +137,9 @@ struct SignUpView: View {
                             let signupData: [String: Any] = [
                                 "email": email,
                                 "fullName": fullName,
-                                "address": address
+                                "streetName": address,
+                                "cityName":city,
+                                "postalCode":postal
                             ]
                             db.collection("customers").document(email).setData(signupData) { error in
                                 if let error = error {
@@ -138,7 +169,7 @@ struct SignUpView: View {
             }
             Spacer()
             .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
         }
     }
 }
