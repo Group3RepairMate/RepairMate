@@ -15,7 +15,7 @@ struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var fullName: String = ""
-    @State private var address: String = ""
+    @State private var streetName: String = ""
     @State private var city: String = ""
     @State private var postal: String = ""
     
@@ -79,7 +79,7 @@ struct SignUpView: View {
                 
                 HStack {
                     Image(systemName: "house")
-                    TextField("Street Name", text: $address)
+                    TextField("Street Name", text: $streetName)
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -91,20 +91,7 @@ struct SignUpView: View {
                 )
                 .padding()
                 HStack {
-                    Image(systemName: "house")
-                    TextField("City", text: $city)
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                HStack {
-                    Image(systemName: "house")
+                    Image(systemName: "number")
                     TextField("Postal Code", text: $postal)
                     Spacer()
                 }
@@ -116,12 +103,29 @@ struct SignUpView: View {
                         .foregroundColor(Color("darkgray"))
                 )
                 .padding()
+                HStack {
+                    Image(systemName: "window.vertical.closed")
+                    TextField("City Name", text: $city)
+                    Spacer()
+                }
+                .foregroundColor(.black)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Color("darkgray"))
+                )
+                .padding()
+             
                 Spacer()
                 Button(action: {
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         UserDefaults.standard.set(email, forKey: "EMAIL")
                         UserDefaults.standard.set(fullName, forKey: "NAME")
-                        UserDefaults.standard.set(address, forKey: "ADDRESS")
+                        UserDefaults.standard.set(streetName, forKey: "ADDRESS")
+                        UserDefaults.standard.set(city, forKey: "CITY")
+                        UserDefaults.standard.set(postal, forKey: "POSTAL")
+
                         if let error = error {
                             print(error)
                             return
@@ -137,7 +141,7 @@ struct SignUpView: View {
                             let signupData: [String: Any] = [
                                 "email": email,
                                 "fullName": fullName,
-                                "streetName": address,
+                                "streetName": streetName,
                                 "cityName":city,
                                 "postalCode":postal
                             ]

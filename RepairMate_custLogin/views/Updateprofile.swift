@@ -11,42 +11,54 @@ struct Updateprofile: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Spacer()
-            
-            Image("logo")
-            
             Text("User Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Image(systemName: "person.fill")
-                    Text("Name\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                    Text("Name: \(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                        .font(.title2)
+                    
                 }
-                .padding(.vertical, 8)
+                
+                .padding(10)
                 
                 HStack {
                     Image(systemName: "envelope.fill")
-                    Text("Email\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                    Text("Email: \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                        .font(.title2)
                 }
-                .padding(.vertical, 8)
+                .padding(10)
                 
                 HStack {
                     Image(systemName: "house.fill")
-                    Text("Address\(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                    Text("Street Name: \(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                        .font(.title2)
                 }
-                .padding(.vertical, 8)
+                .padding(10)
+                HStack {
+                    Image(systemName: "number")
+                    Text("Postal Code: \(UserDefaults.standard.string(forKey: "POSTAL") ?? "")")
+                        .font(.title2)
+                }
+                .padding(10)
+                HStack {
+                    Image(systemName: "window.vertical.closed")
+                    Text("City: \(UserDefaults.standard.string(forKey: "CITY") ?? "")")
+                        .font(.title2)
+                }
+                .padding(10)
+                
+            
             }
             .padding(.horizontal, 16)
             .background(Color.white)
-            .cornerRadius(8)
-            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-
-            .padding(.vertical, 20)
-            
-            Spacer()
-            
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 15, x: 0, y: 2)
+         
+            NavigationLink(destination: Editview(), tag: 1, selection:self.$linkselection){}
             Button(action: {
                 self.linkselection = 1
             }) {
@@ -55,14 +67,17 @@ struct Updateprofile: View {
                     .foregroundColor(.white)
                     .padding(.vertical, 15)
                     .frame(maxWidth: 120)
-                    .background(Color.blue)
+                    .background(Color("darkgray"))
                     .cornerRadius(70)
             }
             
             Spacer()
         }
+
+        .navigationBarTitle("", displayMode: .inline)
         .padding(20)
         .background(Color.white)
+                    
     }
 }
 
