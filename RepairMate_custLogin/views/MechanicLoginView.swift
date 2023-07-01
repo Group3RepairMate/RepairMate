@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
-import FirebaseFirestore
+import Firebase
 
 struct MechanicLoginView: View {
     @AppStorage("mechanicId") var mechanicId: String = ""

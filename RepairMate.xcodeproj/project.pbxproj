@@ -44,6 +44,7 @@
 		9EF43E582A2FE425001A4A66 /* RoleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */; };
 		9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */; };
 		9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */; };
+		E8AB58982A4A958D0009BA1C /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AB58972A4A958D0009BA1C /* Order.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionView.swift; sourceTree = "<group>"; };
 		9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicLoginView.swift; sourceTree = "<group>"; };
 		9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicSignUpView.swift; sourceTree = "<group>"; };
+		E8AB58972A4A958D0009BA1C /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				9D24E29D2A41E7C90015F274 /* PaymentGateway.swift */,
 				9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */,
 				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
+				E8AB58972A4A958D0009BA1C /* Order.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				038630BD2A1D792E004BD44F /* SignUpView.swift in Sources */,
 				9DF6AB882A34F77D00DA095B /* ImagePicker.swift in Sources */,
 				9D4EDF062A3CC80100CA8390 /* Editview.swift in Sources */,
+				E8AB58982A4A958D0009BA1C /* Order.swift in Sources */,
 				9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */,
 				9DF45C4D2A47A3350058AC4F /* Mechanics_Home.swift in Sources */,
 				9DE5E7BF2A3A8E3E00D9913F /* History.swift in Sources */,
