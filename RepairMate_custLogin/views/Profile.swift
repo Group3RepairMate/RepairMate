@@ -56,7 +56,7 @@ struct Profile: View {
                         Text("\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading,-60)
+                            .padding(.leading,-59)
                             .padding(.top, -50)
                             .font(.system(size: 23))
                     }
