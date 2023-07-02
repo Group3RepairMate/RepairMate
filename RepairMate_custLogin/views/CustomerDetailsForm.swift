@@ -12,7 +12,10 @@ struct CustomerDetailsForm: View {
     @State private var lastName: String = ""
     @State private var emailAddress: String = ""
     @State private var contactNumber: String = ""
-    @State private var location: String = ""
+    @State private var streetname: String = ""
+    @State private var apartment: String = ""
+    @State private var city: String = ""
+    @State private var postal: String = ""
     @State private var dateTime: Date = Date()
     @State private var problemDesc: String = ""
     @State private var garagedetail: String = ""
@@ -25,8 +28,8 @@ struct CustomerDetailsForm: View {
     @State private var goToProfileSetting: Bool = false
     @State private var goToPayment: Bool = false
     
-    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, location: String, dateTime: Date, problemDesc: String, garagedetail: String) {
-        if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || location.isEmpty || problemDesc.isEmpty {
+    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, apartment: String,streetname: String,postal:String,city: String, dateTime: Date, problemDesc: String, garagedetail: String) {
+        if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || streetname.isEmpty || apartment.isEmpty || postal.isEmpty || city.isEmpty || problemDesc.isEmpty {
             showAlert = true
             return
         }
@@ -36,7 +39,10 @@ struct CustomerDetailsForm: View {
             "lastName": lastName,
             "emailAddress": emailAddress,
             "contactNumber": contactNumber,
-            "location": location,
+            "apartmentNum":apartment,
+            "streetName": streetname,
+            "postalcode":postal,
+            "city":city,
             "dateTime": dateTime,
             "problemDesc": problemDesc,
             "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? "",
@@ -84,9 +90,14 @@ struct CustomerDetailsForm: View {
                 .padding(8)
                 
                 Section(header: Text("Booking Details")) {
-                    TextField("Location", text: $location)
+                    TextField("Apartment", text: $apartment)
                         .autocorrectionDisabled()
-                    
+                    TextField("Street Name", text: $streetname)
+                        .autocorrectionDisabled()
+                    TextField("Postal Code", text: $postal)
+                        .autocorrectionDisabled()
+                    TextField("City", text: $city)
+                        .autocorrectionDisabled()
                     if UserDefaults.standard.string(forKey: "SERVICE") == "Immediate" {
                         let now = Date()
                         DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
@@ -96,7 +107,7 @@ struct CustomerDetailsForm: View {
                         DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
                     }
                     
-                    TextField("Problem Description", text: $problemDesc)
+                    TextField("Problem Description", text: $problemDesc,axis: .vertical)
                         .multilineTextAlignment(.leading)
                         .frame(height: 120)
                         .overlay(
@@ -118,7 +129,7 @@ struct CustomerDetailsForm: View {
             }
             
             Button(action: {
-                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, location: location, dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
+                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
                 
                 
                 
@@ -130,7 +141,10 @@ struct CustomerDetailsForm: View {
                     lastName = ""
                     emailAddress = ""
                     contactNumber = ""
-                    location = ""
+                    streetname = ""
+                    apartment = ""
+                    city = ""
+                    postal = ""
                     dateTime = Date()
                     problemDesc = ""
                     linkselection = 1

@@ -80,7 +80,7 @@ struct Editview: View {
                 }
                 UserDefaults.standard.set(fullName, forKey: "NAME")
                 UserDefaults.standard.set(streetName, forKey: "ADDRESS")
-                UserDefaults.standard.set(city, forKey: "ADDRESS")
+                UserDefaults.standard.set(city, forKey: "CITY")
                 UserDefaults.standard.set(postal, forKey: "POSTAL")
                 
                 
