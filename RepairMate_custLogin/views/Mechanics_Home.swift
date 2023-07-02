@@ -11,30 +11,64 @@ import Firebase
 
 struct Mechanics_Home: View {
     @State private var orderList: [Order] = []
+    @AppStorage("mechanicId") var mechanicId: String = ""
     
     var body: some View {
-        VStack {
-            if orderList.isEmpty {
-                Text("No orders found")
-                    .foregroundColor(.gray)
-                    .padding()
-            }
-            else{
-                List(orderList, id: \.id) { order in
-                    VStack(alignment: .leading) {
-                        Text("\(order.firstName) \(order.lastName)")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .font(.system(size: 18))
-                        Text("Date : \(order.date)")
-                        Text("location : \(order.location)")
-                    }
-                    .padding()
-                }
-            }
+        if mechanicId ==  ""{
+            Mauthview()
         }
-        .onAppear {
-            fetchOrderList()
+        else{
+            VStack {
+                if orderList.isEmpty {
+                    Text("No orders found")
+                        .foregroundColor(.gray)
+                        .padding()
+                }
+                else{
+                    List(orderList, id: \.id) { order in
+                        VStack(alignment: .leading) {
+                            Text("\(order.firstName) \(order.lastName)")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .font(.system(size: 18))
+                            Text("Date : \(order.date)")
+                            Text("location : \(order.location)")
+                        }
+                        .padding()
+                    }
+                }
+                
+                Button(action:{
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                        withAnimation{
+                            orderList = []
+                            mechanicId = ""
+                        }
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                })
+                {
+                    Text("Logout")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+            }
+            .onAppear {
+                fetchOrderList()
+            }
         }
     }
     

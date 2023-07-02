@@ -14,7 +14,7 @@ struct MechanicLoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @Binding var currentShowingView: String
-    @State private var linkselection: Int? = nil
+    //@State private var linkselection: Int? = nil
     @State private var showingAlert = false
     
     private func isValidPassword(_ password: String) -> Bool {
@@ -95,18 +95,25 @@ struct MechanicLoginView: View {
                                     print("No documents found in customers collection")
                                     return
                                 }
-                                var isMechanic:Bool = false
-                                for document in documents {
-                                    let mechanicData = document.data()
-                                    if(mechanicData["email"] as! String==email){
-                                        isMechanic = true
+                                
+                                if(!documents.isEmpty){
+                                    var isMechanic:Bool = false
+                                    for document in documents {
+                                        let mechanicData = document.data()
+                                        if(mechanicData["email"] as! String==email){
+                                            isMechanic = true
+                                        }
                                     }
-                                }
-                                if(isMechanic){
-                                    UserDefaults.standard.set(email,forKey: "EMAIL")
-                                    print(authResult.user.uid )
-                                    withAnimation{
-                                        mechanicId = authResult.user.uid
+                                    
+                                    if(isMechanic){
+                                        UserDefaults.standard.set(email,forKey: "EMAIL")
+                                        print(authResult.user.uid )
+                                        withAnimation{
+                                            mechanicId = authResult.user.uid
+                                        }
+                                    }
+                                    else{
+                                        showingAlert = true
                                     }
                                 }
                                 else{
