@@ -33,12 +33,6 @@ class Garagehelper: ObservableObject{
                                         
                                         DispatchQueue.main.async {
                                             self.garagelist = garages.list
-                                            for i in self.garagelist{
-                                                print("chintu \(i)")
-                                            }
-                                            print("chintu self.garagelist \(self.garagelist.count)")
-
-                                          
                                         }
                                     }
                                     else{

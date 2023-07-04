@@ -26,116 +26,118 @@ struct LoginView: View {
         return passwordRegex.evaluate(with: password)
     }
     var body: some View {
-        VStack{
-            Text("Welcome back!")
-                .font(.largeTitle)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            HStack{
-                Image(systemName: "envelope.fill")
-                    .foregroundColor(.black)
-                    .font(.system(size: 20))
-                    .opacity(0.5)
-                TextField("Email", text: $email)
-                Spacer()
-            }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black,lineWidth: 1)
-            )
-            .padding(.top,5)
-            
-            HStack{
-                Image(systemName: "lock.fill")
-                    .foregroundColor(.black)
-                    .font(.system(size: 20))
-                    .opacity(0.5)
-                SecureField("Password", text: $password)
-                Spacer()
-            }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black,lineWidth: 1)
-            )
-            .padding(.top,5)
-            
-            Button(action:{
-                Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
-                    if let error = error{
-                        print(error)
-                        return
-                    }
-                    if let authResult = authResult{
-                        let customersCollection = Firestore.firestore().collection("customers")
-                        customersCollection.getDocuments { (snapshot, error) in
-                            if let error = error {
-                                print("Error fetching customers: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            guard let documents = snapshot?.documents else {
-                                print("No documents found in customers collection")
-                                return
-                            }
-                            
-                            var isCustomer:Bool = false
-                            for document in documents {
-                                let customerId = document.documentID
-                                let customerData = document.data()
-                                if(customerData["email"] as! String==email){
-                                    isCustomer = true
+        ScrollView{
+            VStack{
+                Text("Welcome back!")
+                    .font(.largeTitle)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                HStack{
+                    Image(systemName: "envelope.fill")
+                        .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .opacity(0.5)
+                    TextField("Email", text: $email)
+                    Spacer()
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black,lineWidth: 1)
+                )
+                .padding(.top,5)
+                
+                HStack{
+                    Image(systemName: "lock.fill")
+                        .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .opacity(0.5)
+                    SecureField("Password", text: $password)
+                    Spacer()
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black,lineWidth: 1)
+                )
+                .padding(.top,5)
+                
+                Button(action:{
+                    Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
+                        if let error = error{
+                            print(error)
+                            return
+                        }
+                        if let authResult = authResult{
+                            let customersCollection = Firestore.firestore().collection("customers")
+                            customersCollection.getDocuments { (snapshot, error) in
+                                if let error = error {
+                                    print("Error fetching customers: \(error.localizedDescription)")
+                                    return
                                 }
-                            }
-                            
-                            if(isCustomer){
-                                UserDefaults.standard.set(email,forKey: "EMAIL")
-                                print(authResult.user.uid )
-                                withAnimation{
-                                    userID = authResult.user.uid
+                                
+                                guard let documents = snapshot?.documents else {
+                                    print("No documents found in customers collection")
+                                    return
                                 }
-                            }
-                            else{
-                                showingAlert = true
+                                
+                                var isCustomer:Bool = false
+                                for document in documents {
+                                    let customerId = document.documentID
+                                    let customerData = document.data()
+                                    if(customerData["email"] as! String==email){
+                                        isCustomer = true
+                                    }
+                                }
+                                
+                                if(isCustomer){
+                                    UserDefaults.standard.set(email,forKey: "EMAIL")
+                                    print(authResult.user.uid )
+                                    withAnimation{
+                                        userID = authResult.user.uid
+                                    }
+                                }
+                                else{
+                                    showingAlert = true
+                                }
                             }
                         }
                     }
+                })
+                {
+                    Text("Sign In")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("darkgray"))
+                        .cornerRadius(8)
+                        .padding(.top,20)
                 }
-            })
-            {
-                Text("Sign In")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color("darkgray"))
-                    .cornerRadius(8)
-                    .padding(.top,20)
-            }
-            .alert("User not found", isPresented: $showingAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            
-            Button(action : {
-                withAnimation{
-                    self.currentShowingView = "signup"
+                .alert("User not found", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
                 }
-            }){
-                Text("Don't have an account?")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.gray)
-                    .cornerRadius(8)
-                    .padding(.top,5)
+                
+                Button(action : {
+                    withAnimation{
+                        self.currentShowingView = "signup"
+                    }
+                }){
+                    Text("Don't have an account?")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.gray)
+                        .cornerRadius(8)
+                        .padding(.top,5)
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 

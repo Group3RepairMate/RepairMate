@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+
 @main
 struct RepairMate_custLoginApp: App {
     var garagehelper = Garagehelper()
