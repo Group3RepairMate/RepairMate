@@ -87,7 +87,7 @@ struct CustomerDetailsForm: View {
                         .autocorrectionDisabled()
                         .keyboardType(.numberPad)
                 }
-                .padding(8)
+                .padding(5)
                 
                 Section(header: Text("Booking Details")) {
                     TextField("Apartment", text: $apartment)
@@ -116,7 +116,7 @@ struct CustomerDetailsForm: View {
                         )
                         .autocorrectionDisabled()
                 }
-                
+                .padding(5)
                 Section(header: Text("Payment Option")) {
                     ForEach(PaymentOption.allCases, id: \.self) { option in
                         Toggle(option.rawValue, isOn: Binding<Bool>(

@@ -38,6 +38,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "envelope")
                     TextField("Email", text: $email)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -52,6 +53,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "lock")
                     SecureField("Password", text: $password)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -66,6 +68,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "person")
                     TextField("Full Name", text: $fullName)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -80,6 +83,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "house")
                     TextField("Street Name", text: $streetName)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -93,6 +97,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "number")
                     TextField("Postal Code", text: $postal)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)
@@ -106,6 +111,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "window.vertical.closed")
                     TextField("City Name", text: $city)
+                        .autocorrectionDisabled()
                     Spacer()
                 }
                 .foregroundColor(.black)

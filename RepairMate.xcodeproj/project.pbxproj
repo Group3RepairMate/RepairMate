@@ -26,6 +26,7 @@
 		9D24E2AB2A41EFDB0015F274 /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 9D24E2AA2A41EFDB0015F274 /* StripePayments */; };
 		9D24E2AD2A41EFDB0015F274 /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9D24E2AC2A41EFDB0015F274 /* StripePaymentsUI */; };
 		9D4EDF062A3CC80100CA8390 /* Editview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4EDF052A3CC80100CA8390 /* Editview.swift */; };
+		9D526DA22A55F6790057EB16 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9D526DA12A55F6790057EB16 /* FirebaseStorage */; };
 		9D780F132A39628300189096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D780F122A39628300189096 /* GoogleService-Info.plist */; };
 		9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */; };
 		9DE5E7BF2A3A8E3E00D9913F /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5E7BE2A3A8E3E00D9913F /* History.swift */; };
@@ -89,6 +90,7 @@
 				038630C42A1D7F10004BD44F /* FirebaseAuth in Frameworks */,
 				9D24E2A72A41EFDB0015F274 /* StripeFinancialConnections in Frameworks */,
 				9D24E2A32A41EFDB0015F274 /* StripeApplePay in Frameworks */,
+				9D526DA22A55F6790057EB16 /* FirebaseStorage in Frameworks */,
 				038630C62A1D7F10004BD44F /* FirebaseFirestore in Frameworks */,
 				9D24E2A92A41EFDB0015F274 /* StripePaymentSheet in Frameworks */,
 				9D24E2A52A41EFDB0015F274 /* StripeCardScan in Frameworks */,
@@ -106,6 +108,7 @@
 			children = (
 				038630A42A1C1824004BD44F /* RepairMate_custLogin */,
 				038630A32A1C1824004BD44F /* Products */,
+				9D526DA02A55F6790057EB16 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +181,13 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
+		9D526DA02A55F6790057EB16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9D8EE1F32A35026D0069B605 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 				9D24E2A82A41EFDB0015F274 /* StripePaymentSheet */,
 				9D24E2AA2A41EFDB0015F274 /* StripePayments */,
 				9D24E2AC2A41EFDB0015F274 /* StripePaymentsUI */,
+				9D526DA12A55F6790057EB16 /* FirebaseStorage */,
 			);
 			productName = RepairMate_custLogin;
 			productReference = 038630A22A1C1824004BD44F /* RepairMate.app */;
@@ -568,6 +579,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9D24E29F2A41EFDB0015F274 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
 			productName = StripePaymentsUI;
+		};
+		9D526DA12A55F6790057EB16 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038630C22A1D7F10004BD44F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
