@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0317D6A92A4D3D9D00E2C860 /* ResetPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317D6A82A4D3D9D00E2C860 /* ResetPassCustomer.swift */; };
 		0317D6AB2A4D3E7300E2C860 /* ForogotPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317D6AA2A4D3E7300E2C860 /* ForogotPassCustomer.swift */; };
+		0317D6AD2A56027700E2C860 /* EditBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317D6AC2A56027700E2C860 /* EditBooking.swift */; };
 		038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */; };
 		038630A82A1C1824004BD44F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038630A72A1C1824004BD44F /* ContentView.swift */; };
 		038630AA2A1C1825004BD44F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 038630A92A1C1825004BD44F /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		0317D6A82A4D3D9D00E2C860 /* ResetPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassCustomer.swift; sourceTree = "<group>"; };
 		0317D6AA2A4D3E7300E2C860 /* ForogotPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForogotPassCustomer.swift; sourceTree = "<group>"; };
+		0317D6AC2A56027700E2C860 /* EditBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBooking.swift; sourceTree = "<group>"; };
 		038630A22A1C1824004BD44F /* RepairMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepairMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038630A52A1C1824004BD44F /* RepairMate_custLoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepairMate_custLoginApp.swift; sourceTree = "<group>"; };
 		038630A72A1C1824004BD44F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
 				0317D6A82A4D3D9D00E2C860 /* ResetPassCustomer.swift */,
 				0317D6AA2A4D3E7300E2C860 /* ForogotPassCustomer.swift */,
+				0317D6AC2A56027700E2C860 /* EditBooking.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				038630BB2A1C65DC004BD44F /* String.swift in Sources */,
 				9D24E29E2A41E7C90015F274 /* PaymentGateway.swift in Sources */,
 				038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */,
+				0317D6AD2A56027700E2C860 /* EditBooking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

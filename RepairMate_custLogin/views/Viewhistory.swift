@@ -9,7 +9,7 @@ struct Viewhistory: View {
         case undone
         case all
     }
-    
+    @State private var editChanges:Int? = nil
     @State private var status: Status = .all
     
     var body: some View {
@@ -33,7 +33,7 @@ struct Viewhistory: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                
+                NavigationLink(destination: EditBooking(), tag: 1, selection:self.$editChanges){}
                 List(orderList, id: \.id) { order in
                     VStack(alignment: .leading) {
                         Text("\(order.garagename)")
@@ -43,6 +43,16 @@ struct Viewhistory: View {
                         Text("")
                         Text("Date and Time: \(formattedDateTime(order.dateTime))")
                             .font(.system(size: 14))
+                        
+                        Button(action: {
+                            self.editChanges = 1
+                        }) {
+                            Label("Edit", systemImage: "pencil.circle")
+                                .foregroundColor(.black)
+                                .font(.headline)
+                                .padding()
+                                .cornerRadius(20)
+                        }
                         
                     }
                     .padding()

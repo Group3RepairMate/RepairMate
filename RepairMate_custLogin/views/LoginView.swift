@@ -55,7 +55,7 @@ struct LoginView: View {
                         .foregroundColor(Color("darkgray"))
                 )
                 .padding()
-                NavigationLink(destination: ForogotPassCustomer(), tag: 1, selection:self.$forgotPass){}
+                NavigationLink(destination: ForgotPassCustomer(), tag: 1, selection:self.$forgotPass){}
                 HStack{
                     Image(systemName: "lock")
                     SecureField("Password", text: $password)
