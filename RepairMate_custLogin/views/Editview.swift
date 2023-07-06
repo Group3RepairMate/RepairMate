@@ -10,12 +10,12 @@ import FirebaseAuth
 import Firebase
 
 struct Editview: View {
-    @State private var fullName:String = UserDefaults.standard.string(forKey: "NAME") ?? ""
+    @State private var fullName:String = ""
     @State private var contact:String = ""
-    @State private var email:String = UserDefaults.standard.string(forKey: "EMAIL") ?? ""
-    @State private var streetName:String = UserDefaults.standard.string(forKey: "ADDRESS") ?? ""
-    @State private var city: String = UserDefaults.standard.string(forKey: "CITY") ?? ""
-    @State private var postal: String = UserDefaults.standard.string(forKey: "POSTAL") ?? ""
+    @State private var email:String = (UserDefaults.standard.string(forKey: "EMAIL") ?? "")
+    @State private var streetName:String = ""
+    @State private var city: String = ""
+    @State private var postal: String = ""
     var body: some View {
       
         VStack{
@@ -78,11 +78,6 @@ struct Editview: View {
                         print("User profile updated successfully.")
                     }
                 }
-                UserDefaults.standard.set(fullName, forKey: "NAME")
-                UserDefaults.standard.set(streetName, forKey: "ADDRESS")
-                UserDefaults.standard.set(city, forKey: "CITY")
-                UserDefaults.standard.set(postal, forKey: "POSTAL")
-                
                 
             }) {
                 Text("Update")
@@ -102,6 +97,27 @@ struct Editview: View {
             
             
             
+        }
+        .onAppear(){
+            let db = Firestore.firestore()
+            let userID = Auth.auth().currentUser?.uid
+         
+            guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+                print("User document ID not found")
+                return
+            }
+            
+            db.collection("customers").document(userDocumentID).getDocument { document, error in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    city = data?["cityName"] as? String ?? ""
+                    postal = data?["postalCode"] as? String ?? ""
+                    streetName = data?["streetName"] as? String ?? ""
+                    fullName = data?["fullName"] as? String ?? ""
+                } else {
+                    print("User document does not exist")
+                }
+            }
         }
         .padding(10)
     }

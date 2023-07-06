@@ -8,13 +8,17 @@ struct Updateprofile: View {
     @State private var email: String = ""
     @State private var address: String = ""
     @State private var linkselection: Int? = nil
+    @State private var city: String = ""
+    @State private var postal: String = ""
+    @State private var street:String = ""
+    @State private var name:String = ""
     
     var body: some View {
         VStack(spacing: 20) {
             Text("User Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top,10)
+                .padding(.top, 10)
             Spacer()
             VStack(alignment: .leading, spacing: 4) {
                 
@@ -22,12 +26,11 @@ struct Updateprofile: View {
                     Image(systemName: "person.fill")
                     Text("Name:")
                         .font(.title2)
-                    Text("\(UserDefaults.standard.string(forKey: "NAME") ?? "")")
+                    Text(name)
                         .font(.title2)
                         .foregroundColor(Color("darkgray"))
                     
                 }
-                
                 .padding(10)
                 
                 HStack {
@@ -44,39 +47,60 @@ struct Updateprofile: View {
                     Image(systemName: "house.fill")
                     Text("Street Name:")
                         .font(.title2)
-                    Text("\(UserDefaults.standard.string(forKey: "ADDRESS") ?? "")")
+                    Text(street)
                         .font(.title2)
                         .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
+                
                 HStack {
                     Image(systemName: "number")
                     Text("Postal Code:")
                         .font(.title2)
-                    Text("\(UserDefaults.standard.string(forKey: "POSTAL") ?? "")")
+                    Text(postal) // Updated to use the Firebase value
                         .font(.title2)
                         .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
+                
                 HStack {
                     Image(systemName: "window.vertical.closed")
                     Text("City:")
                         .font(.title2)
-                    Text("\(UserDefaults.standard.string(forKey: "CITY") ?? "")")
+                    Text(city) // Updated to use the Firebase value
                         .font(.title2)
                         .foregroundColor(Color("darkgray"))
                 }
                 .padding(10)
                 
             }
-            // .padding(.top, 20)
-            //.padding(.top,20)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(color: Color.blue.opacity(0.1), radius: 15, x: 1, y: 2)
-            // .cornerRadius(2)
+            .onAppear {
+                // Fetch the user profile from Firebase
+                let db = Firestore.firestore()
+                let userID = Auth.auth().currentUser?.uid
+             
+                guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+                    print("User document ID not found")
+                    return
+                }
+                
+                db.collection("customers").document(userDocumentID).getDocument { document, error in
+                    if let document = document, document.exists {
+                        let data = document.data()
+                        city = data?["cityName"] as? String ?? ""
+                        postal = data?["postalCode"] as? String ?? ""
+                        street = data?["streetName"] as? String ?? ""
+                        name = data?["fullName"] as? String ?? ""
+                    } else {
+                        print("User document does not exist")
+                    }
+                }
+            }
+            
             Spacer()
-            NavigationLink(destination: Editview(), tag: 1, selection:self.$linkselection){}
+            
+            NavigationLink(destination: Editview(), tag: 1, selection: self.$linkselection) { EmptyView() }
+            
             Button(action: {
                 self.linkselection = 1
             }) {
@@ -88,14 +112,10 @@ struct Updateprofile: View {
                     .background(Color("darkgray"))
                     .cornerRadius(70)
             }
-            
-            
         }
-        
         .navigationBarTitle("", displayMode: .inline)
         .padding(20)
         .background(Color.white)
-        
     }
 }
 
