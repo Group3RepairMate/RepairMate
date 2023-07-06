@@ -34,7 +34,7 @@ struct Mechanics_Home: View {
                             Text("\(order.firstName) \(order.lastName)")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
-                                .font(.system(size: 17.5))
+                                .font(.system(size: 18))
                             Text("Date : \(order.date)")
                             Text("Street Name : \(order.streetname)")
                         }
