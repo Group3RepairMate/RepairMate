@@ -28,12 +28,13 @@ struct Mechanics_Home: View {
                     Text("Your Orders")
                         .font(.largeTitle)
                         .foregroundColor(Color("darkgray"))
+                        .padding()
                     List(orderList, id: \.id) { order in
                         VStack(alignment: .leading) {
                             Text("\(order.firstName) \(order.lastName)")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
-                                .font(.system(size: 18))
+                                .font(.system(size: 17.5))
                             Text("Date : \(order.date)")
                             Text("streetname : \(order.streetname)")
                         }
