@@ -36,7 +36,7 @@ struct Mechanics_Home: View {
                                 .foregroundColor(.black)
                                 .font(.system(size: 17.5))
                             Text("Date : \(order.date)")
-                            Text("streetname : \(order.streetname)")
+                            Text("Street Name : \(order.streetname)")
                         }
                         .padding()
                     }
