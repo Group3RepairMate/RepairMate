@@ -46,6 +46,7 @@ struct CustomerDetailsForm: View {
             "dateTime": dateTime,
             "problemDesc": problemDesc,
             "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? "",
+            "garageemail":UserDefaults.standard.string(forKey: "GARAGEEMAIL") ?? "",
             "status": "processing"
         ]
         

@@ -8,20 +8,26 @@ struct Order: Identifiable {
     let email: String
     let date: Date
     let contactNo: String
-    let location: String
-    let garage: String
+    let apartment: String
+    let streetname: String
+    let postalcode: String
+    let city: String
     let status: String
     let problemDisc: String
+    let garageemail:String
     
-    init(firstName: String, lastName: String, email: String, date: Date, contactNo: String, location: String, garage: String, status: String, problemDisc: String) {
+    init(firstName: String, lastName: String, email: String, date: Date, contactNo: String, apartment: String,streetname:String,postalcode:String,city:String , status: String, problemDisc: String,garageemail:String) {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.date = date
         self.contactNo = contactNo
-        self.location = location
-        self.garage = garage
+        self.apartment = apartment
+        self.streetname = streetname
+        self.postalcode = postalcode
+        self.city = city
         self.status = status
         self.problemDisc = problemDisc
+        self.garageemail = garageemail
     }
 }

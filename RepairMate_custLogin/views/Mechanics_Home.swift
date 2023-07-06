@@ -25,6 +25,9 @@ struct Mechanics_Home: View {
                         .padding()
                 }
                 else{
+                    Text("Your Orders")
+                        .font(.largeTitle)
+                        .foregroundColor(Color("darkgray"))
                     List(orderList, id: \.id) { order in
                         VStack(alignment: .leading) {
                             Text("\(order.firstName) \(order.lastName)")
@@ -32,7 +35,7 @@ struct Mechanics_Home: View {
                                 .foregroundColor(.black)
                                 .font(.system(size: 18))
                             Text("Date : \(order.date)")
-                            Text("location : \(order.location)")
+                            Text("streetname : \(order.streetname)")
                         }
                         .padding()
                     }
@@ -108,16 +111,24 @@ struct Mechanics_Home: View {
                             let contactNo = data["contactNumber"] as? String ?? ""
                             let email = data["emailAddress"] as? String ?? ""
                             let problem = data["problemDesc"] as? String ?? ""
-                            let location = data["location"] as? String ?? ""
+                            let apartment = data["apartmentNum"] as? String ?? ""
+                            let streetname = data["streetName"] as? String ?? ""
+                            let postalcode = data["postalcode"] as? String ?? ""
+                            let city = data["city"] as? String ?? ""
                             let garage = data["garagename"] as? String ?? ""
                             let status = data["status"] as? String ?? ""
                             let date = data["dateTime"] as? Timestamp ?? Timestamp()
+                            let garageemail = data["garageemail"] as? String ?? ""
+                       
                             
-                            return Order(firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, location: location, garage: garage, status: status, problemDisc: problem)
+                            return Order(firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail)
                         }
                         
                         for i in fetchedOrder{
-                            self.orderList.append(i)
+                            if(i.garageemail == mechanicId){
+                                self.orderList.append(i)
+                            }
+                            
                         }
                     }
                 }
