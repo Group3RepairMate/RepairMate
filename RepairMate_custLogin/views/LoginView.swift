@@ -71,14 +71,6 @@ struct LoginView: View {
                         .foregroundColor(.gray.opacity(0.7))
                         .padding(5)
                 }
-                Button(action : {
-                    withAnimation{
-                        self.currentShowingView = "signup"
-                    }
-                }){
-                    Text("Don't have an account?")
-                        .foregroundColor(.gray.opacity(0.7))
-                }
                 Spacer()
                 Button(action:{
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in

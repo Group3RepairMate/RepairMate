@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct Viewhistory: View {
-    @State private var orderList: [History] = []
+    @State private var orderList: [Order] = []
     enum Status {
         case processing
         case done
@@ -33,15 +33,15 @@ struct Viewhistory: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                NavigationLink(destination: EditBooking(), tag: 1, selection:self.$editChanges){}
                 List(orderList, id: \.id) { order in
+                    NavigationLink(destination: EditBooking(order: order), tag: 1, selection:self.$editChanges){}
                     VStack(alignment: .leading) {
-                        Text("\(order.garagename)")
+                        Text("\(order.garageName)")
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
                             .font(.system(size: 18))
                         Text("")
-                        Text("Date and Time: \(formattedDateTime(order.dateTime))")
+                        Text("Date and Time: \(formattedDateTime(order.date))")
                             .font(.system(size: 14))
                         
                         Button(action: {
@@ -81,16 +81,26 @@ struct Viewhistory: View {
                 return
             }
             
-            let orders = documents.compactMap { document -> History? in
-                let data = document.data()
-                let location = data["location"] as? String ?? ""
-                let timestamp = data["dateTime"] as? Timestamp ?? Timestamp()
-                let garagename = data["garagename"] as? String ?? ""
+            let orders = documents.compactMap { order -> Order? in
+                let data = order.data()
+                let id = data["bookingID"] as? String ?? ""
+                let fname = data["firstName"] as? String ?? ""
+                let lname = data["lastName"] as? String ?? ""
+                let contactNo = data["contactNumber"] as? String ?? ""
+                let email = data["emailAddress"] as? String ?? ""
+                let problem = data["problemDesc"] as? String ?? ""
+                let apartment = data["apartmentNum"] as? String ?? ""
+                let streetname = data["streetName"] as? String ?? ""
+                let postalcode = data["postalcode"] as? String ?? ""
+                let city = data["city"] as? String ?? ""
+                let garage = data["garagename"] as? String ?? ""
+                let status = data["status"] as? String ?? ""
+                let date = data["dateTime"] as? Timestamp ?? Timestamp()
+                let garageemail = data["garageemail"] as? String ?? ""
+                let avalability = data["garageAvailability"] as? String ?? ""
                 
-             
-                let dateTime = timestamp.dateValue()
                 
-                return History(location: location, dateTime: dateTime, garagename: garagename)
+                return Order(bookingId: id,firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail,garageName: garage,avalability: avalability)
             }
             
             self.orderList = orders

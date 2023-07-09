@@ -1,36 +1,34 @@
 //
-//  ContentView.swift
-//  RepairMate_custLogin
+//  ContentViewForMech.swift
+//  RepairMate
 //
-//  Created by Arjun Roperia on 2023-05-22.
+//  Created by Harshil Vaghani on 2023-07-09.
 //
 
 import SwiftUI
-import FirebaseAuth
-import Firebase
 
-struct ContentView: View {
-    @AppStorage("uid") var userID : String = ""
+struct ContentViewForMech: View {
+    @AppStorage("mechanicId") var mechanicId: String = ""
     var body: some View {
         
-        if userID ==  ""{
-            AuthView()
+        if mechanicId ==  ""{
+            Mauthview()
         }
         else{
             TabView{
-                Homescreen().tabItem{
+                Mechanics_Home().tabItem{
                     Image(systemName: "house.fill")
                     
                     Text("Home")
                     
                 }
                 
-                Viewhistory().tabItem{
+                MechanicHistory().tabItem{
                     Image(systemName: "text.book.closed")
                     Text("History")
                 }
                 
-                Profile().tabItem{
+                MechanicProfile().tabItem{
                     Image(systemName: "person.2.circle.fill")
                     Text("Profile")
                 }
@@ -44,8 +42,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ContentViewForMech_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentViewForMech()
     }
 }

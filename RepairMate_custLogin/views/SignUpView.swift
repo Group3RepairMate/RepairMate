@@ -170,7 +170,6 @@ struct SignUpView: View {
                         .cornerRadius(8)
                         .padding(.top,30)
                 }
-                Spacer()
             }
             Spacer()
             .navigationBarTitle("", displayMode: .inline)

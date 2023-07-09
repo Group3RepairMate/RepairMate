@@ -71,6 +71,7 @@ struct Mechanics_Home: View {
                 )
             }
             .onAppear {
+                orderList = []
                 fetchOrderList()
             }
             .navigationBarBackButtonHidden()
@@ -107,6 +108,7 @@ struct Mechanics_Home: View {
                     if(!orders.isEmpty){
                         let fetchedOrder = orders.compactMap { order -> Order? in
                             let data = order.data()
+                            let id = data["bookingID"] as? String ?? ""
                             let fname = data["firstName"] as? String ?? ""
                             let lname = data["lastName"] as? String ?? ""
                             let contactNo = data["contactNumber"] as? String ?? ""
@@ -120,9 +122,10 @@ struct Mechanics_Home: View {
                             let status = data["status"] as? String ?? ""
                             let date = data["dateTime"] as? Timestamp ?? Timestamp()
                             let garageemail = data["garageemail"] as? String ?? ""
+                            let avalability = data["garageAvailability"] as? String ?? ""
                        
                             
-                            return Order(firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail)
+                            return Order(bookingId: id,firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail,garageName: garage,avalability: avalability)
                         }
                         
                         for i in fetchedOrder{

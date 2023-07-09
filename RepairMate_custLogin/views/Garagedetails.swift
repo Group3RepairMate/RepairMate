@@ -121,12 +121,9 @@ struct Garagedetails: View {
                 }
 
                 .padding(5)
-                NavigationLink(destination: CustomerDetailsForm(), isActive: $goToCustomerDetailScreen) {
+                NavigationLink(destination: CustomerDetailsForm(detailsview: detailsview), isActive: $goToCustomerDetailScreen) {
                                 Button(action: {
                                     self.goToCustomerDetailScreen = true
-                                    UserDefaults.standard.set(detailsview.name, forKey: "GARAGE")
-                                    UserDefaults.standard.set(detailsview.email, forKey: "GARAGEEMAIL")
-                                    UserDefaults.standard.set(detailsview.availability, forKey: "SERVICE")
                                 }) {
                                     Text("Book Now")
                                         .fontWeight(.bold)

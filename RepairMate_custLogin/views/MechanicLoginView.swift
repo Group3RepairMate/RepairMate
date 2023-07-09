@@ -72,14 +72,14 @@ struct MechanicLoginView: View {
                                 self.showingAlert = true
                             }
                             else{
-                                var isMechanic:Bool = false
+                                var isMechanicPresent:Bool = false
                                 for i in self.garagehelper.garagelist{
                                     if(email==i.email){
-                                        isMechanic = true
+                                        isMechanicPresent = true
                                     }
                                 }
                                 
-                                if(isMechanic){
+                                if(isMechanicPresent){
                                     UserDefaults.standard.set(email,forKey: "EMAIL")
                                     withAnimation{
                                         mechanicId = email

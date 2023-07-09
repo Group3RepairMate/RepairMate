@@ -8,6 +8,7 @@ enum PaymentOption: String, CaseIterable {
 }
 
 struct CustomerDetailsForm: View {
+    var detailsview: Garage
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var emailAddress: String = ""
@@ -18,8 +19,6 @@ struct CustomerDetailsForm: View {
     @State private var postal: String = ""
     @State private var dateTime: Date = Date()
     @State private var problemDesc: String = ""
-    @State private var garagedetail: String = ""
-    @State private var date: Date = Date()
     @State private var time: Date = Date()
     @State private var showAlert = false
     @State private var showsuccess = false
@@ -28,7 +27,7 @@ struct CustomerDetailsForm: View {
     @State private var goToProfileSetting: Bool = false
     @State private var goToPayment: Bool = false
     
-    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, apartment: String,streetname: String,postal:String,city: String, dateTime: Date, problemDesc: String, garagedetail: String) {
+    private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, apartment: String,streetname: String,postal:String,city: String, dateTime: Date, problemDesc: String) {
         if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || streetname.isEmpty || apartment.isEmpty || postal.isEmpty || city.isEmpty || problemDesc.isEmpty {
             showAlert = true
             return
@@ -45,21 +44,32 @@ struct CustomerDetailsForm: View {
             "city":city,
             "dateTime": dateTime,
             "problemDesc": problemDesc,
-            "garagename": UserDefaults.standard.string(forKey: "GARAGE") ?? "",
-            "garageemail":UserDefaults.standard.string(forKey: "GARAGEEMAIL") ?? "",
-            "status": "processing"
+            "garagename": detailsview.name,
+            "garageemail":detailsview.email,
+            "status": "processing",
+            "garageAvailability":detailsview.availability
         ]
         
-        guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+        guard let userID = UserDefaults.standard.string(forKey: "EMAIL") else {
             print("User document ID not found")
             return
         }
         
-        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").addDocument(data: userData) { error in
+        let collectionRef = Firestore.firestore().collection("customers").document(userID).collection("Orderlist")
+        
+        let documentRef = collectionRef.addDocument(data: userData) { error in
             if let error = error {
-                print("Error\(error)")
+                print("Error adding document: \(error)")
             } else {
-                print("Document added")
+                print("Document added successfully!")
+            }
+        }
+        
+        let documentID = documentRef.documentID
+        collectionRef.document(documentID).updateData(["bookingID":documentID]){ error in
+            if let error = error {
+                print("Error adding field: \(error)")
+            } else {
                 showAlert = true
                 showsuccess = true
             }
@@ -99,7 +109,7 @@ struct CustomerDetailsForm: View {
                         .autocorrectionDisabled()
                     TextField("City", text: $city)
                         .autocorrectionDisabled()
-                    if UserDefaults.standard.string(forKey: "SERVICE") == "Immediate" {
+                    if detailsview.availability == "Immediate" {
                         let now = Date()
                         DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
                             Text("Time")
@@ -130,9 +140,12 @@ struct CustomerDetailsForm: View {
             }
             
             Button(action: {
-                addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc, garagedetail: garagedetail)
-                
-                
+                if detailsview.availability == "Immediate" {
+                    let now = Date()
+                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: time, problemDesc: problemDesc)
+                } else {
+                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc)
+                }
                 
                 if selectedPaymentOption == .card {
                     goToPayment = true
@@ -201,11 +214,5 @@ struct RadioButtonStyle: ToggleStyle {
                 }
             configuration.label
         }
-    }
-}
-
-struct CustomerDetailsForm_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomerDetailsForm()
     }
 }

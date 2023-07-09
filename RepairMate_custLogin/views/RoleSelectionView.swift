@@ -10,6 +10,7 @@ import SwiftUI
 struct RoleSelectionView: View {
     @State private var currentShowingView: String = "login"
     @State private var linkselection: Int? = nil
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -43,7 +44,7 @@ struct RoleSelectionView: View {
                     }
                     .padding(.bottom)
                     // Passed currentShowingView state to MechanicLoginView
-                    NavigationLink(destination: Mechanics_Home()){
+                    NavigationLink(destination: ContentViewForMech()){
                         VStack{
                             Image("mechanics")
                                 .resizable()

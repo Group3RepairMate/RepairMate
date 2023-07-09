@@ -4,69 +4,122 @@ import Firebase
 
 
 struct EditBooking: View {
-    @State private var dateTime: Date = Date()
-    @State private var location: String = ""
+    var order : Order
+    @State private var email: String = ""
+    @State private var contact: String = ""
+    @State private var unit: String = ""
+    @State private var time: Date = Date()
+    @State private var street: String = ""
+    @State private var postalcode: String = ""
+    @State private var problem: String = ""
     @State private var showAlert:Bool = false
+    @State private var isChanged:Bool = false
     var body: some View {
         VStack {
-            Text("Edit Booking")
+            Text("Booking Details")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
                 .padding(10)
             
-//            NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
-            
             Form {
-                Section(header: Text("")) {
-                    DatePicker("Date and Time", selection: $dateTime, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                Section(header: Text("Your Email:")) {
+                    TextField("\(order.email)", text: $email)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                }
+                
+                Section(header: Text("Your Contact No:")) {
+                    TextField("\(order.contactNo)", text: $contact)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                }
+                
+                Section(header: Text("Garage Name:")) {
+                    Text("\(order.garageName)")
+                }
+                
+                Section(header: Text("Address:")){
+                    Text("Unit No:")
+                        .bold()
+                    TextField("\(order.apartment)", text: $unit)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
                     
-                    TextField("Address", text: $location)
-                        .autocorrectionDisabled()
-                        .keyboardType(.emailAddress)
+                    Text("Street:")
+                        .bold()
+                    TextField("\(order.streetname)", text: $street)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                    
+                    Text("Postal code:")
+                        .bold()
+                    TextField("\(order.postalcode)", text: $postalcode)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
                 }
-            }
-            Button(action: {
                 
-                let db = Firestore.firestore()
-                let userID = Auth.auth().currentUser?.uid
-                
-                guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else{
-                    print("Not found")
-                    return
-                }
-                
-                let collectionRef = db.collection("customers")
-                let documentRef = collectionRef.document(userDocumentID)
-                let collectionRef2 = documentRef.collection("Orderlist")
-                //let docID = collectionRef2.documentID
-                collectionRef2.getDocuments { (querySnapshot, error) in
-                    if let error = error {
-                        print("Error getting documents: \(error)")
-                    } else if let querySnapshot = querySnapshot {
-                        // Iterate through the documents
-                        for document in querySnapshot.documents {
-                            // Retrieve the document ID
-                            let documentID = document.documentID
-                            db.collection("customers").document(userDocumentID).collection("Orderlist").document(documentID).updateData([
-                                                        "dateTime": dateTime,
-                                                        "address":location
-                                                    ])
-                                                { error in
-                                                    if let error = error {
-                                                        print("Error updating user profile: \(error)")
-                                                    } else {
-                                                        print("User profile updated successfully.")
-                                                    }
-                                                }
+                if(order.garageAvailability == "Immediate"){
+                    Section(header: Text("Time:")) {
+                        let now = Date()
+                        DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
+                            Text("Selected Time:")
                         }
                     }
                 }
-
- 
-                UserDefaults.standard.set(dateTime, forKey: "DATE")
-                UserDefaults.standard.set(location, forKey: "ADDRESS")
+                else{
+                    Section(header: Text("Date and Time:")) {
+                        DatePicker(selection: $time, in: Date()..., displayedComponents: [.date, .hourAndMinute]){
+                            Text("Selected Date and Time:")
+                        }
+                    }
+                }
                 
-                showAlert=true
+                Section(header: Text("Problem to fix:")) {
+                    TextField("Problem Description", text: $problem,axis: .vertical)
+                        .multilineTextAlignment(.leading)
+                        .frame(height: 120)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray, lineWidth: 0)
+                        )
+                        .autocorrectionDisabled()
+                }
+            }
+            
+            Button(action: {
+                
+                Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
+                    "emailAddress": email,
+                    "contactNumber":contact,
+                    "apartmentNum":unit,
+                    "streetName":street,
+                    "postalcode":postalcode,
+                    "dateTime":time,
+                    "problemDesc":problem
+                ])
+                { error in
+                    if let error = error {
+                        showAlert = true
+                    } else {
+                        showAlert = true
+                        isChanged = true
+                    }
+                }
                 
             }) {
                 Text("Update")
@@ -84,23 +137,25 @@ struct EditBooking: View {
                     .foregroundColor(.black)
             )
             .alert(isPresented: $showAlert) {
-                if showAlert {
+                if isChanged {
                     return Alert(title: Text("Successful"), message: Text("Changes made"), dismissButton: .default(Text("OK")))
                     
                 } else {
                     return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
                 }
             }
-
-
-            
         }
         .padding(10)
-        }
-
-}
-    struct EditBooking_Previews: PreviewProvider {
-        static var previews: some View {
-            EditBooking()
+        .onAppear(){
+            time = order.date
+            street = order.streetname
+            postalcode = order.postalcode
+            unit = order.apartment
+            email = order.email
+            contact = order.contactNo
+            problem = order.problemDisc
         }
     }
+    
+}
+

@@ -3,6 +3,7 @@
 import Foundation
 struct Order: Identifiable {
     let id = UUID()
+    let bookingId: String
     let firstName: String
     let lastName: String
     let email: String
@@ -15,8 +16,11 @@ struct Order: Identifiable {
     let status: String
     let problemDisc: String
     let garageemail:String
+    let garageName:String
+    let garageAvailability:String
     
-    init(firstName: String, lastName: String, email: String, date: Date, contactNo: String, apartment: String,streetname:String,postalcode:String,city:String , status: String, problemDisc: String,garageemail:String) {
+    init(bookingId:String,firstName: String, lastName: String, email: String, date: Date, contactNo: String, apartment: String,streetname:String,postalcode:String,city:String , status: String, problemDisc: String,garageemail:String,garageName:String,avalability:String) {
+        self.bookingId = bookingId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
@@ -29,5 +33,7 @@ struct Order: Identifiable {
         self.status = status
         self.problemDisc = problemDisc
         self.garageemail = garageemail
+        self.garageName = garageName
+        self.garageAvailability = avalability
     }
 }

@@ -122,7 +122,7 @@ struct MechanicSignUpView: View {
                         message: Text("\(self.garageName) is registered successfully."),
                         dismissButton: .default(Text("OK")) {
                             mechanicId = self.email
-                            Mechanics_Home()
+                            ContentViewForMech()
                         }
                     )
                 }
@@ -154,7 +154,7 @@ struct MechanicSignUpView: View {
     
     func getRegistrationOfGarage(name:String,email:String,contact:String,location:String,availability:String){
         
-        guard let url = URL(string: "http://localhost:8081/addGarage") else {
+        guard let url = URL(string: "http://localhost:8080/addGarage") else {
             print("Invalid URL")
             return
         }
