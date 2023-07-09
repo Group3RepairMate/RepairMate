@@ -1,85 +1,121 @@
-//
-//  Updateprofile.swift
-//  RepairmateHome
-//
-//  Created by Patel Chintan on 2023-06-07.
-//
-
 import SwiftUI
 import FirebaseAuth
 import Firebase
 
 struct Updateprofile: View {
-    @State private var fullName:String = ""
-    @State private var contact:String = ""
-    @State private var email:String = ""
-    @State private var address:String = ""
+    @State private var fullName: String = ""
+    @State private var contact: String = ""
+    @State private var email: String = ""
+    @State private var address: String = ""
+    @State private var linkselection: Int? = nil
+    @State private var city: String = ""
+    @State private var postal: String = ""
+    @State private var street:String = ""
+    @State private var name:String = ""
+    
     var body: some View {
-        VStack{
-            Text("Update Profile")
+        VStack(spacing: 20) {
+            Text("User Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-            TextField("Enter Your Name",text: $fullName)
-                .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
-
-            TextField("Enter Your Address",text: $address)
-                .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
+                .padding(.top, 10)
             Spacer()
-            Button(action: {
-                // Update the user's profile in the Repairmate collection
+            VStack(alignment: .leading, spacing: 4) {
+                
+                HStack {
+                    Image(systemName: "person.fill")
+                    Text("Name:")
+                        .font(.title2)
+                    Text(name)
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
+                    
+                }
+                .padding(10)
+                
+                HStack {
+                    Image(systemName: "envelope.fill")
+                    Text("Email:")
+                        .font(.title2)
+                    Text("\(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
+                }
+                .padding(10)
+                
+                HStack {
+                    Image(systemName: "house.fill")
+                    Text("Street Name:")
+                        .font(.title2)
+                    Text(street)
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
+                }
+                .padding(10)
+                
+                HStack {
+                    Image(systemName: "number")
+                    Text("Postal Code:")
+                        .font(.title2)
+                    Text(postal) // Updated to use the Firebase value
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
+                }
+                .padding(10)
+                
+                HStack {
+                    Image(systemName: "window.vertical.closed")
+                    Text("City:")
+                        .font(.title2)
+                    Text(city) // Updated to use the Firebase value
+                        .font(.title2)
+                        .foregroundColor(Color("darkgray"))
+                }
+                .padding(10)
+                
+            }
+            .onAppear {
+                // Fetch the user profile from Firebase
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
-                
+             
                 guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                     print("User document ID not found")
                     return
                 }
                 
-                db.collection("Repairmate").document(userDocumentID).updateData([
-                    "fullName": fullName,
-                    "address": address
-                ]) { error in
-                    if let error = error {
-                        print("Error updating user profile: \(error)")
+                db.collection("customers").document(userDocumentID).getDocument { document, error in
+                    if let document = document, document.exists {
+                        let data = document.data()
+                        city = data?["cityName"] as? String ?? ""
+                        postal = data?["postalCode"] as? String ?? ""
+                        street = data?["streetName"] as? String ?? ""
+                        name = data?["fullName"] as? String ?? ""
                     } else {
-                        print("User profile updated successfully.")
+                        print("User document does not exist")
                     }
                 }
-                UserDefaults.standard.set(fullName, forKey: "NAME")
-                UserDefaults.standard.set(address, forKey: "ADDRESS")
-                
+            }
+            
+            Spacer()
+            
+            NavigationLink(destination: Editview(), tag: 1, selection: self.$linkselection) { EmptyView() }
+            
+            Button(action: {
+                self.linkselection = 1
             }) {
-                Text("Update")
+                Text("Edit Profile")
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
+                    .padding(.vertical, 15)
                     .frame(maxWidth: 120)
+                    .background(Color("darkgray"))
+                    .cornerRadius(70)
             }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
-
-
-            
         }
-        .padding(10)
+        .navigationBarTitle("", displayMode: .inline)
+        .padding(20)
+        .background(Color.white)
     }
 }
 

@@ -20,7 +20,7 @@ struct Garagedetails: View {
         VStack {
             Text(detailsview.name)
                 .foregroundColor(Color("darkgray"))
-                .font(.system(size: 30))
+                .font(.system(size: 28))
                 .fontWeight(.semibold)
             Text("")
 
@@ -125,6 +125,7 @@ struct Garagedetails: View {
                                 Button(action: {
                                     self.goToCustomerDetailScreen = true
                                     UserDefaults.standard.set(detailsview.name, forKey: "GARAGE")
+                                    UserDefaults.standard.set(detailsview.email, forKey: "GARAGEEMAIL")
                                     UserDefaults.standard.set(detailsview.availability, forKey: "SERVICE")
                                 }) {
                                     Text("Book Now")

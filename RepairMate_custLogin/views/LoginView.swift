@@ -1,4 +1,4 @@
-//
+
 //  LoginView.swift
 //  RepairMate_custLogin
 //
@@ -15,13 +15,13 @@ struct LoginView: View {
     @State private var email : String = ""
     @State private var password : String = ""
     @State private var showingAlert = false
-    
+    @State private var forgotPass : Int? = nil
     private func isValidPassword(_ password : String) -> Bool{
         
         //atleast 6 characters Long
         //1 upper case letter
         //1 special character
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
         
         return passwordRegex.evaluate(with: password)
     }
@@ -46,8 +46,8 @@ struct LoginView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.black,lineWidth: 1)
                 )
-                .padding(.top,5)
-                
+                .padding()
+                NavigationLink(destination: ForgotPassCustomer(), tag: 1, selection:self.$forgotPass){}
                 HStack{
                     Image(systemName: "lock.fill")
                         .foregroundColor(.black)
@@ -61,8 +61,25 @@ struct LoginView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.black,lineWidth: 1)
                 )
-                .padding(.top,5)
-                
+                .padding()
+                Button(action : {
+                    withAnimation{
+                        self.forgotPass = 1
+                    }
+                }){
+                    Text("Forgot Password")
+                        .foregroundColor(.gray.opacity(0.7))
+                        .padding(5)
+                }
+                Button(action : {
+                    withAnimation{
+                        self.currentShowingView = "signup"
+                    }
+                }){
+                    Text("Don't have an account?")
+                        .foregroundColor(.gray.opacity(0.7))
+                }
+                Spacer()
                 Button(action:{
                     Auth.auth().signIn(withEmail: email, password: password) { authResult,  error in
                         if let error = error{
@@ -81,7 +98,6 @@ struct LoginView: View {
                                     print("No documents found in customers collection")
                                     return
                                 }
-                                
                                 var isCustomer:Bool = false
                                 for document in documents {
                                     let customerId = document.documentID
@@ -90,7 +106,6 @@ struct LoginView: View {
                                         isCustomer = true
                                     }
                                 }
-                                
                                 if(isCustomer){
                                     UserDefaults.standard.set(email,forKey: "EMAIL")
                                     print(authResult.user.uid )
@@ -140,5 +155,3 @@ struct LoginView: View {
         }
     }
 }
-
-

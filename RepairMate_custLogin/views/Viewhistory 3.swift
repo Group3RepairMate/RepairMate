@@ -9,7 +9,7 @@ struct Viewhistory: View {
         case undone
         case all
     }
-    @State private var editChanges:Int? = nil
+    
     @State private var status: Status = .all
     
     var body: some View {
@@ -28,12 +28,12 @@ struct Viewhistory: View {
                     Text("All").tag(Viewhistory.Status.all)
                     Text("Processing").tag(Viewhistory.Status.processing)
                     Text("Done").tag(Viewhistory.Status.done)
-                    Text("Pending").tag(Viewhistory.Status.undone)
+                    Text("Undone").tag(Viewhistory.Status.undone)
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                NavigationLink(destination: EditBooking(), tag: 1, selection:self.$editChanges){}
+                
                 List(orderList, id: \.id) { order in
                     VStack(alignment: .leading) {
                         Text("\(order.garagename)")
@@ -43,16 +43,6 @@ struct Viewhistory: View {
                         Text("")
                         Text("Date and Time: \(formattedDateTime(order.dateTime))")
                             .font(.system(size: 14))
-                        
-                        Button(action: {
-                            self.editChanges = 1
-                        }) {
-                            Label("Edit", systemImage: "pencil.circle")
-                                .foregroundColor(.black)
-                                .font(.headline)
-                                .padding()
-                                .cornerRadius(20)
-                        }
                         
                     }
                     .padding()
@@ -70,7 +60,7 @@ struct Viewhistory: View {
             return
         }
         
-        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").order(by: "dateTime", descending: true).getDocuments { snapshot, error in
+        Firestore.firestore().collection("Repairmate").document(userDocumentID).collection("Orderlist").order(by: "dateTime", descending: true).getDocuments { snapshot, error in
             if let error = error {
                 print("Error retrieving order list: \(error)")
                 return

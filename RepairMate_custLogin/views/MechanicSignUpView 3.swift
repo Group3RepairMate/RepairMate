@@ -23,7 +23,7 @@ struct MechanicSignUpView: View {
     private let bookingTypes = ["Advance", "Immediate", "Both"]
     
     private func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         return passwordRegex.evaluate(with: password)
     }
     
@@ -149,7 +149,6 @@ struct MechanicSignUpView: View {
         .onAppear(){
             
         }
-        .navigationBarTitle("", displayMode: .inline)
     }
     
     func getRegistrationOfGarage(name:String,email:String,contact:String,location:String,availability:String){
@@ -199,5 +198,4 @@ struct MechanicSignUpView: View {
             }
         }.resume()
     }
-    
 }

@@ -18,7 +18,7 @@ struct MechanicLoginView: View {
     @EnvironmentObject var garagehelper: Garagehelper
     
     private func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
         return passwordRegex.evaluate(with: password)
     }
     
@@ -126,9 +126,6 @@ struct MechanicLoginView: View {
                 Spacer()
             }
             .padding()
-            .navigationBarTitle("", displayMode: .inline)
         }
-        .navigationBarTitle("", displayMode: .inline)
     }
-       
 }
