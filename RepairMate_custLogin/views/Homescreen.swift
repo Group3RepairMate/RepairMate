@@ -57,7 +57,7 @@ struct Homescreen: View {
                                     .foregroundColor(.gray)
                                     .font(.system(size: 14))
                             }
-                            .padding(11)
+                            .padding(10)
                         }
                     }
                 }
