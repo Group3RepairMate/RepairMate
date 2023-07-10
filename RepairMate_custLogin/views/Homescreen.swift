@@ -40,7 +40,7 @@ struct Homescreen: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-            
+                
                 List {
                     ForEach(searchlist, id: \.self) { index in
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
@@ -76,19 +76,30 @@ struct Homescreen: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-       
-       
+        
+        
     }
     
     var searchlist: [Int] {
+        
+        let filteredList: [Int]
+        
         if searchlocation.isEmpty {
-            return garagehelper.garagelist.indices.filter { typegarage(garagehelper.garagelist[$0]) }
+            filteredList = garagehelper.garagelist.indices.filter { typegarage(garagehelper.garagelist[$0]) }
         } else {
-            return garagehelper.garagelist.indices.filter { index in
+            filteredList = garagehelper.garagelist.indices.filter { index in
                 let garage = garagehelper.garagelist[index]
                 return typegarage(garage) && garage.name.localizedCaseInsensitiveContains(searchlocation)
             }
         }
+        
+        let sortedList = filteredList.sorted { index1, index2 in
+            let garage1 = garagehelper.garagelist[index1]
+            let garage2 = garagehelper.garagelist[index2]
+            return garage1.name < garage2.name
+        }
+        
+        return sortedList
     }
     
     func typegarage(_ garage: Garage) -> Bool {
