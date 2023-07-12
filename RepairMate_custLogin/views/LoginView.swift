@@ -100,6 +100,7 @@ struct LoginView: View {
                                 }
                                 if(isCustomer){
                                     UserDefaults.standard.set(email,forKey: "EMAIL")
+                                    UserDefaults.standard.set(password, forKey: "PASS")
                                     print(authResult.user.uid )
                                     withAnimation{
                                         userID = authResult.user.uid

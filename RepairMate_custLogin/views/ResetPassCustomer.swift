@@ -1,4 +1,4 @@
-
+//
 //  ResetPassCustomer.swift
 //  RepairMate
 //
@@ -10,16 +10,27 @@ import Firebase
 
 struct ResetPassCustomer: View {
     @State private var email : String = ""
-    
+    @State private var oldPass : String = ""
     private func resetPassword(){
         let auth = Auth.auth()
-        auth.sendPasswordReset(withEmail: email){(error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            print("Password reset sent to email")
+        if  email != UserDefaults.standard.string(forKey: "EMAIL"){
+            print("Please enter correct email.")
+            return
         }
+        if oldPass != UserDefaults.standard.string(forKey: "PASS") {
+            print("Please enter correct password.")
+            return
+        }else{
+            auth.sendPasswordReset(withEmail: email){(error) in
+                if let error = error{
+                    print(error)
+                    return
+                }
+                
+                print("Password reset sent to email")
+            }
+        }
+        
     }
     var body: some View {
         VStack(alignment: .center){
@@ -28,6 +39,15 @@ struct ResetPassCustomer: View {
                 .foregroundColor(Color("darkgray"))
                 .padding()
             TextField("Enter Your Email Address",text: $email)
+                .padding(15)
+                .frame(width: 350.0)
+                .foregroundColor(Color.blue)
+                .textInputAutocapitalization(.never)
+                .background(Color.gray.opacity(0.3))
+                .disableAutocorrection(true)
+                .font(.headline)
+                .cornerRadius(10)
+            TextField("Enter Your Old password",text: $oldPass)
                 .padding(15)
                 .frame(width: 350.0)
                 .foregroundColor(Color.blue)

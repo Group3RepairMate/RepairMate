@@ -43,7 +43,6 @@ struct RoleSelectionView: View {
                         
                     }
                     .padding(.bottom)
-                    // Passed currentShowingView state to MechanicLoginView
                     NavigationLink(destination: ContentViewForMech()){
                         VStack{
                             Image("mechanics")
