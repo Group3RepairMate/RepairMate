@@ -50,7 +50,7 @@ struct LoginView: View {
                 }
                 .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 31)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(lineWidth: 2)
                         .foregroundColor(Color("darkgray"))
                 )
