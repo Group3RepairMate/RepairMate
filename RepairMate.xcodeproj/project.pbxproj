@@ -32,10 +32,11 @@
 		9DA76DC92A575E1200327D5C /* ForgotPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */; };
 		9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */; };
 		9DA76DCD2A575EF100327D5C /* EditBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DCC2A575EF100327D5C /* EditBooking.swift */; };
+		9DAD42B42A602E2D0026AE6E /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */; };
+		9DAD42B62A602EA40026AE6E /* CustomerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */; };
 		9DF45C4D2A47A3350058AC4F /* Mechanics_Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */; };
 		9DF45C512A47AC850058AC4F /* Mauthview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C502A47AC850058AC4F /* Mauthview.swift */; };
 		9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB772A34F71500DA095B /* Homescreen.swift */; };
-		9DF6AB7A2A34F73C00DA095B /* Autoparts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB792A34F73C00DA095B /* Autoparts.swift */; };
 		9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7B2A34F75600DA095B /* Profile.swift */; };
 		9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */; };
 		9DF6AB802A34F76800DA095B /* Viewhistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */; };
@@ -71,10 +72,11 @@
 		9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassCustomer.swift; sourceTree = "<group>"; };
 		9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassCustomer.swift; sourceTree = "<group>"; };
 		9DA76DCC2A575EF100327D5C /* EditBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBooking.swift; sourceTree = "<group>"; };
+		9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetail.swift; sourceTree = "<group>"; };
 		9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanics_Home.swift; sourceTree = "<group>"; };
 		9DF45C502A47AC850058AC4F /* Mauthview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mauthview.swift; sourceTree = "<group>"; };
 		9DF6AB772A34F71500DA095B /* Homescreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
-		9DF6AB792A34F73C00DA095B /* Autoparts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Autoparts.swift; sourceTree = "<group>"; };
 		9DF6AB7B2A34F75600DA095B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updateprofile.swift; sourceTree = "<group>"; };
 		9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Viewhistory.swift; sourceTree = "<group>"; };
@@ -156,34 +158,35 @@
 		038630B32A1C41DB004BD44F /* views */ = {
 			isa = PBXGroup;
 			children = (
+				9EF43E552A2FE3C6001A4A66 /* SplashScreenView.swift */,
+				9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */,
 				038630A72A1C1824004BD44F /* ContentView.swift */,
-				038630B62A1C4861004BD44F /* LoginView.swift */,
-				E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */,
-				038630BC2A1D792E004BD44F /* SignUpView.swift */,
 				038630BE2A1D7AA9004BD44F /* AuthView.swift */,
+				038630B62A1C4861004BD44F /* LoginView.swift */,
+				038630BC2A1D792E004BD44F /* SignUpView.swift */,
 				9DF6AB772A34F71500DA095B /* Homescreen.swift */,
+				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
+				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
 				9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */,
 				9D4EDF052A3CC80100CA8390 /* Editview.swift */,
-				9EF43E552A2FE3C6001A4A66 /* SplashScreenView.swift */,
 				9DF6AB872A34F77D00DA095B /* ImagePicker.swift */,
 				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
-				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
-				E87E90F22A5B129B0060396E /* MechanicProfile.swift */,
-				9DF6AB832A34F77300DA095B /* Garage.swift */,
-				9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */,
-				E87E90F02A5B126E0060396E /* MechanicHistory.swift */,
-				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
-				9DF6AB792A34F73C00DA095B /* Autoparts.swift */,
-				9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */,
-				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
-				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
-				9D24E29D2A41E7C90015F274 /* PaymentGateway.swift */,
-				9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */,
-				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
-				E8AB58972A4A958D0009BA1C /* Order.swift */,
 				9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */,
 				9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */,
 				9DA76DCC2A575EF100327D5C /* EditBooking.swift */,
+				E8AB58972A4A958D0009BA1C /* Order.swift */,
+				9DF6AB832A34F77300DA095B /* Garage.swift */,
+				9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */,
+				9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */,
+				9D24E29D2A41E7C90015F274 /* PaymentGateway.swift */,
+				E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */,
+				E87E90F02A5B126E0060396E /* MechanicHistory.swift */,
+				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
+				9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */,
+				E87E90F22A5B129B0060396E /* MechanicProfile.swift */,
+				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
+				9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */,
+				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -302,7 +305,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF43E562A2FE3C6001A4A66 /* SplashScreenView.swift in Sources */,
-				9DF6AB7A2A34F73C00DA095B /* Autoparts.swift in Sources */,
 				9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */,
 				038630B72A1C4861004BD44F /* LoginView.swift in Sources */,
 				9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */,
@@ -327,10 +329,12 @@
 				9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */,
 				E87E90F32A5B129B0060396E /* MechanicProfile.swift in Sources */,
 				9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */,
+				9DAD42B42A602E2D0026AE6E /* NotificationScreen.swift in Sources */,
 				E87E90F12A5B126E0060396E /* MechanicHistory.swift in Sources */,
 				9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */,
 				038630BB2A1C65DC004BD44F /* String.swift in Sources */,
 				9D24E29E2A41E7C90015F274 /* PaymentGateway.swift in Sources */,
+				9DAD42B62A602EA40026AE6E /* CustomerDetail.swift in Sources */,
 				038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

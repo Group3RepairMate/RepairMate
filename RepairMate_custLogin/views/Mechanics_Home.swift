@@ -29,46 +29,22 @@ struct Mechanics_Home: View {
                         .font(.largeTitle)
                         .foregroundColor(Color("darkgray"))
                         .padding()
-                    List(orderList, id: \.id) { order in
-                        VStack(alignment: .leading) {
-                            Text("\(order.firstName) \(order.lastName)")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .font(.system(size: 18))
-                            Text("Date : \(order.date)")
-                            Text("Street Name : \(order.streetname)")
+                    List(){
+                        ForEach(orderList, id: \.id) { order in
+                            NavigationLink(destination: CustomerDetail(detailsview: order)){
+                                VStack(alignment: .leading) {
+                                    Text("\(order.firstName) \(order.lastName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("Date : \(order.date)")
+                                    Text("Street Name : \(order.streetname)")
+                                }
+                                .padding()
+                            }
                         }
-                        .padding()
                     }
                 }
-                
-                Button(action:{
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                        withAnimation{
-                            orderList = []
-                            mechanicId = ""
-                        }
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                })
-                {
-                    Text("Logout")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
-                }
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
-                        .foregroundColor(.black)
-                )
             }
             .onAppear {
                 orderList = []

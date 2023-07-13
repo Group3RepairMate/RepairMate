@@ -74,6 +74,7 @@ struct RoleSelectionView: View {
                     MechanicLoginView(currentShowingView: $currentShowingView)
                 case "mechanic_signup":
                     MechanicSignUpView(currentShowingView: $currentShowingView)
+               
                 default:
                     EmptyView()
                 }

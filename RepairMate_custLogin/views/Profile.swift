@@ -8,6 +8,7 @@ struct Profile: View {
     @State private var isShowingImagePicker = false
     @State private var linkselection: Int? = nil
     @State private var historyselection:Int? = nil
+    @State private var notificationselection:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
     @State private var fullName:String = ""
     @AppStorage("uid") var userID: String = ""
@@ -76,6 +77,7 @@ struct Profile: View {
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
+                NavigationLink(destination: NotificationScreen(), tag: 1, selection:self.$notificationselection){}
                 List {
                     Button(action: {
                         self.historyselection = 1
@@ -91,6 +93,15 @@ struct Profile: View {
                         // Add action for "FAQ" button
                     }) {
                         Label("FAQ", systemImage: "questionmark.circle")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding()
+                            .cornerRadius(20)
+                    }
+                    Button(action: {
+                        self.notificationselection = 1
+                    }) {
+                        Label("Notifications", systemImage: "text.book.closed")
                             .foregroundColor(.black)
                             .font(.headline)
                             .padding()
