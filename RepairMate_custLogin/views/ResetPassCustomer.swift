@@ -11,13 +11,21 @@ import Firebase
 struct ResetPassCustomer: View {
     @State private var email : String = ""
     @State private var oldPass : String = ""
+    @State private var isalert = false
+    @State private var isshow = false
+    @State private var ispass = false
+    
     private func resetPassword(){
         let auth = Auth.auth()
         if  email != UserDefaults.standard.string(forKey: "EMAIL"){
+            isalert = true
+            isshow = true
             print("Please enter correct email.")
             return
         }
         if oldPass != UserDefaults.standard.string(forKey: "PASS") {
+            isalert = true
+            ispass = true
             print("Please enter correct password.")
             return
         }else{
@@ -26,7 +34,7 @@ struct ResetPassCustomer: View {
                     print(error)
                     return
                 }
-                
+                isalert = true
                 print("Password reset sent to email")
             }
         }
@@ -74,6 +82,24 @@ struct ResetPassCustomer: View {
                     .stroke(Color.blue,lineWidth: 0)
                     .foregroundColor(.black)
             )
+            .alert(isPresented: $isalert) {
+                if isshow{
+                    return Alert(
+                        title: Text("Please check your email")
+                    )
+                }
+                if ispass{
+                    return Alert(
+                        title: Text("Please check your password")
+                    )
+                    
+                }
+                return Alert(
+                    title: Text("Password request sent successfully!")
+                )
+                
+                
+            }
         }
         
         .padding(10)
