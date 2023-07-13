@@ -42,7 +42,7 @@ struct Viewhistory: View {
                             .font(.system(size: 18))
                         Text("")
                         Text("Date and Time: \(formattedDateTime(order.date))")
-                            .font(.system(size: 14))
+                            .font(.system(size: 13))
                         
                         Button(action: {
                             self.editChanges = 1
