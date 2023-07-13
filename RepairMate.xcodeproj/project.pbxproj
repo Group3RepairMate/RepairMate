@@ -50,7 +50,9 @@
 		E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */; };
 		E87E90F12A5B126E0060396E /* MechanicHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90F02A5B126E0060396E /* MechanicHistory.swift */; };
 		E87E90F32A5B129B0060396E /* MechanicProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90F22A5B129B0060396E /* MechanicProfile.swift */; };
+		E88E15C92A5F959900B46FD5 /* CustomerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E15C82A5F959900B46FD5 /* CustomerDetail.swift */; };
 		E8AB58982A4A958D0009BA1C /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AB58972A4A958D0009BA1C /* Order.swift */; };
+		E8ECD14B2A5FAC2600968830 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ECD14A2A5FAC2600968830 /* NotificationScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +91,9 @@
 		E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewForMech.swift; sourceTree = "<group>"; };
 		E87E90F02A5B126E0060396E /* MechanicHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicHistory.swift; sourceTree = "<group>"; };
 		E87E90F22A5B129B0060396E /* MechanicProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicProfile.swift; sourceTree = "<group>"; };
+		E88E15C82A5F959900B46FD5 /* CustomerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetail.swift; sourceTree = "<group>"; };
 		E8AB58972A4A958D0009BA1C /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		E8ECD14A2A5FAC2600968830 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 			children = (
 				038630A72A1C1824004BD44F /* ContentView.swift */,
 				038630B62A1C4861004BD44F /* LoginView.swift */,
+				E88E15C82A5F959900B46FD5 /* CustomerDetail.swift */,
 				E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */,
 				038630BC2A1D792E004BD44F /* SignUpView.swift */,
 				038630BE2A1D7AA9004BD44F /* AuthView.swift */,
@@ -171,6 +176,7 @@
 				E87E90F22A5B129B0060396E /* MechanicProfile.swift */,
 				9DF6AB832A34F77300DA095B /* Garage.swift */,
 				9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */,
+				E8ECD14A2A5FAC2600968830 /* NotificationScreen.swift */,
 				E87E90F02A5B126E0060396E /* MechanicHistory.swift */,
 				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
 				9DF6AB792A34F73C00DA095B /* Autoparts.swift */,
@@ -321,7 +327,9 @@
 				9EF43E582A2FE425001A4A66 /* RoleSelectionView.swift in Sources */,
 				9DF6AB822A34F76E00DA095B /* Garagedetails.swift in Sources */,
 				9DF6AB862A34F77800DA095B /* Garagehelper.swift in Sources */,
+				E88E15C92A5F959900B46FD5 /* CustomerDetail.swift in Sources */,
 				9DF6AB802A34F76800DA095B /* Viewhistory.swift in Sources */,
+				E8ECD14B2A5FAC2600968830 /* NotificationScreen.swift in Sources */,
 				9DF6AB842A34F77300DA095B /* Garage.swift in Sources */,
 				E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */,
 				9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */,

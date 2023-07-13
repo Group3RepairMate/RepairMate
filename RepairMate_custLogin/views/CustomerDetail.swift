@@ -1,31 +1,38 @@
 import SwiftUI
 import CoreLocation
 import MapKit
+import FirebaseAuth
+import Firebase
 
-struct Place: Identifiable {
+struct Location: Identifiable {
     let id = UUID()
     let coordinate: CLLocationCoordinate2D
 }
 
-struct Garagedetails: View {
-    var detailsview: Garage
-    @State private var place: [Place] = []
+struct CustomerDetail: View {
+    var detailsview: Order
+    @State private var place: [Location] = []
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 
-    @StateObject private var placeManager = PlaceManager()
+    @StateObject private var locationManager = LocationManager()
     @State var goToCustomerDetailScreen: Bool = false
+    @AppStorage("mechanicId") var mechanicId: String = ""
+    @State private var showingAlert = false
+    @State private var isAccepted = false
     
-
     var body: some View {
+        if mechanicId == "" {
+            AuthView()
+        }
         VStack {
-            Text(detailsview.name)
+            Text("\(detailsview.firstName) \(detailsview.lastName)")
                 .foregroundColor(Color("darkgray"))
                 .font(.system(size: 28))
                 .fontWeight(.semibold)
             Text("")
 
             VStack {
-                Text("Location: \(detailsview.location)")
+                Text("Location: \(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
                     .fontWeight(.semibold)
                     .font(.system(size: 17))
                     .foregroundColor(.gray)
@@ -35,6 +42,7 @@ struct Garagedetails: View {
                 }
                 .padding(15)
                 .frame(width: 400, height: 300)
+                
                 Text("")
                 Text("")
                 Button(action: {
@@ -67,9 +75,9 @@ struct Garagedetails: View {
 
             }
             .onAppear {
-                forwardGeocoding(address: detailsview.location)
+                forwardGeocoding(address: "\(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
             }
-            .onReceive(placeManager.$lastKnownLocation) { location in
+            .onReceive(locationManager.$lastKnownLocation) { location in
                 guard let userLocation = location else { return }
                 region.center = userLocation.coordinate
             }
@@ -102,7 +110,7 @@ struct Garagedetails: View {
                 .padding(.top,10)
                 Text("")
                 Button(action: {
-                    let phone = detailsview.phone_no
+                    let phone = detailsview.contactNo
                     let dialstr = "tel://\(phone)"
                     if let dial = URL(string: dialstr) {
                         UIApplication.shared.open(dial)
@@ -114,41 +122,81 @@ struct Garagedetails: View {
                         Text("Phone:")
                             .fontWeight(.semibold)
                             .font(.system(size: 15))
-                        Text(detailsview.phone_no)
+                        Text(detailsview.contactNo)
                             .foregroundColor(.gray)
                             .font(.system(size: 15))
                         Spacer()
                     }
                 }
-
-                .padding(5)
-                NavigationLink(destination: CustomerDetailsForm(detailsview: detailsview), isActive: $goToCustomerDetailScreen) {
-                                Button(action: {
-                                    self.goToCustomerDetailScreen = true
-                                }) {
-                                    Text("Book Now")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                        .multilineTextAlignment(.center)
-                                        .padding(15)
-                                        .frame(maxWidth: 120)
-                                }
-                                .background(Color("darkgray"))
-                                .cornerRadius(70)
-                                .padding(20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.blue, lineWidth: 0)
-                                        .foregroundColor(.black)
-                                )
-                                .padding(.top,50)
-                            }
-                            .navigationBarTitle("", displayMode: .inline)
+                
+                Button(action:{
+                    Firestore.firestore().collection("customers").document(detailsview.email).collection("Orderlist").document(detailsview.bookingId).updateData([
+                        "status":"accepted"
+                    ])
+                    { error in
+                        if let error = error {
+                            showingAlert = true
+                        } else {
+                            showingAlert = true
+                            isAccepted = true
+                        }
+                    }
+                })
+                {
+                    Text("Accept")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+                .alert(isPresented: $showingAlert) {
+                    if isAccepted {
+                        return Alert(title: Text("Successful"), message: Text("Order accepted."), dismissButton: .default(Text("OK")))
+                        
+                    } else {
+                        return Alert(title: Text("Failed"), message: Text("Order cannot be accepted"), dismissButton: .default(Text("OK")))
+                    }
+                }
+                
+                Button(action:{
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                        withAnimation{
+                            mechanicId = ""
+                            UserDefaults.standard.removeObject(forKey: "MECH_EMAIL")
+                        }
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                })
+                {
+                    Text("Logout")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 120)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
             }
-
         }
     }
-
+    
     func forwardGeocoding(address: String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -160,7 +208,7 @@ struct Garagedetails: View {
             if let placemark = placemarks?.first,
                let location = placemark.location {
                 let coordinate = location.coordinate
-                self.place.append(Place(coordinate: coordinate))
+                self.place.append(Location(coordinate: coordinate))
                 print("\(address)")
                 print("\nlat: \(coordinate.latitude), long: \(coordinate.longitude)")
             } else {
@@ -168,7 +216,7 @@ struct Garagedetails: View {
             }
         }
     }
-
+    
     func openAppleMaps(latitude: CLLocationDegrees?, longitude: CLLocationDegrees?) {
         guard let latitude = latitude, let longitude = longitude else {
             return
@@ -177,12 +225,12 @@ struct Garagedetails: View {
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = detailsview.name
+        mapItem.name = detailsview.streetname + detailsview.city
         mapItem.openInMaps(launchOptions: nil)
     }
 }
 
-class PlaceManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var lastKnownLocation: CLLocation?
 
