@@ -3,6 +3,7 @@ import CoreLocation
 import MapKit
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 
 struct Location: Identifiable {
     let id = UUID()

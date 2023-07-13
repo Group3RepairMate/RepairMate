@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 
 struct Updateprofile: View {
     @State private var fullName: String = ""
