@@ -6,10 +6,44 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct MechanicProfile: View {
+    @AppStorage("mechanicId") var mechanicId: String = ""
+    
     var body: some View {
-        Text("Mechanic profile")
+        if mechanicId == "" {
+            AuthView()
+        }
+        else{
+            Button(action:{
+                let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                    withAnimation{
+                        mechanicId = ""
+                    }
+                } catch let signOutError as NSError {
+                    print("Error signing out: %@", signOutError)
+                }
+            })
+            {
+                Text("Logout")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(15)
+                    .frame(maxWidth: 120)
+            }
+            .background(Color("darkgray"))
+            .cornerRadius(70)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.blue,lineWidth: 0)
+                    .foregroundColor(.black)
+            )
+        }
     }
 }
 

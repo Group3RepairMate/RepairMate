@@ -122,7 +122,6 @@ struct MechanicSignUpView: View {
                         message: Text("\(self.garageName) is registered successfully."),
                         dismissButton: .default(Text("OK")) {
                             mechanicId = self.email
-                            UserDefaults.standard.set(email, forKey: "MECH_EMAIL")
                             ContentViewForMech()
                         }
                     )

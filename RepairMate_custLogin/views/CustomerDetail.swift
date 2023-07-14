@@ -21,30 +21,24 @@ struct CustomerDetail: View {
     @State private var isAccepted = false
     
     var body: some View {
-        if mechanicId == "" {
-            AuthView()
-        }
         VStack {
             Text("\(detailsview.firstName) \(detailsview.lastName)")
                 .foregroundColor(Color("darkgray"))
                 .font(.system(size: 28))
                 .fontWeight(.semibold)
-            Text("")
 
             VStack {
                 Text("Location: \(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
                     .fontWeight(.semibold)
                     .font(.system(size: 17))
                     .foregroundColor(.gray)
-                Text("")
+                
                 Map(coordinateRegion: $region, annotationItems: place) { place in
                     MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
                 }
                 .padding(15)
                 .frame(width: 400, height: 300)
                 
-                Text("")
-                Text("")
                 Button(action: {
                     openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
@@ -71,8 +65,6 @@ struct CustomerDetail: View {
                         .foregroundColor(.black)
                 )
 
-
-
             }
             .onAppear {
                 forwardGeocoding(address: "\(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
@@ -83,7 +75,6 @@ struct CustomerDetail: View {
             }
 
             VStack {
-                
                 Button(action: {
                     let email = detailsview.email
                     let urlgmail = URL(string: "googlegmail://co?to=\(email)")!
@@ -108,7 +99,7 @@ struct CustomerDetail: View {
                 }
                 .padding(5)
                 .padding(.top,10)
-                Text("")
+
                 Button(action: {
                     let phone = detailsview.contactNo
                     let dialstr = "tel://\(phone)"
@@ -165,34 +156,6 @@ struct CustomerDetail: View {
                         return Alert(title: Text("Failed"), message: Text("Order cannot be accepted"), dismissButton: .default(Text("OK")))
                     }
                 }
-                
-                Button(action:{
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                        withAnimation{
-                            mechanicId = ""
-                            UserDefaults.standard.removeObject(forKey: "MECH_EMAIL")
-                        }
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                })
-                {
-                    Text("Logout")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
-                }
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
-                        .foregroundColor(.black)
-                )
             }
         }
     }
