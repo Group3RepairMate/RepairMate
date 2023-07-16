@@ -33,13 +33,17 @@ struct Homescreen: View {
                     Text("All").tag(ServiceType.all)
                     if garagehelper.garagelist.contains(where: { $0.availability == "Immediate" }) {
                         Text("Immediate").tag(ServiceType.immediate)
+                            .padding(5)
+                            .foregroundColor(Color("darkgray"))
                     }
                     if garagehelper.garagelist.contains(where: { $0.availability == "Advance" }) {
                         Text("Advance").tag(ServiceType.advance)
+                            .padding(5)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+               
                 
                 List {
                     ForEach(searchlist, id: \.self) { index in

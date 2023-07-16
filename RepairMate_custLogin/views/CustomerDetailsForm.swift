@@ -81,7 +81,8 @@ struct CustomerDetailsForm: View {
             Text("Customer Details")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .padding(10)
+               // .padding(10)
+                .padding(.top, -40)
             
             NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
             
