@@ -122,16 +122,17 @@ struct SignUpView: View {
                         .foregroundColor(Color("darkgray"))
                 )
                 .padding()
-             
+                
                 Spacer()
                 Button(action: {
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         UserDefaults.standard.set(email, forKey: "EMAIL")
+                        UserDefaults.standard.set(password, forKey: "PASS")
                         UserDefaults.standard.set(fullName, forKey: "NAME")
                         UserDefaults.standard.set(streetName, forKey: "ADDRESS")
                         UserDefaults.standard.set(city, forKey: "CITY")
                         UserDefaults.standard.set(postal, forKey: "POSTAL")
-
+                        
                         if let error = error {
                             print(error)
                             return
@@ -160,7 +161,7 @@ struct SignUpView: View {
                             }
                         }
                     }
-                }) {
+                })  {
                     Text("Create Account")
                         .foregroundColor(.white)
                         .font(.headline)
@@ -168,11 +169,10 @@ struct SignUpView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color("darkgray"))
                         .cornerRadius(8)
-                        .padding(.top,30)
-                }
-            }
+                        .padding(10)
+                }            }
             Spacer()
-            .navigationBarTitle("", displayMode: .inline)
+                .navigationBarTitle("", displayMode: .inline)
             //.navigationBarHidden(true)
         }
     }

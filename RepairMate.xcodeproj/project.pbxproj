@@ -35,7 +35,6 @@
 		9DF45C4D2A47A3350058AC4F /* Mechanics_Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */; };
 		9DF45C512A47AC850058AC4F /* Mauthview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C502A47AC850058AC4F /* Mauthview.swift */; };
 		9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB772A34F71500DA095B /* Homescreen.swift */; };
-		9DF6AB7A2A34F73C00DA095B /* Autoparts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB792A34F73C00DA095B /* Autoparts.swift */; };
 		9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7B2A34F75600DA095B /* Profile.swift */; };
 		9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */; };
 		9DF6AB802A34F76800DA095B /* Viewhistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */; };
@@ -76,7 +75,6 @@
 		9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanics_Home.swift; sourceTree = "<group>"; };
 		9DF45C502A47AC850058AC4F /* Mauthview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mauthview.swift; sourceTree = "<group>"; };
 		9DF6AB772A34F71500DA095B /* Homescreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
-		9DF6AB792A34F73C00DA095B /* Autoparts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Autoparts.swift; sourceTree = "<group>"; };
 		9DF6AB7B2A34F75600DA095B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updateprofile.swift; sourceTree = "<group>"; };
 		9DF6AB7F2A34F76800DA095B /* Viewhistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Viewhistory.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				E8ECD14A2A5FAC2600968830 /* NotificationScreen.swift */,
 				E87E90F02A5B126E0060396E /* MechanicHistory.swift */,
 				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
-				9DF6AB792A34F73C00DA095B /* Autoparts.swift */,
 				9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */,
 				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
 				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
@@ -308,7 +305,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF43E562A2FE3C6001A4A66 /* SplashScreenView.swift in Sources */,
-				9DF6AB7A2A34F73C00DA095B /* Autoparts.swift in Sources */,
 				9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */,
 				038630B72A1C4861004BD44F /* LoginView.swift in Sources */,
 				9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */,
