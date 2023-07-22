@@ -55,9 +55,9 @@ struct Homescreen: View {
                                     .font(.system(size: 15))
                                 Text("Service Type: \(garagehelper.garagelist[index].availability)")
                                     .foregroundColor(.gray)
-                                    .font(.system(size: 14))
+                                    .font(.system(size: 15))
                             }
-                            .padding(11)
+                            .padding(10)
                         }
                     }
                 }
