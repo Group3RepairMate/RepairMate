@@ -19,6 +19,7 @@ struct MechanicSignUpView: View {
     @State private var selectedBookingType: Int = 0
     @State private var showingAlert = false
     @AppStorage("mechanicId") var mechanicId: String = ""
+    @AppStorage("mechanicPassword") var mechanicPassword: String = ""
     @EnvironmentObject var garagehelper: Garagehelper
     
     private let bookingTypes = ["Advance", "Immediate", "Both"]
@@ -122,7 +123,8 @@ struct MechanicSignUpView: View {
                         title: Text("Success!"),
                         message: Text("\(self.garageName) is registered successfully."),
                         dismissButton: .default(Text("OK")) {
-                            mechanicId = self.email
+                            mechanicId = email
+                            mechanicPassword = password
                             ContentViewForMech()
                         }
                     )
@@ -200,5 +202,4 @@ struct MechanicSignUpView: View {
             }
         }.resume()
     }
-    
 }

@@ -22,6 +22,7 @@ struct Editview: View {
             Text("Edit Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
+            
             TextField("Enter Your Name",text: $fullName)
                 .padding(15)
                 .foregroundColor(Color.blue)
@@ -39,6 +40,7 @@ struct Editview: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
+            
             TextField("Enter Your City",text: $city)
                 .padding(15)
                 .foregroundColor(Color.blue)
@@ -47,6 +49,7 @@ struct Editview: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
+            
             TextField("Enter Your Postal Code",text: $postal)
                 .padding(15)
                 .foregroundColor(Color.blue)
@@ -55,7 +58,9 @@ struct Editview: View {
                 .disableAutocorrection(true)
                 .font(.headline)
                 .cornerRadius(20)
+            
             Spacer()
+            
             Button(action: {
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
@@ -93,9 +98,6 @@ struct Editview: View {
                     .stroke(Color.blue,lineWidth: 0)
                     .foregroundColor(.black)
             )
-            
-            
-            
         }
         .onAppear(){
             let db = Firestore.firestore()

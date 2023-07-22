@@ -11,6 +11,7 @@ import Firebase
 
 struct MechanicLoginView: View {
     @AppStorage("mechanicId") var mechanicId: String = ""
+    @AppStorage("mechanicPassword") var mechanicPassword: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @Binding var currentShowingView: String
@@ -83,6 +84,7 @@ struct MechanicLoginView: View {
                                     UserDefaults.standard.set(email,forKey: "EMAIL")
                                     withAnimation{
                                         mechanicId = email
+                                        mechanicPassword = password
                                         self.currentShowingView = "mechanichome"
                                     }
                                 }
