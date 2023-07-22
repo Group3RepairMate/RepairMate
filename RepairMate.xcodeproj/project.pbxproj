@@ -29,6 +29,9 @@
 		9D526DA22A55F6790057EB16 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9D526DA12A55F6790057EB16 /* FirebaseStorage */; };
 		9D780F132A39628300189096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D780F122A39628300189096 /* GoogleService-Info.plist */; };
 		9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */; };
+		9D7854382A6C6C0600144066 /* NotificationMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7854372A6C6C0600144066 /* NotificationMechanic.swift */; };
+		9D78543A2A6C6C2D00144066 /* UpdateMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7854392A6C6C2D00144066 /* UpdateMechanic.swift */; };
+		9D78543C2A6C6C3E00144066 /* EditMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D78543B2A6C6C3E00144066 /* EditMechanic.swift */; };
 		9DA76DC92A575E1200327D5C /* ForgotPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */; };
 		9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */; };
 		9DA76DCD2A575EF100327D5C /* EditBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76DCC2A575EF100327D5C /* EditBooking.swift */; };
@@ -69,6 +72,9 @@
 		9D4EDF052A3CC80100CA8390 /* Editview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editview.swift; sourceTree = "<group>"; };
 		9D780F122A39628300189096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailsForm.swift; sourceTree = "<group>"; };
+		9D7854372A6C6C0600144066 /* NotificationMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMechanic.swift; sourceTree = "<group>"; };
+		9D7854392A6C6C2D00144066 /* UpdateMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMechanic.swift; sourceTree = "<group>"; };
+		9D78543B2A6C6C3E00144066 /* EditMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMechanic.swift; sourceTree = "<group>"; };
 		9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassCustomer.swift; sourceTree = "<group>"; };
 		9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassCustomer.swift; sourceTree = "<group>"; };
 		9DA76DCC2A575EF100327D5C /* EditBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBooking.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
 				9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */,
 				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
+				9D7854372A6C6C0600144066 /* NotificationMechanic.swift */,
+				9D7854392A6C6C2D00144066 /* UpdateMechanic.swift */,
+				9D78543B2A6C6C3E00144066 /* EditMechanic.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -308,7 +317,9 @@
 				9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */,
 				038630B72A1C4861004BD44F /* LoginView.swift in Sources */,
 				9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */,
+				9D7854382A6C6C0600144066 /* NotificationMechanic.swift in Sources */,
 				9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */,
+				9D78543A2A6C6C2D00144066 /* UpdateMechanic.swift in Sources */,
 				9DF45C512A47AC850058AC4F /* Mauthview.swift in Sources */,
 				038630BD2A1D792E004BD44F /* SignUpView.swift in Sources */,
 				9DF6AB882A34F77D00DA095B /* ImagePicker.swift in Sources */,
@@ -327,6 +338,7 @@
 				9DF6AB842A34F77300DA095B /* Garage.swift in Sources */,
 				E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */,
 				9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */,
+				9D78543C2A6C6C3E00144066 /* EditMechanic.swift in Sources */,
 				E87E90F32A5B129B0060396E /* MechanicProfile.swift in Sources */,
 				9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */,
 				9DAD42B42A602E2D0026AE6E /* NotificationScreen.swift in Sources */,

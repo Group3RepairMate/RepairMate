@@ -45,7 +45,9 @@ struct ResetPassCustomer: View {
             Text("Reset Password")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .padding()
+                .padding(.top, -40)
+            Text("")
+            Text("")
             TextField("Enter Your Email Address",text: $email)
                 .padding(15)
                 .frame(width: 350.0)
@@ -100,9 +102,10 @@ struct ResetPassCustomer: View {
                 
                 
             }
+          
         }
         
-        .padding(10)
+ 
     }
 }
 

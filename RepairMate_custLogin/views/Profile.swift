@@ -90,15 +90,6 @@ struct Profile: View {
                     }
                     
                     Button(action: {
-                        // Add action for "FAQ" button
-                    }) {
-                        Label("FAQ", systemImage: "questionmark.circle")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
-                            .cornerRadius(20)
-                    }
-                    Button(action: {
                         self.notificationselection = 1
                     }) {
                         Label("Notifications", systemImage: "text.book.closed")

@@ -33,18 +33,14 @@ struct Homescreen: View {
                     Text("All").tag(ServiceType.all)
                     if garagehelper.garagelist.contains(where: { $0.availability == "Immediate" }) {
                         Text("Immediate").tag(ServiceType.immediate)
-                            .padding(5)
-                            .foregroundColor(Color("darkgray"))
                     }
                     if garagehelper.garagelist.contains(where: { $0.availability == "Advance" }) {
                         Text("Advance").tag(ServiceType.advance)
-                            .padding(5)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-               
-                
+            
                 List {
                     ForEach(searchlist, id: \.self) { index in
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
@@ -69,10 +65,6 @@ struct Homescreen: View {
             }
             .onAppear() {
                 self.garagehelper.fetchGaragelist()
-                print(UserDefaults.standard.string(forKey: "EMAIL"))
-                for i in 0..<garagehelper.garagelist.count {
-                    print("type of avail \(garagehelper.garagelist[i].availability)")
-                }
             }
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
@@ -80,8 +72,8 @@ struct Homescreen: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        
-        
+       
+       
     }
     
     var searchlist: [Int] {
