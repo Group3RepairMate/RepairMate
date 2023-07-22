@@ -19,6 +19,7 @@ struct MechanicSignUpView: View {
     @State private var selectedBookingType: Int = 0
     @State private var showingAlert = false
     @AppStorage("mechanicId") var mechanicId: String = ""
+    @EnvironmentObject var garagehelper: Garagehelper
     
     private let bookingTypes = ["Advance", "Immediate", "Both"]
     

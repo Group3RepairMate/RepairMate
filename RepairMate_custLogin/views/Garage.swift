@@ -7,11 +7,9 @@ struct Garagesstruct : Codable{
 }
 
 struct Garage : Codable,Hashable{
-    var id : Int
     var name : String
     var location : String
     var email : String
     var phone_no : String
     var availability:String
-    
 }

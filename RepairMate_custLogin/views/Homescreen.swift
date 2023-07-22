@@ -65,10 +65,6 @@ struct Homescreen: View {
             }
             .onAppear() {
                 self.garagehelper.fetchGaragelist()
-                print(UserDefaults.standard.string(forKey: "EMAIL"))
-                for i in 0..<garagehelper.garagelist.count {
-                    print("type of avail \(garagehelper.garagelist[i].availability)")
-                }
             }
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
