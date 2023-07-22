@@ -69,7 +69,7 @@ struct Profile: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, -59)
                             .padding(.top, -50)
-                            .font(.system(size: 23))
+                            .font(.system(size: 22.5))
                     }
                 }
                 .background(Color("darkgray"))
