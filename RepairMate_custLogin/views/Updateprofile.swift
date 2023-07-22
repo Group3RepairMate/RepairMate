@@ -18,8 +18,7 @@ struct Updateprofile: View {
             Text("User Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, 10)
-            Spacer()
+                .padding(.top, -55)
             VStack(alignment: .leading, spacing: 4) {
                 
                 HStack {
