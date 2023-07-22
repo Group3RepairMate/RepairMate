@@ -45,7 +45,7 @@ struct ResetPassCustomer: View {
             Text("Reset Password")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -40)
+                .padding(.top, -43)
             Text("")
             Text("")
             TextField("Enter Your Email Address",text: $email)
