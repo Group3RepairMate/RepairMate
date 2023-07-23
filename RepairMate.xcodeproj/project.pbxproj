@@ -47,7 +47,6 @@
 		9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */; };
 		9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */; };
 		E85D06112A6B93BC00F987F9 /* NotificationMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */; };
-		E85D06132A6B940D00F987F9 /* UpdateMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06122A6B940D00F987F9 /* UpdateMechanic.swift */; };
 		E85D06152A6B946200F987F9 /* EditMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06142A6B946200F987F9 /* EditMechanic.swift */; };
 		E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */; };
 		E87E90F12A5B126E0060396E /* MechanicHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90F02A5B126E0060396E /* MechanicHistory.swift */; };
@@ -90,7 +89,6 @@
 		9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicLoginView.swift; sourceTree = "<group>"; };
 		9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicSignUpView.swift; sourceTree = "<group>"; };
 		E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMechanic.swift; sourceTree = "<group>"; };
-		E85D06122A6B940D00F987F9 /* UpdateMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMechanic.swift; sourceTree = "<group>"; };
 		E85D06142A6B946200F987F9 /* EditMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMechanic.swift; sourceTree = "<group>"; };
 		E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewForMech.swift; sourceTree = "<group>"; };
 		E87E90F02A5B126E0060396E /* MechanicHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicHistory.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */,
 				9D4EDF052A3CC80100CA8390 /* Editview.swift */,
 				9EF43E552A2FE3C6001A4A66 /* SplashScreenView.swift */,
-				E85D06122A6B940D00F987F9 /* UpdateMechanic.swift */,
 				9DF6AB872A34F77D00DA095B /* ImagePicker.swift */,
 				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
 				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
@@ -319,7 +316,6 @@
 				9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */,
 				E85D06112A6B93BC00F987F9 /* NotificationMechanic.swift in Sources */,
 				9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */,
-				E85D06132A6B940D00F987F9 /* UpdateMechanic.swift in Sources */,
 				9DF45C512A47AC850058AC4F /* Mauthview.swift in Sources */,
 				038630BD2A1D792E004BD44F /* SignUpView.swift in Sources */,
 				9DF6AB882A34F77D00DA095B /* ImagePicker.swift in Sources */,

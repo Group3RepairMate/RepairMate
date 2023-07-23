@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct MechanicHistory: View {
+    @EnvironmentObject var garagehelper: Garagehelper
+    @AppStorage("mechanicId") var mechanicId: String = ""
+    
     var body: some View {
-        Text("mechanic history")
+        VStack{
+            Text("mechanic history")
+        }
+        .onAppear(){
+            for i in garagehelper.garagelist{
+                if(i.email == mechanicId){
+                    print("history \(i.phone_no)")
+                }
+            }
+        }
     }
 }
 

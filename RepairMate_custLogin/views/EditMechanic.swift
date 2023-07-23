@@ -1,14 +1,10 @@
-//
-//  EditMechanic.swift
-//  RepairMate
-//
-//  Created by Harshil Vaghani on 2023-07-22.
-//
+
 
 import SwiftUI
 import FirebaseAuth
 
 struct EditMechanic: View {
+    @Environment(\.dismiss) var dismiss
     @State private var email: String = ""
     @State private var garageName: String = ""
     @State private var contactNo: String = ""
@@ -16,67 +12,55 @@ struct EditMechanic: View {
     @EnvironmentObject var garagehelper: Garagehelper
     @AppStorage("mechanicId") var mechanicId: String = ""
     @AppStorage("mechanicPassword") var mechanicPassword: String = ""
+    
     var body: some View {
         VStack{
             Text("Edit Profile")
-                .font(.largeTitle)
-                .foregroundColor(Color("darkgray"))
-            
-            TextField("Enter Your Name",text: $garageName)
+                .font(.title)
                 .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
             
-            TextField("Enter Your City",text: $email)
-                .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
-            
-            TextField("Enter Your City",text: $contactNo)
-                .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
-            
-            TextField("Enter Your Street",text: $garageAddress)
-                .padding(15)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(20)
+            Form{
+                
+                Section(header: Text("Garage Name:")) {
+                    TextField("Enter Your Name",text: $garageName)
+                        .padding(2)
+                }
+                
+                Section(header: Text("Email:")) {
+                    TextField("Enter Your City",text: $email)
+                        .padding(2)
+                }
+                
+                Section(header: Text("Contact No:")) {
+                    TextField("Enter Your Name",text: $contactNo)
+                        .padding(2)
+                }
+                
+                Section(header: Text("Garage Address:")) {
+                    TextField("Enter Your Name",text: $garageAddress)
+                        .padding(2)
+                }
+            }
             
             Spacer()
             
             Button(action: {
                 updateProfile()
+                for i in garagehelper.garagelist{
+                    if(i.email==mechanicId){
+                        print(i.phone_no)
+                    }
+                }
             }) {
                 Text("Update")
-                    .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 120)
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray)
+                    .cornerRadius(8)
+                    .padding()
             }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
         }
         .onAppear(){
             for i in garagehelper.garagelist{
@@ -87,6 +71,7 @@ struct EditMechanic: View {
                     garageAddress=i.location
                 }
             }
+
         }
     }
     
@@ -97,10 +82,11 @@ struct EditMechanic: View {
         }
         
         var request = URLRequest(url: url)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type") // change as per server requirements
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let parameters: [String: String] = [
             "name": garageName,
+            "oldEmail":mechanicId,
             "email": email,
             "phone_no":contactNo,
             "location":garageAddress
@@ -121,32 +107,29 @@ struct EditMechanic: View {
             }
             else{
                 DispatchQueue.main.async {
-                    updateEmail()
-                }
-            }
-        }.resume()
-    }
-    
-    func updateEmail(){
-        guard let user = Auth.auth().currentUser else {
-            return
-        }
-        
-        let credential = EmailAuthProvider.credential(withEmail: mechanicId, password: mechanicPassword)
-        
-        user.reauthenticate(with: credential) { (result, error) in
-            if let error = error {
-                print(error)
-            } else {
-                user.updateEmail(to: email) { (error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        mechanicId = email
+                    guard let user = Auth.auth().currentUser else {
+                        return
+                    }
+                    
+                    let credential = EmailAuthProvider.credential(withEmail: mechanicId, password: mechanicPassword)
+                    
+                    user.reauthenticate(with: credential) { (result, error) in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            user.updateEmail(to: email) { (error) in
+                                if let error = error {
+                                    print(error)
+                                } else {
+                                    mechanicId = email
+                                    dismiss()
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
+        }.resume()
     }
 }
 

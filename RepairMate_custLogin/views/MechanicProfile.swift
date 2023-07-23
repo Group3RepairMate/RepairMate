@@ -13,12 +13,13 @@ import FirebaseStorage
 struct MechanicProfile: View {
     @State private var selectedImage: Data?
     @State private var isShowingImagePicker = false
-    @State private var linkselection: Int? = nil
     @State private var historyselection:Int? = nil
     @State private var notificationselection:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
     @State private var fullName:String = ""
+    @State private var isSheetPresented = false
     @AppStorage("mechanicId") var mechanicId: String = ""
+    @AppStorage("mechanicPassword") var mechanicPassword: String = ""
     @EnvironmentObject var garagehelper: Garagehelper
     
     var selectedUIImage: UIImage? {
@@ -81,9 +82,8 @@ struct MechanicProfile: View {
                                 .font(.system(size: 23))
                         }
                     }
-                    .background(Color("darkgray"))
+                    .background(Color.gray)
                     
-                    NavigationLink(destination: UpdateMechanic(), tag: 1, selection:self.$linkselection){}
                     NavigationLink(destination: MechanicHistory(), tag: 1, selection:self.$historyselection){}
                     NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                     NavigationLink(destination: NotificationMechanic(), tag: 1, selection:self.$notificationselection){}
@@ -134,29 +134,27 @@ struct MechanicProfile: View {
                     })
                     {
                         Text("Logout")
-                            .fontWeight(.bold)
                             .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(15)
-                            .frame(maxWidth: 120)
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.gray)
+                            .cornerRadius(8)
+                            .padding()
                     }
-                    .background(Color("darkgray"))
-                    .cornerRadius(70)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 0)
-                            .stroke(Color.blue,lineWidth: 0)
-                            .foregroundColor(.black)
-                    )
                     Spacer()
                 }
                 .navigationBarTitle("", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            self.linkselection = 1
+                            isSheetPresented.toggle()
                         } label: {
                             Image(systemName: "square.and.pencil")
                                 .foregroundColor(.white)
+                        }
+                        .sheet(isPresented: $isSheetPresented) {
+                            EditMechanic()
                         }
                     }
                 }
