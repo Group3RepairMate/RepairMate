@@ -138,7 +138,7 @@ struct MechanicProfile: View {
                             .font(.headline)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.gray)
+                            .background(Color("darkgray"))
                             .cornerRadius(8)
                             .padding()
                     }

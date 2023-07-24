@@ -46,18 +46,13 @@ struct EditMechanic: View {
             
             Button(action: {
                 updateProfile()
-                for i in garagehelper.garagelist{
-                    if(i.email==mechanicId){
-                        print(i.phone_no)
-                    }
-                }
             }) {
                 Text("Update")
                     .foregroundColor(.white)
                     .font(.headline)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray)
+                    .background(Color("darkgray"))
                     .cornerRadius(8)
                     .padding()
             }
