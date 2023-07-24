@@ -22,7 +22,8 @@ struct Garagedetails: View {
                 .foregroundColor(Color("darkgray"))
                 .font(.system(size: 28))
                 .fontWeight(.semibold)
-                .padding(.top, -40)
+              
+//                .padding(.top, -40)
             Text("")
 
             VStack {

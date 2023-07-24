@@ -14,6 +14,8 @@ struct EditBooking: View {
     @State private var problem: String = ""
     @State private var showAlert:Bool = false
     @State private var isChanged:Bool = false
+    @State private var linkselection : Int? = nil
+    
     var body: some View {
         VStack {
             Text("Booking Details")
@@ -100,7 +102,8 @@ struct EditBooking: View {
                         .autocorrectionDisabled()
                 }
             }
-            
+//            NavigationLink(destination: Homescreen(), tag: 1, selection:self.$linkselection){}
+
             Button(action: {
                 
                 Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
@@ -127,7 +130,7 @@ struct EditBooking: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(15)
-                    .frame(maxWidth: 120)
+                    .frame(maxWidth: 200)
             }
             .background(Color("darkgray"))
             .cornerRadius(70)
@@ -144,6 +147,28 @@ struct EditBooking: View {
                     return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
                 }
             }
+            
+            Button(action: {
+                deleteOrder()
+                self.linkselection = 1
+            }) {
+                Text("Delete Order")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(15)
+                    .frame(maxWidth: 200)
+            }
+            .background(Color.red)
+            .cornerRadius(70)
+            .alert(isPresented: $showAlert) {
+                if isChanged {
+                  
+                    return Alert(title: Text("Successful"), message: Text("Order Delete Successfully"), dismissButton: .default(Text("OK")))
+                } else {
+                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                }
+            }
         }
         .padding(10)
         .onAppear(){
@@ -156,6 +181,23 @@ struct EditBooking: View {
             problem = order.problemDisc
         }
     }
-    
+    private func deleteOrder() {
+        guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+            print("User document ID not found")
+            return
+        }
+        
+        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").document(order.bookingId).delete { error in
+            if let error = error {
+                print("Error deleting order: \(error)")
+                showAlert = true
+            } else {
+               
+                showAlert = true
+                isChanged = true
+              
+            }
+        }
+    }
 }
 

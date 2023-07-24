@@ -86,6 +86,8 @@ struct CustomerDetailsForm: View {
             
             NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
             
+            NavigationLink(destination: PaymentGateway(), tag: 2, selection: self.$linkselection) {}
+            
             Form {
                 Section(header: Text("Personal Information")) {
                     TextField("First Name", text: $firstName)
@@ -151,6 +153,9 @@ struct CustomerDetailsForm: View {
                 if selectedPaymentOption == .card {
                     goToPayment = true
                 }
+                if selectedPaymentOption == .card {
+                    self.linkselection = 2
+                }
                 else if  selectedPaymentOption == .cash{
                     firstName = ""
                     lastName = ""
@@ -193,11 +198,6 @@ struct CustomerDetailsForm: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-        .sheet(isPresented: $goToPayment) {
-            if selectedPaymentOption == .card {
-                PaymentGateway()
-            }
-        }
         
         Spacer()
     }

@@ -54,6 +54,7 @@ struct Viewhistory: View {
                                 .cornerRadius(20)
                         }
                         
+                        
                     }
                     .padding()
                 }

@@ -53,7 +53,7 @@ struct PaymentGateway: View {
                         .padding()
                         .autocorrectionDisabled()
                     
-                    NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
+                    NavigationLink(destination: ContentView(), tag: 1, selection: self.$linkselection) {}
                 }
                 .padding()
                 Spacer()
@@ -83,7 +83,9 @@ struct PaymentGateway: View {
                 Alert(title: Text("Payment Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
         }
+//        .navigationBarBackButtonHidden(true)
     }
+    
     
     private func processPayment() {
         STPAPIClient.shared.publishableKey = "pk_test_51NL5tXGqazpotKa3TAh4pTUeAUyNADf16KmzA0o6JVwEDSpRdD1myznjXzSm7CKcRQkq5F7amf5OUh4Bvd7Gf68b00gvi8wrbr"
@@ -118,6 +120,7 @@ struct PaymentGateway: View {
         self.alertMessage = "Payment successful!Thank you"
        
     }
+        
 }
 
 struct PaymentGateway_Previews: PreviewProvider {
