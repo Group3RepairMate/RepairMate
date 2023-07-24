@@ -53,7 +53,7 @@ struct PaymentGateway: View {
                         .padding()
                         .autocorrectionDisabled()
                     
-                    NavigationLink(destination: ContentView(), tag: 1, selection: self.$linkselection) {}
+//                    NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
                 }
                 .padding()
                 Spacer()

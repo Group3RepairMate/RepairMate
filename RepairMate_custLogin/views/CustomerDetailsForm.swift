@@ -26,6 +26,7 @@ struct CustomerDetailsForm: View {
     @State private var selectedPaymentOption: PaymentOption = .cash
     @State private var goToProfileSetting: Bool = false
     @State private var goToPayment: Bool = false
+    @State private var showcard: Bool = false
     
     private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, apartment: String,streetname: String,postal:String,city: String, dateTime: Date, problemDesc: String) {
         if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || streetname.isEmpty || apartment.isEmpty || postal.isEmpty || city.isEmpty || problemDesc.isEmpty {
@@ -72,6 +73,7 @@ struct CustomerDetailsForm: View {
             } else {
                 showAlert = true
                 showsuccess = true
+                showcard = true
             }
         }
     }
@@ -151,9 +153,7 @@ struct CustomerDetailsForm: View {
                 }
                 
                 if selectedPaymentOption == .card {
-                    goToPayment = true
-                }
-                if selectedPaymentOption == .card {
+                    showcard = true
                     self.linkselection = 2
                 }
                 else if  selectedPaymentOption == .cash{
@@ -191,9 +191,11 @@ struct CustomerDetailsForm: View {
         }
         .alert(isPresented: $showAlert) {
             if showsuccess {
+                
                 return Alert(title: Text("Successful"), message: Text("Booking Successful."), dismissButton: .default(Text("OK")))
                 
-            } else {
+            }
+            else {
                 return Alert(title: Text("Incomplete Form"), message: Text("Please check all the required details."), dismissButton: .default(Text("OK")))
             }
         }
