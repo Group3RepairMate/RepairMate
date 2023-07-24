@@ -1,7 +1,7 @@
 
 
 import Foundation
-struct Order: Identifiable,Equatable{
+struct Order: Identifiable,Equatable,Hashable{
     let id = UUID()
     let bookingId: String
     let firstName: String
