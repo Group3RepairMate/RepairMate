@@ -84,6 +84,7 @@ struct CustomerDetailsForm: View {
                 .padding(10)
             
             NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
+            NavigationLink(destination: Viewhistory(), tag: 2, selection: self.$linkselection) {}
             
             Form {
                 Section(header: Text("Personal Information")) {
@@ -181,6 +182,7 @@ struct CustomerDetailsForm: View {
             .onAppear() {
                 print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
                 print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
+                self.emailAddress = UserDefaults.standard.string(forKey: "EMAIL") ?? ""
             }
         }
         .alert(isPresented: $showAlert) {
@@ -192,7 +194,9 @@ struct CustomerDetailsForm: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-        .sheet(isPresented: $goToPayment) {
+        .sheet(isPresented: $goToPayment,onDismiss: {
+            self.linkselection=2
+        }) {
             if selectedPaymentOption == .card {
                 PaymentGateway()
             }

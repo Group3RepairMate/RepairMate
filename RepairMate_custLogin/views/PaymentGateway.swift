@@ -2,7 +2,7 @@ import SwiftUI
 import Stripe
 
 struct PaymentGateway: View {
-    
+    @Environment(\.dismiss) var dismiss
     @State private var cardHolderName: String = ""
     @State private var cardNumber: String = ""
     @State private var expirationMonth: String = ""
@@ -53,15 +53,12 @@ struct PaymentGateway: View {
                         .padding()
                         .autocorrectionDisabled()
                     
-//                    NavigationLink(destination: Viewhistory(), tag: 1, selection: self.$linkselection) {}
                 }
                 .padding()
                 Spacer()
                 Button(action: {
                     processPayment()
-                    Viewhistory()
-                    print("PRess pay")
-                    
+                    dismiss()
                 }) {
                     Text("Pay")
                         .fontWeight(.bold)
@@ -83,7 +80,6 @@ struct PaymentGateway: View {
                 Alert(title: Text("Payment Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
         }
-//        .navigationBarBackButtonHidden(true)
     }
     
     

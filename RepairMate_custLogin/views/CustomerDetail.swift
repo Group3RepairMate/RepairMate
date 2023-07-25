@@ -126,6 +126,7 @@ struct CustomerDetail: View {
                     ])
                     { error in
                         if let error = error {
+                            print("accept: \(error)")
                             showingAlert = true
                         } else {
                             showingAlert = true
