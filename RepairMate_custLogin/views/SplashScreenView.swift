@@ -13,13 +13,13 @@ struct SplashScreenView: View {
             } else {
                 VStack {
                     Text("REPAIR MATE")
-                        .font(.largeTitle)
+                        .font(.headline)
                         .fontWeight(.bold)
                         .padding()
                         .foregroundColor(Color("darkgray"))
                     
                     Text("Welcome to our service!")
-                        .font(.headline)
+                        .font(.largeTitle)
                         .fontWeight(.medium)
                         .padding()
                         .foregroundColor(Color("darkgray"))
