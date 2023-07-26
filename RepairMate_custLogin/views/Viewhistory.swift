@@ -10,7 +10,7 @@ struct Viewhistory: View {
         case all
     }
     @State private var status: Status = .all
-    @State private var selectedOrder: Order? = nil // Added state variable for selected order
+    @State private var selectedOrder: Order? = nil
     
     var body: some View {
         VStack {
@@ -36,7 +36,7 @@ struct Viewhistory: View {
                     NavigationLink(
                         destination: EditBooking(order: order),
                         tag: order,
-                        selection: $selectedOrder // Use tag and selection for navigation
+                        selection: $selectedOrder
                     ) {
                         VStack(alignment: .leading) {
                             Text("\(order.garageName)")
@@ -63,6 +63,7 @@ struct Viewhistory: View {
             }
         }
         .onAppear {
+            orderList = []
             fetchOrderList()
         }
         

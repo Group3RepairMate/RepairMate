@@ -48,6 +48,7 @@
 		9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */; };
 		E85D06112A6B93BC00F987F9 /* NotificationMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */; };
 		E85D06152A6B946200F987F9 /* EditMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06142A6B946200F987F9 /* EditMechanic.swift */; };
+		E87ACDA02A71E05C00495BC8 /* EditOrderForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87ACD9F2A71E05C00495BC8 /* EditOrderForMech.swift */; };
 		E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */; };
 		E87E90F12A5B126E0060396E /* MechanicHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90F02A5B126E0060396E /* MechanicHistory.swift */; };
 		E87E90F32A5B129B0060396E /* MechanicProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87E90F22A5B129B0060396E /* MechanicProfile.swift */; };
@@ -90,6 +91,7 @@
 		9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicSignUpView.swift; sourceTree = "<group>"; };
 		E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMechanic.swift; sourceTree = "<group>"; };
 		E85D06142A6B946200F987F9 /* EditMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMechanic.swift; sourceTree = "<group>"; };
+		E87ACD9F2A71E05C00495BC8 /* EditOrderForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderForMech.swift; sourceTree = "<group>"; };
 		E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewForMech.swift; sourceTree = "<group>"; };
 		E87E90F02A5B126E0060396E /* MechanicHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicHistory.swift; sourceTree = "<group>"; };
 		E87E90F22A5B129B0060396E /* MechanicProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicProfile.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */,
 				9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */,
 				9DA76DCC2A575EF100327D5C /* EditBooking.swift */,
+				E87ACD9F2A71E05C00495BC8 /* EditOrderForMech.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				9DF6AB842A34F77300DA095B /* Garage.swift in Sources */,
 				E85D06152A6B946200F987F9 /* EditMechanic.swift in Sources */,
 				E87E90EF2A5B11C70060396E /* ContentViewForMech.swift in Sources */,
+				E87ACDA02A71E05C00495BC8 /* EditOrderForMech.swift in Sources */,
 				9DA76DCB2A575E5000327D5C /* ResetPassCustomer.swift in Sources */,
 				E87E90F32A5B129B0060396E /* MechanicProfile.swift in Sources */,
 				9D780F152A3962DE00189096 /* CustomerDetailsForm.swift in Sources */,
