@@ -72,8 +72,8 @@ struct CustomerDetailsForm: View {
                 print("Error adding field: \(error)")
             } else {
                 showAlert = true
-                showsuccess = true
-                showcard = true
+//                showsuccess = true
+//                showcard = true
             }
         }
     }
@@ -153,7 +153,7 @@ struct CustomerDetailsForm: View {
                 }
                 
                 if selectedPaymentOption == .card {
-                    showcard = true
+                    
                     self.linkselection = 2
                 }
                 else if  selectedPaymentOption == .cash{

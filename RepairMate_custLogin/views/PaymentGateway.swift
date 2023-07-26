@@ -53,14 +53,16 @@ struct PaymentGateway: View {
                         .padding()
                         .autocorrectionDisabled()
                     
-//                    NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
+//                    NavigationLink(destination: Viewhistory(), tag: 1, selection: self.$linkselection) {}
                 }
                 .padding()
                 Spacer()
                 // Payment button
                 Button(action: {
                     processPayment()
-                    linkselection = 1
+//                    linkselection = 1
+                    Viewhistory()
+                    print("PRess pay")
                     
                 }) {
                     Text("Pay")

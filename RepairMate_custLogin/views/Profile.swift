@@ -92,7 +92,7 @@ struct Profile: View {
                     Button(action: {
                         self.notificationselection = 1
                     }) {
-                        Label("Notifications", systemImage: "text.book.closed")
+                        Label("Notifications", systemImage: "bell.fill")
                             .foregroundColor(.black)
                             .font(.headline)
                             .padding()

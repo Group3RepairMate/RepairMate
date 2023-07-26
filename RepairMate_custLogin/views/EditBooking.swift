@@ -15,7 +15,7 @@ struct EditBooking: View {
     @State private var showAlert:Bool = false
     @State private var isChanged:Bool = false
     @State private var linkselection : Int? = nil
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
             Text("Booking Details")
@@ -150,7 +150,8 @@ struct EditBooking: View {
             
             Button(action: {
                 deleteOrder()
-                self.linkselection = 1
+//                self.linkselection = 1
+                dismiss()
             }) {
                 Text("Delete Order")
                     .fontWeight(.bold)
