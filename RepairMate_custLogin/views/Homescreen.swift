@@ -31,6 +31,7 @@ struct Homescreen: View {
                 
                 Picker("Service", selection: $selectedServiceType) {
                     Text("All").tag(ServiceType.all)
+                        .fontWeight(.semibold)
                     if garagehelper.garagelist.contains(where: { $0.availability == "Immediate" }) {
                         Text("Immediate").tag(ServiceType.immediate)
                     }
@@ -39,6 +40,7 @@ struct Homescreen: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                //.padding(10)
                 .padding(.horizontal)
             
                 List {
@@ -61,6 +63,7 @@ struct Homescreen: View {
                         }
                     }
                 }
+                .listStyle(.insetGrouped)
                 Spacer()
             }
             .onAppear() {

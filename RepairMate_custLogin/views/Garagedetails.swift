@@ -20,7 +20,7 @@ struct Garagedetails: View {
         VStack {
             Text(detailsview.name)
                 .foregroundColor(Color("darkgray"))
-                .font(.system(size: 28))
+                .font(.title2)
                 .fontWeight(.semibold)
               
 //                .padding(.top, -40)
@@ -131,18 +131,16 @@ struct Garagedetails: View {
                                     Text("Book Now")
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
+                                        .font(.headline)
                                         .multilineTextAlignment(.center)
                                         .padding(15)
                                         .frame(maxWidth: 120)
                                 }
+                                .foregroundColor(.white)
+                                .font(.headline)
+                                .frame(maxWidth: 200)
                                 .background(Color("darkgray"))
-                                .cornerRadius(70)
-                                .padding(20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.blue, lineWidth: 0)
-                                        .foregroundColor(.black)
-                                )
+                                .cornerRadius(8)
                                 .padding(.top,50)
                             }
                             .navigationBarTitle("", displayMode: .inline)

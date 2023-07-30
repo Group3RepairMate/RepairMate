@@ -109,7 +109,7 @@ struct Profile: View {
                             .cornerRadius(20)
                     }
                 }
-                .listStyle(GroupedListStyle())
+                .listStyle(.insetGrouped)
                 
                 
                 Button(action:{
