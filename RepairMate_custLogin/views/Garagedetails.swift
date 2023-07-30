@@ -22,10 +22,8 @@ struct Garagedetails: View {
                 .foregroundColor(Color("darkgray"))
                 .font(.title2)
                 .fontWeight(.semibold)
-              
-//                .padding(.top, -40)
-            Text("")
-
+                .padding(.top,-50)
+            
             VStack {
                 Text("Location: \(detailsview.location)")
                     .fontWeight(.semibold)
@@ -43,30 +41,17 @@ struct Garagedetails: View {
                     openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
                     HStack {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(.white)
-                            .padding(.leading,0)
-                            .frame(width: 1)
-                        Text("Get Directions")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.vertical, 15)
-                            .frame(width: 130)
-                      
+                        Spacer()
+                        Image("direction")
+//                            .foregroundColor(Color("darkgray"))
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .padding(.trailing,12)
+                            .padding(.top,-32)
+//                            .frame(width: 1)
+//
                     }
                 }
-                .padding(.horizontal, 25)
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue, lineWidth: 0)
-                        .foregroundColor(.black)
-                )
-
-
-
             }
             .onAppear {
                 forwardGeocoding(address: detailsview.location)
@@ -93,15 +78,15 @@ struct Garagedetails: View {
                             .foregroundColor(.blue)
                         Text("Email:")
                             .fontWeight(.semibold)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Text(detailsview.email)
                             .foregroundColor(.gray)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Spacer()
                     }
                 }
-                .padding(5)
-                .padding(.top,10)
+                .padding(4)
+                .padding(.top,5)
                 Text("")
                 Button(action: {
                     let phone = detailsview.phone_no
@@ -115,15 +100,15 @@ struct Garagedetails: View {
                             .foregroundColor(.blue)
                         Text("Phone:")
                             .fontWeight(.semibold)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Text(detailsview.phone_no)
                             .foregroundColor(.gray)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Spacer()
                     }
                 }
 
-                .padding(5)
+                .padding(4)
                 NavigationLink(destination: CustomerDetailsForm(detailsview: detailsview), isActive: $goToCustomerDetailScreen) {
                                 Button(action: {
                                     self.goToCustomerDetailScreen = true
@@ -138,9 +123,10 @@ struct Garagedetails: View {
                                 }
                                 .foregroundColor(.white)
                                 .font(.headline)
-                                .frame(maxWidth: 200)
+                                .frame(maxWidth: .infinity)
                                 .background(Color("darkgray"))
                                 .cornerRadius(8)
+                                .padding(5)
                                 .padding(.top,50)
                             }
                             .navigationBarTitle("", displayMode: .inline)
