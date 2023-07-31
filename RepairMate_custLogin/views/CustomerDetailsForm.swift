@@ -114,7 +114,6 @@ struct CustomerDetailsForm: View {
                         .accentColor(.blue)
                         .foregroundColor(.blue)
                         .font(.title2.weight(.medium))
-                        .background(border)
                     TextField("Street Name", text: $streetname)
                         .autocorrectionDisabled()
                     TextField("Postal Code", text: $postal)
