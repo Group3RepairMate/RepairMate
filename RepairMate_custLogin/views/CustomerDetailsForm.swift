@@ -108,6 +108,13 @@ struct CustomerDetailsForm: View {
                 Section(header: Text("Booking Details")) {
                     TextField("Apartment", text: $apartment)
                         .autocorrectionDisabled()
+                       // .textFieldStyle(PlainTextFieldStyle())
+                        // Text alignment.
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
+                        .background(border)
                     TextField("Street Name", text: $streetname)
                         .autocorrectionDisabled()
                     TextField("Postal Code", text: $postal)
@@ -203,6 +210,7 @@ struct CustomerDetailsForm: View {
         
         Spacer()
     }
+    
 }
 
 struct RadioButtonStyle: ToggleStyle {
