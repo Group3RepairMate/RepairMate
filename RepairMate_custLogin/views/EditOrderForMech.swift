@@ -154,9 +154,9 @@ struct EditOrderForMech: View {
             }
             .alert(isPresented: $showAlert) {
                 if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Order Delete Successfully"), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Successful"), message: Text("Order completed Successfully"), dismissButton: .default(Text("OK")))
                 } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Failed"), message: Text("Cannot make the order done"), dismissButton: .default(Text("OK")))
                 }
             }
             
