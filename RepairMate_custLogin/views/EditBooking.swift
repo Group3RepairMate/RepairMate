@@ -206,7 +206,8 @@ struct EditBooking: View {
             return
         }
         
-        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").document(order.bookingId).delete { error in
+        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").document(order.bookingId).updateData(
+            ["status":"deleted"]) { error in
             if let error = error {
                 print("Error deleting order: \(error)")
                 showAlert = true

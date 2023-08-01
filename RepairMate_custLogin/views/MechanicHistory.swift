@@ -9,7 +9,7 @@ struct MechanicHistory: View {
     @EnvironmentObject var garagehelper: Garagehelper
     @AppStorage("mechanicId") var mechanicId: String = ""
     enum Status {
-        case processing
+        case accepted
         case done
         case undone
         case all
@@ -30,9 +30,15 @@ struct MechanicHistory: View {
             } else {
                 Picker("Service", selection: $status) {
                     Text("All").tag(Viewhistory.Status.all)
-                    Text("Processing").tag(Viewhistory.Status.processing)
-                    Text("Done").tag(Viewhistory.Status.done)
-                    Text("Pending").tag(Viewhistory.Status.undone)
+                    if orderList.contains(where: { $0.status == "accepted" }) {
+                        Text("Processing").tag(MechanicHistory.Status.accepted)
+                    }
+                    if orderList.contains(where: { $0.status == "done" }) {
+                        Text("Done").tag(MechanicHistory.Status.done)
+                    }
+                    if orderList.contains(where: { $0.status == "deleted" }) {
+                        Text("Unsuccessful").tag(MechanicHistory.Status.undone)
+                    }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)

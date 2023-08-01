@@ -131,6 +131,36 @@ struct EditOrderForMech: View {
             }
             
             Button(action: {
+                Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
+                    ["status":"done"]) { error in
+                    if let error = error {
+                        print("Error deleting order: \(error)")
+                        showAlert = true
+                    } else {
+                        showAlert = true
+                        isChanged = true
+                    }
+                }
+            })
+            {
+                Text("Done")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("darkgray"))
+                    .cornerRadius(8)
+                    .padding(.top,20)
+            }
+            .alert(isPresented: $showAlert) {
+                if isChanged {
+                    return Alert(title: Text("Successful"), message: Text("Order Delete Successfully"), dismissButton: .default(Text("OK")))
+                } else {
+                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                }
+            }
+            
+            Button(action: {
                 deleteOrder()
                 dismiss()
             }) {
@@ -159,7 +189,8 @@ struct EditOrderForMech: View {
     
     private func deleteOrder() {
         
-        Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).delete { error in
+        Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
+            ["status":"deleted"]) { error in
             if let error = error {
                 print("Error deleting order: \(error)")
                 showAlert = true

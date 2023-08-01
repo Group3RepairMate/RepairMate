@@ -4,7 +4,7 @@ import FirebaseFirestore
 struct Viewhistory: View {
     @State private var orderList: [Order] = []
     enum Status {
-        case processing
+        case accepted
         case done
         case undone
         case all
@@ -25,9 +25,15 @@ struct Viewhistory: View {
             } else {
                 Picker("Service", selection: $status) {
                     Text("All").tag(Viewhistory.Status.all)
-                    Text("Processing").tag(Viewhistory.Status.processing)
-                    Text("Done").tag(Viewhistory.Status.done)
-                    Text("Pending").tag(Viewhistory.Status.undone)
+                    if orderList.contains(where: { $0.status == "accepted" }) {
+                        Text("Processing").tag(Viewhistory.Status.accepted)
+                    }
+                    if orderList.contains(where: { $0.status == "done" }) {
+                        Text("Done").tag(Viewhistory.Status.done)
+                    }
+                    if orderList.contains(where: { $0.status == "deleted" }) {
+                        Text("Unsuccessful").tag(Viewhistory.Status.undone)
+                    }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
