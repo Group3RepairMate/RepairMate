@@ -11,7 +11,7 @@ struct CustomerDetailsForm: View {
     var detailsview: Garage
     @State private var firstName: String = ""
     @State private var lastName: String = ""
-    @State private var emailAddress: String = ""
+    @State private var emailAddress:  String = ""
     @State private var contactNumber: String = ""
     @State private var streetname: String = ""
     @State private var apartment: String = ""
@@ -23,6 +23,7 @@ struct CustomerDetailsForm: View {
     @State private var showAlert = false
     @State private var showsuccess = false
     @State private var linkselection: Int? = nil
+    @State private var paymentselection: Int? = nil
     @State private var selectedPaymentOption: PaymentOption = .cash
     @State private var goToProfileSetting: Bool = false
     @State private var goToPayment: Bool = false
@@ -31,6 +32,7 @@ struct CustomerDetailsForm: View {
     private func addCustDetails(firstName: String, lastName: String, emailAddress: String, contactNumber: String, apartment: String,streetname: String,postal:String,city: String, dateTime: Date, problemDesc: String) {
         if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || contactNumber.isEmpty || streetname.isEmpty || apartment.isEmpty || postal.isEmpty || city.isEmpty || problemDesc.isEmpty {
             showAlert = true
+            showsuccess = false
             return
         }
         
@@ -63,6 +65,8 @@ struct CustomerDetailsForm: View {
                 print("Error adding document: \(error)")
             } else {
                 print("Document added successfully!")
+                showAlert = true
+                showsuccess = true
             }
         }
         
@@ -72,35 +76,51 @@ struct CustomerDetailsForm: View {
                 print("Error adding field: \(error)")
             } else {
                 showAlert = true
-//                showsuccess = true
-//                showcard = true
+                
             }
         }
+        
     }
     
     var body: some View {
         VStack {
             Text("Customer Details")
-                .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
-               // .padding(10)
-                .padding(.top, -40)
+                .font(.title)
+                .fontWeight(.semibold)
+                .padding(.top,-15)
             
             NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
             
-            NavigationLink(destination: PaymentGateway(), tag: 2, selection: self.$linkselection) {}
+            NavigationLink(destination: PaymentGateway(), tag: 1, selection: self.$paymentselection) {}
             
             Form {
                 Section(header: Text("Personal Information")) {
                     TextField("First Name", text: $firstName)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                     TextField("Last Name", text: $lastName)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                     TextField("Email Address", text: $emailAddress)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                         .keyboardType(.emailAddress)
                     TextField("Contact Number", text: $contactNumber)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                         .keyboardType(.numberPad)
                 }
                 .padding(5)
@@ -108,18 +128,28 @@ struct CustomerDetailsForm: View {
                 Section(header: Text("Booking Details")) {
                     TextField("Apartment", text: $apartment)
                         .autocorrectionDisabled()
-                       // .textFieldStyle(PlainTextFieldStyle())
-                        // Text alignment.
                         .multilineTextAlignment(.leading)
                         .accentColor(.blue)
                         .foregroundColor(.blue)
                         .font(.title2.weight(.medium))
                     TextField("Street Name", text: $streetname)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                     TextField("Postal Code", text: $postal)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                     TextField("City", text: $city)
                         .autocorrectionDisabled()
+                        .multilineTextAlignment(.leading)
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                     if detailsview.availability == "Immediate" {
                         let now = Date()
                         DatePicker(selection: $time, in: now..., displayedComponents: .hourAndMinute) {
@@ -137,6 +167,9 @@ struct CustomerDetailsForm: View {
                                 .stroke(Color.gray, lineWidth: 0)
                         )
                         .autocorrectionDisabled()
+                        .accentColor(.blue)
+                        .foregroundColor(.blue)
+                        .font(.title2.weight(.medium))
                 }
                 .padding(5)
                 Section(header: Text("Payment Option")) {
@@ -153,16 +186,15 @@ struct CustomerDetailsForm: View {
             Button(action: {
                 if detailsview.availability == "Immediate" {
                     let now = Date()
-                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: time, problemDesc: problemDesc)
+                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: time, problemDesc: problemDesc)
                 } else {
-                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment:apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc)
+                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc)
                 }
                 
                 if selectedPaymentOption == .card {
-                    
-                    self.linkselection = 2
+                    self.paymentselection = 1
                 }
-                else if  selectedPaymentOption == .cash{
+                else if  selectedPaymentOption == .cash {
                     firstName = ""
                     lastName = ""
                     emailAddress = ""
@@ -190,6 +222,7 @@ struct CustomerDetailsForm: View {
                     .stroke(Color.blue, lineWidth: 0)
                     .foregroundColor(.black)
             )
+            
             .onAppear() {
                 print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
                 print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
