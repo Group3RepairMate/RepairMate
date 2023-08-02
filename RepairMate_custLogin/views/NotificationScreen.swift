@@ -9,7 +9,7 @@ struct NotificationScreen: View {
             Text("New Notification")
                 .font(.title)
                 .bold()
-            Text("\(orderList.count)")
+            
             Text("You have a new message.")
                 .font(.subheadline)
             

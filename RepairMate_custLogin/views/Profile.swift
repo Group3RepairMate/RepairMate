@@ -10,7 +10,11 @@ struct Profile: View {
     @State private var historyselection:Int? = nil
     @State private var notificationselection:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
+    @State private var faq:Int? = nil
+    @State private var policy:Int? = nil
+    @State private var contactus:Int? = nil
     @State private var fullName:String = ""
+    @State private var email:String = ""
     @AppStorage("uid") var userID: String = ""
     
     var selectedUIImage: UIImage? {
@@ -27,91 +31,144 @@ struct Profile: View {
         NavigationView {
             VStack {
                 HStack {
-                    VStack(alignment: .leading, spacing: -1) {
-                        if let uiImage = selectedUIImage {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 90, height: 90)
-                                .clipShape(Circle())
-                                .alignmentGuide(.leading) { _ in -30 }
-                                .padding(.top, 15)
-                        } else {
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 90, height: 90)
-                                .foregroundColor(.white)
-                                .alignmentGuide(.leading) { _ in -30 }
-                                .padding(.top, 15)
-                        }
-                        
-                        Button(action: {
-                            isShowingImagePicker = true
-                        }) {
-                            Text("Edit")
-                                .foregroundColor(.white)
-                                .font(.system(size: 22))
-                                .padding()
-                                .cornerRadius(10)
-                                .bold()
-                            
-                        }
-                        .padding(.leading, 40)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
-                            ImagePicker(selectedImage: $selectedImage)
-                        }
-                    }
-                    VStack {
-                        Text(fullName)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, -59)
-                            .padding(.top, -50)
+                    VStack(alignment: .center, spacing: -1) {
+
+                        Text(email)
+                            .foregroundColor(Color("darkgray"))
+                            .frame(maxWidth: .infinity, alignment: .center)
+//                            .padding(.leading, -59)
+                            .padding(.top, 5)
                             .font(.system(size: 22.5))
+                        Text(fullName)
+                            .foregroundColor(Color("darkgray"))
+                            .frame(maxWidth: .infinity, alignment: .center)
+//                            .padding(.leading, -59)
+//                            .padding(.top, -50)
+                            .font(.system(size: 22.5))
+                      
+                        
                     }
+                 
                 }
-                .background(Color("darkgray"))
+//                .background(Color("darkgray"))
                 
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                 NavigationLink(destination: NotificationScreen(), tag: 1, selection:self.$notificationselection){}
+                NavigationLink(destination: Faq(), tag: 1, selection:self.$faq){}
+                NavigationLink(destination: Privacy(), tag: 1, selection:self.$policy){}
                 List {
-                    Button(action: {
-                        self.historyselection = 1
-                    }) {
-                        Label("View History", systemImage: "text.book.closed")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
+                    Section(header: Text("Profile")) {
+                        Button(action: {
+                            self.historyselection = 1
+                        }) {
+                            HStack {
+                                Image(systemName: "text.book.closed.fill")
+                                    .foregroundColor(.blue) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("View History")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
                             .cornerRadius(20)
+                        }
+                        .padding(.vertical, 3)
+
+                        Button(action: {
+                            self.notificationselection = 1
+                        }) {
+                            HStack {
+                                Image(systemName: "bell.fill")
+                                    .foregroundColor(.red) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Notifications")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
+                            .cornerRadius(20)
+                        }
+                        .padding(.vertical, 3)
+
+                        Button(action: {
+                            // Add action for "reset password" button
+                            self.resetPasswordSelection = 1
+                        }) {
+                            HStack {
+                                Image(systemName: "key.horizontal.fill")
+                                    .foregroundColor(.orange) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Reset Password")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
+                            .cornerRadius(20)
+                        }
+                        .padding(.vertical, 5)
                     }
-                    
-                    Button(action: {
-                        self.notificationselection = 1
-                    }) {
-                        Label("Notifications", systemImage: "bell.fill")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
+
+                    Section(header: Text("Help & Support")) {
+                        Button(action: {
+                            self.faq = 1
+                        }) {
+                            HStack {
+                                Image(systemName: "person.fill.questionmark")
+                                    .foregroundColor(.purple) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("FAQ")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
                             .cornerRadius(20)
-                    }
-                    Button(action: {
-                        // Add action for "reset password" button
-                        self.resetPasswordSelection = 1
-                    }) {
-                        Label("Reset password", systemImage: "key.horizontal.fill")
-                            .foregroundColor(.black)
-                            .font(.headline)
-                            .padding()
+                        }
+                        .padding(.vertical, 3)
+
+                        Button(action: {
+                            self.policy = 1
+                        }) {
+                            HStack {
+                                Image(systemName: "hand.raised.fill")
+                                    .foregroundColor(.blue) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Privacy")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
                             .cornerRadius(20)
+                        }
+                        .padding(.vertical, 3)
+
+                        Button(action: {
+                            // Add action for "Contact Us" button
+                        }) {
+                            HStack {
+                                Image(systemName: "phone.circle.fill")
+                                    .foregroundColor(.gray) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Contact Us")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
+                            .cornerRadius(20)
+                        }
+                        .padding(.vertical, 3) // Add vertical margin
                     }
                 }
-                .listStyle(.insetGrouped)
-                
-                
+                .listStyle(GroupedListStyle())
+
+
                 Button(action:{
                     let firebaseAuth = Auth.auth()
                     do {
@@ -131,19 +188,15 @@ struct Profile: View {
                 })
                 {
                     Text("Logout")
-                        .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("darkgray"))
+                        .cornerRadius(8)
+                        .padding(.top,20)
+                        .padding(5)
                 }
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
-                        .foregroundColor(.black)
-                )
                 Spacer()
             }
             .navigationBarTitle("", displayMode: .inline)
@@ -153,7 +206,7 @@ struct Profile: View {
                         self.linkselection = 1
                     } label: {
                         Image(systemName: "square.and.pencil")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("darkgray"))
                     }
                 }
             }
@@ -170,6 +223,8 @@ struct Profile: View {
                 db.collection("customers").document(userDocumentID).getDocument { document, error in
                     if let document = document, document.exists {
                         let data = document.data()
+                        fullName = data?["fullName"] as? String ?? ""
+                        email = data?["email"] as? String ?? ""
                         fullName = data?["fullName"] as? String ?? ""
                     } else {
                         print("User document does not exist")

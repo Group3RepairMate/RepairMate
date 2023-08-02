@@ -114,20 +114,21 @@ struct Garagedetails: View {
                                     self.goToCustomerDetailScreen = true
                                 }) {
                                     Text("Book Now")
-                                        .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .font(.headline)
-                                        .multilineTextAlignment(.center)
-                                        .padding(15)
-                                        .frame(maxWidth: 120)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color("darkgray"))
+                                        .cornerRadius(8)
+                                        .padding(.top,20)
                                 }
-                                .foregroundColor(.white)
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("darkgray"))
-                                .cornerRadius(8)
+//                                .foregroundColor(.white)
+//                                .font(.headline)
+//                                .frame(maxWidth: .infinity)
+//                                .background(Color("darkgray"))
+//                                .cornerRadius(8)
                                 .padding(5)
-                                .padding(.top,50)
+//                                .padding(.top,50)
                             }
                             .navigationBarTitle("", displayMode: .inline)
             }

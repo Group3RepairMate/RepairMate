@@ -10,13 +10,14 @@ struct Viewhistory: View {
         case all
     }
     @State private var status: Status = .all
-    @State private var selectedOrder: Order? = nil // Added state variable for selected order
+    @State private var selectedOrder: Order? = nil
     
     var body: some View {
         VStack {
             Text("Booking History")
-                .font(.largeTitle)
+                .font(.title)
                 .foregroundColor(Color("darkgray"))
+                .padding(.top, -8)
             
             if orderList.isEmpty {
                 Text("No orders found")
@@ -36,18 +37,19 @@ struct Viewhistory: View {
                     NavigationLink(
                         destination: EditBooking(order: order),
                         tag: order,
-                        selection: $selectedOrder // Use tag and selection for navigation
+                        selection: $selectedOrder
                     ) {
                         VStack(alignment: .leading) {
                             Text("\(order.garageName)")
                                 .fontWeight(.semibold)
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("darkgray"))
                                 .font(.system(size: 18))
                             Text("")
                             Text("Date and Time: \(formattedDateTime(order.date))")
-                                .font(.system(size: 13))
+                                .foregroundColor(.gray)
+                                //.fontWeight(.semibold)
+                                .font(.system(size: 15))
                             Button(action: {
-                                // Set the selected order when the button is tapped
                                 selectedOrder = order
                             }) {
                                 Label("Edit", systemImage: "pencil.circle")
@@ -61,7 +63,10 @@ struct Viewhistory: View {
                     }
                 }
             }
+             
+               
         }
+        .navigationBarTitle("", displayMode: .inline)
         .onAppear {
             fetchOrderList()
         }

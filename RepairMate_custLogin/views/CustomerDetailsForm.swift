@@ -11,7 +11,6 @@ struct CustomerDetailsForm: View {
     var detailsview: Garage
     @State private var firstName: String = ""
     @State private var lastName: String = ""
-    @State private var emailAddress:  String = ""
     @State private var contactNumber: String = ""
     @State private var streetname: String = ""
     @State private var apartment: String = ""
@@ -108,13 +107,6 @@ struct CustomerDetailsForm: View {
                         .accentColor(.blue)
                         .foregroundColor(.blue)
                         .font(.title2.weight(.medium))
-                    TextField("Email Address", text: $emailAddress)
-                        .autocorrectionDisabled()
-                        .multilineTextAlignment(.leading)
-                        .accentColor(.blue)
-                        .foregroundColor(.blue)
-                        .font(.title2.weight(.medium))
-                        .keyboardType(.emailAddress)
                     TextField("Contact Number", text: $contactNumber)
                         .autocorrectionDisabled()
                         .multilineTextAlignment(.leading)
@@ -186,9 +178,9 @@ struct CustomerDetailsForm: View {
             Button(action: {
                 if detailsview.availability == "Immediate" {
                     let now = Date()
-                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: time, problemDesc: problemDesc)
+                    addCustDetails(firstName: firstName, lastName: lastName,  emailAddress: UserDefaults.standard.string(forKey: "EMAIL") ?? "", contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: time, problemDesc: problemDesc)
                 } else {
-                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: emailAddress, contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc)
+                    addCustDetails(firstName: firstName, lastName: lastName, emailAddress: UserDefaults.standard.string(forKey: "EMAIL") ?? "", contactNumber: contactNumber, apartment: apartment, streetname: streetname, postal: postal, city: city , dateTime: dateTime, problemDesc: problemDesc)
                 }
                 
                 if selectedPaymentOption == .card {
@@ -197,7 +189,6 @@ struct CustomerDetailsForm: View {
                 else if  selectedPaymentOption == .cash {
                     firstName = ""
                     lastName = ""
-                    emailAddress = ""
                     contactNumber = ""
                     streetname = ""
                     apartment = ""
@@ -209,24 +200,27 @@ struct CustomerDetailsForm: View {
                 }
             }) {
                 Text("Book")
-                    .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 120)
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("darkgray"))
+                    .cornerRadius(8)
+                    .padding(.top,20)
+                    .padding(5)
             }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue, lineWidth: 0)
-                    .foregroundColor(.black)
-            )
+//            .background(Color("darkgray"))
+//            .cornerRadius(70)
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 0)
+//                    .stroke(Color.blue, lineWidth: 0)
+//                    .foregroundColor(.black)
+//            )
             
-            .onAppear() {
-                print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
-                print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
-            }
+//            .onAppear() {
+//                print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
+//                print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
+//            }
         }
         .alert(isPresented: $showAlert) {
             if showsuccess {
