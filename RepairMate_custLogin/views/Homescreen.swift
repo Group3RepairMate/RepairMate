@@ -102,19 +102,7 @@ struct Homescreen: View {
         
         return sortedList
     }
-    struct CustomRowView: View {
-        
-        @State var buttonTitle: String
-        
-        var body: some View {
-            Text(buttonTitle)
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
-                .padding(.vertical, 40)
-                .background(Color.blue)
-                .cornerRadius(12)
-        }
-    }
+
     func typegarage(_ garage: Garage) -> Bool {
         switch selectedServiceType {
         case .immediate:

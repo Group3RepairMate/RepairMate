@@ -113,6 +113,9 @@ struct SignUpView: View {
             )
             .padding(11)
             
+            Text("")
+        
+            
             Button(action: {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     UserDefaults.standard.set(email, forKey: "EMAIL")
@@ -159,6 +162,7 @@ struct SignUpView: View {
                     .background(Color("darkgray"))
                     .cornerRadius(8)
                     .padding(10)
+                    .padding(.top,10)
             }            }
         .navigationBarTitle("", displayMode: .inline)
         //.navigationBarHidden(true)

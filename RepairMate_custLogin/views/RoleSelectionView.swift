@@ -13,52 +13,67 @@ struct RoleSelectionView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                VStack{
+            ZStack {
+                Color("background").edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Spacer()
                     Text("Select Your Role")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .padding()
                         .foregroundColor(Color("darkgray"))
                     
                     Spacer()
                     
-                    NavigationLink(destination: ContentView()) {
-                        VStack{
-                            Image("profile")
-                                .resizable()
-                                .frame(width: 220.0, height: 220.0)
-                            Text("Customer")
-                                .foregroundColor(.white)
-                                .font(.title3)
-                                .bold()
-                                .frame(maxWidth:230)
-                                .padding(10)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color("darkgray"))
-                                )
+                    VStack {
+                        NavigationLink(destination: ContentView()) {
+                            VStack {
+                                Image("profile")
+                                    .resizable()
+                                    .frame(width: 220.0, height: 220.0)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(.blue, lineWidth: 3)
+                                    )
+                                Text("Customer")
+                                    .foregroundColor(.white)
+                                    .font(.title3)
+                                    .bold()
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color("darkgray"))
+                            )
                         }
                         
-                    }
-                    .padding(.bottom)
-                    NavigationLink(destination: ContentViewForMech()){
-                        VStack{
-                            Image("mechanics")
-                                .resizable()
-                                .frame(width: 220.0, height: 220.0)
-                            Text("Mechanic")
-                                .foregroundColor(.white)
-                                .font(.title3)
-                                .bold()
-                                .frame(maxWidth:230)
-                                .padding(10)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color.green)
-                                )
-                            
+                        Spacer().frame(height: 20)
+                        
+                        Text("")
+                        Text("")
+                        Text("")
+                        
+                        NavigationLink(destination: ContentViewForMech()){
+                            VStack {
+                                Image("mechanics")
+                                    .resizable()
+                                    .frame(width: 220.0, height: 220.0)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(.green, lineWidth: 3)
+                                    )
+                                Text("Mechanic")
+                                    .foregroundColor(.white)
+                                    .font(.title3)
+                                    .bold()
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(.green)
+                            )
                         }
                     }
                     
@@ -66,8 +81,8 @@ struct RoleSelectionView: View {
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
         }
-        // Added view based on the state of currentShowingView
         .overlay(
             Group {
                 switch currentShowingView {
@@ -81,11 +96,5 @@ struct RoleSelectionView: View {
                 }
             }
         )
-    }
-}
-
-struct RoleSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        RoleSelectionView()
     }
 }

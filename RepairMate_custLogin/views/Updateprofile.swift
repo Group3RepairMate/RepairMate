@@ -8,6 +8,10 @@ struct Updateprofile: View {
     @State private var postal: String = ""
     @State private var city: String = ""
     @State private var linkselection: Int? = nil
+    @State private var showAlert = false
+    @State private var show = false
+    @State private var showSuccessAlert = false
+    
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Text("Edit Profile")
@@ -20,7 +24,7 @@ struct Updateprofile: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Enter Your Name")
                         .font(.subheadline)
-                      
+                    
                     HStack {
                         Image(systemName: "person.fill")
                             .foregroundColor(.purple)
@@ -88,34 +92,43 @@ struct Updateprofile: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         Text("")
+                        
+                        
                     }
-                  
+                    
                 }
-//                .padding(.horizontal, 9)
+                //                .padding(.horizontal, 9)
                 .padding()
             }
-           // .padding()
+            // .padding()
             Spacer()
-               // .padding(.horizontal, 20)
+            // .padding(.horizontal, 20)
             Button(action: {
-                let db = Firestore.firestore()
-                let userID = Auth.auth().currentUser?.uid
-                UserDefaults.standard.set(fullName, forKey: "NAME")
-                guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
-                    print("User document ID not found")
-                    return
-                }
-                
-                db.collection("customers").document(userDocumentID).updateData([
-                    "fullName": fullName,
-                    "streetName": streetName,
-                    "cityName": city,
-                    "postalCode": postal
-                ]) { error in
-                    if let error = error {
-                        print("Error updating user profile: \(error)")
-                    } else {
-                        print("User profile updated successfully.")
+                if fullName.isEmpty || streetName.isEmpty || postal.isEmpty || city.isEmpty {
+                    show = true
+                    showAlert = true
+                } else {
+                    let db = Firestore.firestore()
+                    let userID = Auth.auth().currentUser?.uid
+                    UserDefaults.standard.set(fullName, forKey: "NAME")
+                    guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
+                        print("User document ID not found")
+                        return
+                    }
+                    
+                    db.collection("customers").document(userDocumentID).updateData([
+                        "fullName": fullName,
+                        "streetName": streetName,
+                        "cityName": city,
+                        "postalCode": postal
+                    ]) { error in
+                        if let error = error {
+                            print("Error updating user profile: \(error)")
+                        } else {
+                            print("User profile updated successfully.")
+                            show = true
+                            showSuccessAlert = true
+                        }
                     }
                 }
             }) {
@@ -126,9 +139,27 @@ struct Updateprofile: View {
                     .frame(maxWidth: .infinity)
                     .background(Color("darkgray"))
                     .cornerRadius(8)
-                    .padding(.top, 20)
+                    .padding(.top,20)
                     .padding(5)
             }
+            .alert(isPresented:$show){
+                
+                if (showSuccessAlert){
+                    return Alert(
+                        title: Text("Success"),
+                        message: Text("Profile updated successfully."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                else{
+                    return Alert(
+                        title: Text("Error"),
+                        message: Text("Please enter all the details."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+            }
+            
         }
         .onAppear {
             let db = Firestore.firestore()
@@ -152,7 +183,6 @@ struct Updateprofile: View {
             }
         }
         
-        NavigationLink(destination: Editview(), tag: 1, selection: self.$linkselection) { EmptyView() }
     }
 }
 

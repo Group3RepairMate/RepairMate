@@ -12,7 +12,7 @@ struct SplashScreenView: View {
                 RoleSelectionView()
             } else {
                 VStack {
-                    Text("REPAIR MATE")
+                    Text("REPAIRMATE")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()

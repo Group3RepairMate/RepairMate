@@ -74,6 +74,7 @@ struct MechanicHistory: View {
             }
         }
         .onAppear(){
+            orderList = []
             fetchOrderList()
         }
     }

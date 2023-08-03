@@ -77,7 +77,7 @@ struct ResetPassCustomer: View {
                         .foregroundColor(.gray)
                         .font(.system(size: 20))
                         .opacity(0.5)
-                    TextField("Enter Your Old Password", text: $oldPass)
+                    SecureField("Enter Your Old Password", text: $oldPass)
                         .autocorrectionDisabled()
                     Spacer()
                 }
