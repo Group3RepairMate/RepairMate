@@ -18,6 +18,7 @@ struct Viewhistory: View {
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
                 .padding(.top, -8)
+                .fontWeight(.semibold)
             
             if orderList.isEmpty {
                 Text("No orders found")

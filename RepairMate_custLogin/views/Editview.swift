@@ -22,6 +22,7 @@ struct Editview: View {
             Text("Edit Profile")
                 .font(.largeTitle)
                 .foregroundColor(Color("darkgray"))
+                .fontWeight(.semibold)
             TextField("Enter Your Name",text: $fullName)
                 .padding(15)
                 .foregroundColor(Color.blue)
@@ -59,7 +60,7 @@ struct Editview: View {
             Button(action: {
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
-                
+                UserDefaults.standard.set(fullName, forKey: "NAME")
                 guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                     print("User document ID not found")
                     return
@@ -75,6 +76,7 @@ struct Editview: View {
                         print("Error updating user profile: \(error)")
                     } else {
                         print("User profile updated successfully.")
+                        
                     }
                 }
                 
@@ -100,7 +102,7 @@ struct Editview: View {
         .onAppear(){
             let db = Firestore.firestore()
             let userID = Auth.auth().currentUser?.uid
-         
+            
             guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                 print("User document ID not found")
                 return

@@ -17,36 +17,43 @@ struct ForgotPassCustomer: View {
     var body: some View {
         VStack(alignment: .center){
             Text("Forgot Password")
-                .font(.largeTitle)
+                .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding()
-            TextField("Enter Your Email Address",text: $email)
-                .padding(15)
-                .frame(width: 350.0)
-                .foregroundColor(Color.blue)
-                .textInputAutocapitalization(.never)
-                .background(Color.gray.opacity(0.3))
-                .disableAutocorrection(true)
-                .font(.headline)
-                .cornerRadius(10)
+                .padding(.top, -10)
+                .frame(alignment: .center)
+                .fontWeight(.semibold)
+            Text("")
+            Text("")
+            HStack {
+                Image(systemName: "envelope.fill")
+                    .foregroundColor(Color("darkgray"))
+                    .font(.system(size: 20))
+                    .opacity(0.5)
+                TextField("Enter Your Email", text: $email)
+                    .autocorrectionDisabled()
+                Spacer()
+            }
+            .padding(9)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            
             Spacer()
             Button(action : {
                 forgotPassword()
             }){
                 Text("Forget Password")
-                    .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(12)
-                    .frame(maxWidth: 190)
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("darkgray"))
+                    .cornerRadius(8)
+                    .padding(.top,20)
+                    .padding(5)
             }
-            .background(Color("darkgray"))
-            .cornerRadius(50)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
+       
         }
         
         .padding(10)

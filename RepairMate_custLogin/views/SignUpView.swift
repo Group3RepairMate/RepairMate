@@ -21,159 +21,146 @@ struct SignUpView: View {
     
     
     var body: some View {
-        ZStack {
-            VStack {
-                HStack {
-                    Text("Create an account!!")
-                        .foregroundColor(Color("darkgray"))
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
-                }
-                .padding()
-                .padding(.top)
-                
+        VStack {
+            Text("Create an account!!")
+                .foregroundColor(Color("darkgray"))
+                .font(.largeTitle)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 10)
+                .padding(.top,-50)
+            
+            HStack {
+                Image(systemName: "envelope")
+                    .foregroundColor(.blue)
+                TextField("Email", text: $email)
+                    .autocorrectionDisabled()
                 Spacer()
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            
+            HStack {
+                Image(systemName: "lock")
+                    .foregroundColor(.gray)
+                SecureField("Password", text: $password)
                 
-                HStack {
-                    Image(systemName: "envelope")
-                    TextField("Email", text: $email)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                
-                HStack {
-                    Image(systemName: "lock")
-                    SecureField("Password", text: $password)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                
-                HStack {
-                    Image(systemName: "person")
-                    TextField("Full Name", text: $fullName)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                
-                HStack {
-                    Image(systemName: "house")
-                    TextField("Street Name", text: $streetName)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                HStack {
-                    Image(systemName: "number")
-                    TextField("Postal Code", text: $postal)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                HStack {
-                    Image(systemName: "window.vertical.closed")
-                    TextField("City Name", text: $city)
-                        .autocorrectionDisabled()
-                    Spacer()
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(lineWidth: 2)
-                        .foregroundColor(Color("darkgray"))
-                )
-                .padding()
-                
+                    .autocorrectionDisabled()
                 Spacer()
-                Button(action: {
-                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        UserDefaults.standard.set(email, forKey: "EMAIL")
-                        UserDefaults.standard.set(password, forKey: "PASS")
-                        UserDefaults.standard.set(fullName, forKey: "NAME")
-                        UserDefaults.standard.set(streetName, forKey: "ADDRESS")
-                        UserDefaults.standard.set(city, forKey: "CITY")
-                        UserDefaults.standard.set(postal, forKey: "POSTAL")
-                        
-                        if let error = error {
-                            print(error)
-                            return
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            
+            HStack {
+                Image(systemName: "person")
+                    .foregroundColor(.brown)
+                TextField("Full Name", text: $fullName)
+                    .autocorrectionDisabled()
+                Spacer()
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            
+            HStack {
+                Image(systemName: "house")
+                    .foregroundColor(.purple)
+                TextField("Street Name", text: $streetName)
+                    .autocorrectionDisabled()
+                Spacer()
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            HStack {
+                Image(systemName: "number")
+                    .foregroundColor(.black)
+                TextField("Postal Code", text: $postal)
+                    .autocorrectionDisabled()
+                Spacer()
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            HStack {
+                Image(systemName: "window.vertical.closed")
+                    .foregroundColor(.orange)
+                TextField("City Name", text: $city)
+                    .autocorrectionDisabled()
+                Spacer()
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black,lineWidth: 1)
+            )
+            .padding(11)
+            
+            Button(action: {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    UserDefaults.standard.set(email, forKey: "EMAIL")
+                    UserDefaults.standard.set(password, forKey: "PASS")
+                    UserDefaults.standard.set(fullName, forKey: "NAME")
+                    UserDefaults.standard.set(streetName, forKey: "ADDRESS")
+                    UserDefaults.standard.set(city, forKey: "CITY")
+                    UserDefaults.standard.set(postal, forKey: "POSTAL")
+                    
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    if let authResult = authResult {
+                        print(authResult.user.uid)
+                        withAnimation {
+                            userID = authResult.user.uid
                         }
-                        if let authResult = authResult {
-                            print(authResult.user.uid)
-                            withAnimation {
-                                userID = authResult.user.uid
-                            }
-                            
-                            
-                            let db = Firestore.firestore()
-                            let signupData: [String: Any] = [
-                                "email": email,
-                                "fullName": fullName,
-                                "streetName": streetName,
-                                "cityName":city,
-                                "postalCode":postal
-                            ]
-                            db.collection("customers").document(email).setData(signupData) { error in
-                                if let error = error {
-                                    print("Error storing signup details: \(error)")
-                                } else {
-                                    print("Signup details stored successfully.")
-                                }
+                        
+                        
+                        let db = Firestore.firestore()
+                        let signupData: [String: Any] = [
+                            "email": email,
+                            "fullName": fullName,
+                            "streetName": streetName,
+                            "cityName":city,
+                            "postalCode":postal
+                        ]
+                        db.collection("customers").document(email).setData(signupData) { error in
+                            if let error = error {
+                                print("Error storing signup details: \(error)")
+                            } else {
+                                print("Signup details stored successfully.")
                             }
                         }
                     }
-                })  {
-                    Text("Create Account")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color("darkgray"))
-                        .cornerRadius(8)
-                        .padding(10)
-                }            }
-            Spacer()
-                .navigationBarTitle("", displayMode: .inline)
-            //.navigationBarHidden(true)
-        }
+                }
+            })  {
+                Text("Create Account")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("darkgray"))
+                    .cornerRadius(8)
+                    .padding(10)
+            }            }
+        .navigationBarTitle("", displayMode: .inline)
+        //.navigationBarHidden(true)
     }
 }

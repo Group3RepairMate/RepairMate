@@ -36,7 +36,6 @@ struct ContentView: View {
                 }
                 
             }
-         
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle("", displayMode: .inline)
             

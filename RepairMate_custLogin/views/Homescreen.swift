@@ -52,7 +52,7 @@ struct Homescreen: View {
                                     .foregroundColor(Color("darkgray"))
                                     .font(.system(size: 22))
                                 Text(garagehelper.garagelist[index].location)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.brown)
                                     .fontWeight(.semibold)
                                     .font(.system(size: 15))
                                 Text("Service Type: \(garagehelper.garagelist[index].availability)")
@@ -64,6 +64,7 @@ struct Homescreen: View {
                     }
                 }
                 .listStyle(.insetGrouped)
+                
                 Spacer()
             }
             .onAppear() {
@@ -101,7 +102,19 @@ struct Homescreen: View {
         
         return sortedList
     }
-    
+    struct CustomRowView: View {
+        
+        @State var buttonTitle: String
+        
+        var body: some View {
+            Text(buttonTitle)
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
+                .padding(.vertical, 40)
+                .background(Color.blue)
+                .cornerRadius(12)
+        }
+    }
     func typegarage(_ garage: Garage) -> Bool {
         switch selectedServiceType {
         case .immediate:

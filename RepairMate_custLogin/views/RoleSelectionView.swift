@@ -65,6 +65,7 @@ struct RoleSelectionView: View {
                     Spacer()
                 }
             }
+            .navigationBarTitle("", displayMode: .inline)
         }
         // Added view based on the state of currentShowingView
         .overlay(

@@ -10,10 +10,12 @@ struct Profile: View {
     @State private var historyselection:Int? = nil
     @State private var notificationselection:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
+    @State private var update:Int? = nil
     @State private var faq:Int? = nil
+    @State private var contact:Int? = nil
     @State private var policy:Int? = nil
     @State private var contactus:Int? = nil
-    @State private var fullName:String = ""
+    @State private var fullName:String =   ""
     @State private var email:String = ""
     @AppStorage("uid") var userID: String = ""
     
@@ -29,22 +31,25 @@ struct Profile: View {
             AuthView()
         }
         NavigationView {
+            
             VStack {
                 HStack {
                     VStack(alignment: .center, spacing: -1) {
-
-                        Text(email)
-                            .foregroundColor(Color("darkgray"))
-                            .frame(maxWidth: .infinity, alignment: .center)
-//                            .padding(.leading, -59)
-                            .padding(.top, 5)
-                            .font(.system(size: 22.5))
                         Text(fullName)
                             .foregroundColor(Color("darkgray"))
                             .frame(maxWidth: .infinity, alignment: .center)
-//                            .padding(.leading, -59)
-//                            .padding(.top, -50)
                             .font(.system(size: 22.5))
+                            .fontWeight(.semibold)
+                            
+                        Text("")
+                        
+                        Text(email)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.top, 5)
+                            .font(.system(size: 22.5))
+                      
+                        Text("")
                       
                         
                     }
@@ -52,12 +57,14 @@ struct Profile: View {
                 }
 //                .background(Color("darkgray"))
                 
-                NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$linkselection){}
+                NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$update){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
                 NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                 NavigationLink(destination: NotificationScreen(), tag: 1, selection:self.$notificationselection){}
                 NavigationLink(destination: Faq(), tag: 1, selection:self.$faq){}
                 NavigationLink(destination: Privacy(), tag: 1, selection:self.$policy){}
+                
+                NavigationLink(destination: ContactUs(), tag: 1, selection:self.$contact){}
                 List {
                     Section(header: Text("Profile")) {
                         Button(action: {
@@ -100,11 +107,11 @@ struct Profile: View {
                         }) {
                             HStack {
                                 Image(systemName: "key.horizontal.fill")
-                                    .foregroundColor(.orange) // Change symbol color
+                                    .foregroundColor(.orange) 
                                     .imageScale(.large)
                                 Text("")
                                 Text("Reset Password")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black)
                                     .font(.headline)
                             }
                             .padding(3)
@@ -119,11 +126,11 @@ struct Profile: View {
                         }) {
                             HStack {
                                 Image(systemName: "person.fill.questionmark")
-                                    .foregroundColor(.purple) // Change symbol color
+                                    .foregroundColor(.purple)
                                     .imageScale(.large)
                                 Text("")
                                 Text("FAQ")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black)
                                     .font(.headline)
                             }
                             .padding(3)
@@ -136,11 +143,11 @@ struct Profile: View {
                         }) {
                             HStack {
                                 Image(systemName: "hand.raised.fill")
-                                    .foregroundColor(.blue) // Change symbol color
+                                    .foregroundColor(.blue)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Privacy")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black) 
                                     .font(.headline)
                             }
                             .padding(3)
@@ -149,7 +156,7 @@ struct Profile: View {
                         .padding(.vertical, 3)
 
                         Button(action: {
-                            // Add action for "Contact Us" button
+                            self.contact = 1
                         }) {
                             HStack {
                                 Image(systemName: "phone.circle.fill")
@@ -167,7 +174,6 @@ struct Profile: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-
 
                 Button(action:{
                     let firebaseAuth = Auth.auth()
@@ -197,24 +203,24 @@ struct Profile: View {
                         .padding(.top,20)
                         .padding(5)
                 }
-                Spacer()
+//                Spacer()
             }
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        self.linkselection = 1
+                        self.update = 1
                     } label: {
                         Image(systemName: "square.and.pencil")
-                            .foregroundColor(Color("darkgray"))
+                            .foregroundColor(.black)
                     }
                 }
             }
-        }
             .onAppear(){
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
              
+                
                 guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                     print("User document ID not found")
                     return
@@ -225,12 +231,14 @@ struct Profile: View {
                         let data = document.data()
                         fullName = data?["fullName"] as? String ?? ""
                         email = data?["email"] as? String ?? ""
-                        fullName = data?["fullName"] as? String ?? ""
+                     
                     } else {
                         print("User document does not exist")
                     }
+                    
                 }
             }
+        }
         
     }
     

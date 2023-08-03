@@ -40,6 +40,7 @@
 		9DAD42B42A602E2D0026AE6E /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */; };
 		9DAD42B62A602EA40026AE6E /* CustomerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */; };
 		9DBE52462A78B21E000A6CFA /* EditOrderForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBE52452A78B21E000A6CFA /* EditOrderForMech.swift */; };
+		9DC2D2CC2A7B85EF00A860B9 /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2D2CB2A7B85EF00A860B9 /* ContactUs.swift */; };
 		9DF45C4D2A47A3350058AC4F /* Mechanics_Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */; };
 		9DF45C512A47AC850058AC4F /* Mauthview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF45C502A47AC850058AC4F /* Mauthview.swift */; };
 		9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6AB772A34F71500DA095B /* Homescreen.swift */; };
@@ -86,6 +87,7 @@
 		9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetail.swift; sourceTree = "<group>"; };
 		9DBE52452A78B21E000A6CFA /* EditOrderForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderForMech.swift; sourceTree = "<group>"; };
+		9DC2D2CB2A7B85EF00A860B9 /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mechanics_Home.swift; sourceTree = "<group>"; };
 		9DF45C502A47AC850058AC4F /* Mauthview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mauthview.swift; sourceTree = "<group>"; };
 		9DF6AB772A34F71500DA095B /* Homescreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
@@ -180,9 +182,9 @@
 				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
 				9D780F142A3962DE00189096 /* CustomerDetailsForm.swift */,
 				9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */,
+				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
 				9D4EDF052A3CC80100CA8390 /* Editview.swift */,
 				9DF6AB872A34F77D00DA095B /* ImagePicker.swift */,
-				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
 				9DA76DC82A575E1200327D5C /* ForgotPassCustomer.swift */,
 				9DA76DCA2A575E5000327D5C /* ResetPassCustomer.swift */,
 				9DA76DCC2A575EF100327D5C /* EditBooking.swift */,
@@ -205,6 +207,7 @@
 				9DBE52452A78B21E000A6CFA /* EditOrderForMech.swift */,
 				9D78B0272A79AA640050B156 /* Faq.swift */,
 				9D78B0292A79AA700050B156 /* Privacy.swift */,
+				9DC2D2CB2A7B85EF00A860B9 /* ContactUs.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				E87E90F12A5B126E0060396E /* MechanicHistory.swift in Sources */,
 				9DF6AB782A34F71500DA095B /* Homescreen.swift in Sources */,
 				038630BB2A1C65DC004BD44F /* String.swift in Sources */,
+				9DC2D2CC2A7B85EF00A860B9 /* ContactUs.swift in Sources */,
 				9D24E29E2A41E7C90015F274 /* PaymentGateway.swift in Sources */,
 				9DAD42B62A602EA40026AE6E /* CustomerDetail.swift in Sources */,
 				038630A62A1C1824004BD44F /* RepairMate_custLoginApp.swift in Sources */,

@@ -132,6 +132,7 @@ struct Garagedetails: View {
                             }
                             .navigationBarTitle("", displayMode: .inline)
             }
+            
 
         }
     }

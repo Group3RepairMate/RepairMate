@@ -82,6 +82,7 @@ struct CustomerDetailsForm: View {
     }
     
     var body: some View {
+        
         VStack {
             Text("Customer Details")
                 .foregroundColor(Color("darkgray"))
@@ -94,6 +95,7 @@ struct CustomerDetailsForm: View {
             NavigationLink(destination: PaymentGateway(), tag: 1, selection: self.$paymentselection) {}
             
             Form {
+                
                 Section(header: Text("Personal Information")) {
                     TextField("First Name", text: $firstName)
                         .autocorrectionDisabled()
