@@ -22,7 +22,8 @@ struct RoleSelectionView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color("darkgray"))
-                    
+                    Text("")
+                    Text("")
                     Spacer()
                     
                     VStack {
@@ -52,7 +53,6 @@ struct RoleSelectionView: View {
                         
                         Text("")
                         Text("")
-                        Text("")
                         
                         NavigationLink(destination: ContentViewForMech()){
                             VStack {
@@ -62,7 +62,7 @@ struct RoleSelectionView: View {
                                     .clipShape(Circle())
                                     .overlay(
                                         Circle()
-                                            .stroke(.green, lineWidth: 3)
+                                            .stroke(.gray, lineWidth: 3)
                                     )
                                 Text("Mechanic")
                                     .foregroundColor(.white)
@@ -72,7 +72,7 @@ struct RoleSelectionView: View {
                             .padding()
                             .background(
                                 RoundedRectangle(cornerRadius: 30)
-                                    .fill(.green)
+                                    .fill(.gray)
                             )
                         }
                     }
