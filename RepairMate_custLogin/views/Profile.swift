@@ -67,22 +67,22 @@ struct Profile: View {
                 NavigationLink(destination: ContactUs(), tag: 1, selection:self.$contact){}
                 List {
                     Section(header: Text("Profile")) {
-                        Button(action: {
-                            self.historyselection = 1
-                        }) {
-                            HStack {
-                                Image(systemName: "text.book.closed.fill")
-                                    .foregroundColor(.blue) // Change symbol color
-                                    .imageScale(.large)
-                                Text("")
-                                Text("View History")
-                                    .foregroundColor(.black) // Font color
-                                    .font(.headline)
-                            }
-                            .padding(3)
-                            .cornerRadius(20)
-                        }
-                        .padding(.vertical, 3)
+//                        Button(action: {
+//                            self.historyselection = 1
+//                        }) {
+//                            HStack {
+//                                Image(systemName: "text.book.closed.fill")
+//                                    .foregroundColor(.blue) // Change symbol color
+//                                    .imageScale(.large)
+//                                Text("")
+//                                Text("View History")
+//                                    .foregroundColor(.black) // Font color
+//                                    .font(.headline)
+//                            }
+//                            .padding(3)
+//                            .cornerRadius(20)
+//                        }
+//                        .padding(.vertical, 3)
 
                         Button(action: {
                             self.notificationselection = 1
@@ -200,7 +200,7 @@ struct Profile: View {
                         .frame(maxWidth: .infinity)
                         .background(Color("darkgray"))
                         .cornerRadius(8)
-                        .padding(.top,20)
+                        .padding(.top,1)
                         .padding(5)
                 }
 //                Spacer()

@@ -50,7 +50,7 @@ struct ResetPassCustomer: View {
                 Text("Reset Password")
                     .font(.title)
                     .foregroundColor(Color("darkgray"))
-                    .padding(.top, -10)
+                    .padding(.top, -52)
                     .frame(alignment: .center)
                     .fontWeight(.semibold)
                 Text("")

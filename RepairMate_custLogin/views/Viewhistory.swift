@@ -17,7 +17,7 @@ struct Viewhistory: View {
             Text("Booking History")
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -8)
+                .padding()
                 .fontWeight(.semibold)
             
             if orderList.isEmpty {
@@ -58,7 +58,7 @@ struct Viewhistory: View {
                                     .foregroundColor(.gray)
                                     .bold()
                                 Button(action: {
-                                    // Set the selected order when the button is tapped
+                                    
                                     selectedOrder = order
                                 }) {
                                     Label("", systemImage: "square.and.pencil")
@@ -85,20 +85,23 @@ struct Viewhistory: View {
                                 VStack(alignment: .leading) {
                                     Text("\(order.garageName)")
                                         .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 18))
+                                        .foregroundColor(Color("darkgray"))
+                                        .font(.system(size: 19))
                                     Text("")
                                     Text("Date and Time: \(formattedDateTime(order.date))")
                                         .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                        .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                                        
                                         selectedOrder = order
                                     }) {
-                                        Label("Edit", systemImage: "pencil.circle")
+                                        Label("", systemImage: "square.and.pencil")
                                             .foregroundColor(.black)
                                             .font(.headline)
                                             .padding()
                                             .cornerRadius(20)
+                                            .padding(.leading,-15)
                                     }
                                 }
                                 .padding()
@@ -118,20 +121,23 @@ struct Viewhistory: View {
                                 VStack(alignment: .leading) {
                                     Text("\(order.garageName)")
                                         .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 18))
+                                        .foregroundColor(Color("darkgray"))
+                                        .font(.system(size: 19))
                                     Text("")
                                     Text("Date and Time: \(formattedDateTime(order.date))")
                                         .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                        .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                                        
                                         selectedOrder = order
                                     }) {
-                                        Label("Edit", systemImage: "pencil.circle")
+                                        Label("", systemImage: "square.and.pencil")
                                             .foregroundColor(.black)
                                             .font(.headline)
                                             .padding()
                                             .cornerRadius(20)
+                                            .padding(.leading,-15)
                                     }
                                 }
                                 .padding()
@@ -151,20 +157,23 @@ struct Viewhistory: View {
                                 VStack(alignment: .leading) {
                                     Text("\(order.garageName)")
                                         .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 18))
+                                        .foregroundColor(Color("darkgray"))
+                                        .font(.system(size: 19))
                                     Text("")
                                     Text("Date and Time: \(formattedDateTime(order.date))")
                                         .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                        .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                                        
                                         selectedOrder = order
                                     }) {
-                                        Label("Edit", systemImage: "pencil.circle")
+                                        Label("", systemImage: "square.and.pencil")
                                             .foregroundColor(.black)
                                             .font(.headline)
                                             .padding()
                                             .cornerRadius(20)
+                                            .padding(.leading,-15)
                                     }
                                 }
                                 .padding()
@@ -178,8 +187,14 @@ struct Viewhistory: View {
             orderList = []
             fetchOrderList()
         }
+        .onReceive(timer) { _ in
+                fetchOrderList()
+            }
+
+        
         
     }
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         private func fetchOrderList() {
             guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                 print("User document ID not found")

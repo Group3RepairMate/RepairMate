@@ -36,7 +36,7 @@ struct ContentViewForMech: View {
             }
          
             .navigationBarBackButtonHidden(true)
-            
+            .navigationBarTitle("", displayMode: .inline)
             
         }
     }

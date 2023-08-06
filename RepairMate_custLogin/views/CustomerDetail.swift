@@ -13,7 +13,7 @@ struct CustomerDetail: View {
     var detailsview: Order
     @State private var place: [Location] = []
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-
+    
     @StateObject private var locationManager = LocationManager()
     @State var goToCustomerDetailScreen: Bool = false
     @AppStorage("mechanicId") var mechanicId: String = ""
@@ -25,17 +25,24 @@ struct CustomerDetail: View {
             AuthView()
         }
         VStack {
-            Text("\(detailsview.firstName) \(detailsview.lastName)")
+            Text("Customer Details")
                 .foregroundColor(Color("darkgray"))
-                .font(.system(size: 28))
+                .font(.title)
                 .fontWeight(.semibold)
+                .padding(.top, -37)
+                .padding(5)
+            Text("\(detailsview.firstName) \(detailsview.lastName)")
+                .foregroundColor(.brown)
+                .font(.title2)
+                .fontWeight(.medium)
+            
             Text("")
-
+            
             VStack {
                 Text("Location: \(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
-                    .fontWeight(.semibold)
+                    .fontWeight(.regular)
                     .font(.system(size: 17))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
                 Text("")
                 Map(coordinateRegion: $region, annotationItems: place) { place in
                     MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
@@ -49,30 +56,18 @@ struct CustomerDetail: View {
                     openAppleMaps(latitude: place.first?.coordinate.latitude, longitude: place.first?.coordinate.longitude)
                 }) {
                     HStack {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(.white)
-                            .padding(.leading,0)
-                            .frame(width: 1)
-                        Text("Get Directions")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.vertical, 15)
-                            .frame(width: 130)
-                      
+                        Spacer()
+                        Image("direction")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .padding(.trailing,12)
+                            .padding(.top,-32)
+                        
                     }
                 }
-                .padding(.horizontal, 25)
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue, lineWidth: 0)
-                        .foregroundColor(.black)
-                )
-
-
-
+                
+                
+                
             }
             .onAppear {
                 forwardGeocoding(address: "\(detailsview.apartment) \(detailsview.streetname) \(detailsview.city)")
@@ -81,7 +76,7 @@ struct CustomerDetail: View {
                 guard let userLocation = location else { return }
                 region.center = userLocation.coordinate
             }
-
+            
             VStack {
                 
                 Button(action: {
@@ -99,10 +94,10 @@ struct CustomerDetail: View {
                             .foregroundColor(.blue)
                         Text("Email:")
                             .fontWeight(.semibold)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Text(detailsview.email)
                             .foregroundColor(.gray)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Spacer()
                     }
                 }
@@ -121,80 +116,97 @@ struct CustomerDetail: View {
                             .foregroundColor(.blue)
                         Text("Phone:")
                             .fontWeight(.semibold)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Text(detailsview.contactNo)
                             .foregroundColor(.gray)
-                            .font(.system(size: 15))
+                            .font(.system(size: 20))
                         Spacer()
                     }
                 }
-                
-                Button(action:{
-                    Firestore.firestore().collection("customers").document(detailsview.email).collection("Orderlist").document(detailsview.bookingId).updateData([
-                        "status":"accepted"
-                    ])
-                    { error in
-                        if let error = error {
-                            showingAlert = true
-                        } else {
-                            showingAlert = true
-                            isAccepted = true
+                .padding(4)
+                ZStack{
+                    HStack{
+                        Button(action:{
+                            Firestore.firestore().collection("customers").document(detailsview.email).collection("Orderlist").document(detailsview.bookingId).updateData([
+                                "status":"accepted"
+                            ])
+                            { error in
+                                if let error = error {
+                                    showingAlert = true
+                                } else {
+                                    showingAlert = true
+                                    isAccepted = true
+                                }
+                            }
+                        })
+                        {
+                            Text("Accept")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                                .padding(15)
+                                .frame(maxWidth: 120)
+                        }
+                        .background(Color.green)
+                        .cornerRadius(0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 60)
+                                .stroke(Color.blue,lineWidth: 0)
+                                .foregroundColor(.black)
+                        )
+                        .padding(.leading,30)
+                        .padding(.top,80)
+                        
+                        Spacer()
+                        Button(action:{
+                            Firestore.firestore().collection("customers").document(detailsview.email).collection("Orderlist").document(detailsview.bookingId).updateData([
+                                "status":"deleted"
+                            ])
+                            { error in
+                                if let error = error {
+                                    showingAlert = true
+                                } else {
+                                    showingAlert = true
+                                    isAccepted = false
+                                }
+                            }
+                        })
+                        {
+                            HStack{
+                                
+                                Text("Decline")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 20))
+                                    .padding(15)
+                                    .frame(maxWidth: 120)
+                            }
+                            .background(Color.red)
+                            .cornerRadius(0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 60)
+                                    .stroke(Color.red,lineWidth: 0)
+                                    .foregroundColor(.black)
+                            )
+                            .padding(.trailing,30)
+                            .padding(.top,80)
+                        }
+                        
+                        .alert(isPresented: $showingAlert) {
+                            if isAccepted {
+                                return Alert(title: Text("Successful"), message: Text("Order accepted."), dismissButton: .default(Text("OK")))
+                                
+                            } else {
+                                return Alert(title: Text("Failed"), message: Text("Order cannot be accepted"), dismissButton: .default(Text("OK")))
+                            }
                         }
                     }
-                })
-                {
-                    Text("Accept")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(15)
-                        .frame(maxWidth: 120)
+                    
                 }
-                .background(Color("darkgray"))
-                .cornerRadius(70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.blue,lineWidth: 0)
-                        .foregroundColor(.black)
-                )
-                .alert(isPresented: $showingAlert) {
-                    if isAccepted {
-                        return Alert(title: Text("Successful"), message: Text("Order accepted."), dismissButton: .default(Text("OK")))
-                        
-                    } else {
-                        return Alert(title: Text("Failed"), message: Text("Order cannot be accepted"), dismissButton: .default(Text("OK")))
-                    }
-                }
-                Spacer()
-                
-//                Button(action:{
-//                    let firebaseAuth = Auth.auth()
-//                    do {
-//                        try firebaseAuth.signOut()
-//                        withAnimation{
-//                            mechanicId = ""
-//                            UserDefaults.standard.removeObject(forKey: "MECH_EMAIL")
-//                        }
-//                    } catch let signOutError as NSError {
-//                        print("Error signing out: %@", signOutError)
-//                    }
-//                })
-//                {
-//                    Text("Logout")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.white)
-//                        .multilineTextAlignment(.center)
-//                        .padding(15)
-//                        .frame(maxWidth: 120)
-//                }
-//                .background(Color("darkgray"))
-//                .cornerRadius(70)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 0)
-//                        .stroke(Color.blue,lineWidth: 0)
-//                        .foregroundColor(.black)
-//                )
             }
+            Spacer()
+            
+            
         }
     }
     
@@ -205,7 +217,7 @@ struct CustomerDetail: View {
                 print("Failed to retrieve location")
                 return
             }
-
+            
             if let placemark = placemarks?.first,
                let location = placemark.location {
                 let coordinate = location.coordinate
@@ -222,7 +234,7 @@ struct CustomerDetail: View {
         guard let latitude = latitude, let longitude = longitude else {
             return
         }
-
+        
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
@@ -234,19 +246,19 @@ struct CustomerDetail: View {
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var lastKnownLocation: CLLocation?
-
+    
     override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.lastKnownLocation = location
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager error: \(error.localizedDescription)")
     }

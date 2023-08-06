@@ -26,24 +26,29 @@ struct Mechanics_Home: View {
                 }
                 else{
                     Text("Your Orders")
-                        .font(.largeTitle)
                         .foregroundColor(Color("darkgray"))
-                        .padding()
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
                     List(){
                         ForEach(orderList, id: \.id) { order in
                             NavigationLink(destination: CustomerDetail(detailsview: order)){
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 8) {
                                     Text("\(order.firstName) \(order.lastName)")
                                         .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 18))
+                                        .foregroundColor(Color("darkgray"))
+                                        .font(.system(size: 22))
                                     Text("Date : \(order.date)")
+                                        .foregroundColor(.brown)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 15))
                                     Text("Street Name : \(order.streetname)")
+                                       
                                 }
-                                .padding()
+                                .padding(10)
                             }
                         }
                     }
+                    .listStyle(.insetGrouped)
                 }
             }
             .onAppear {

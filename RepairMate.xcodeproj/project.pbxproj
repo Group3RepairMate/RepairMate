@@ -198,13 +198,14 @@
 				9DC2D2CB2A7B85EF00A860B9 /* ContactUs.swift */,
 				9D78B0292A79AA700050B156 /* Privacy.swift */,
 				9DAD42B32A602E2D0026AE6E /* NotificationScreen.swift */,
+				9DC2D2D32A7C246600A860B9 /* Notification.swift */,
 				9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */,
+				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
 				9D24E29D2A41E7C90015F274 /* PaymentGateway.swift */,
 				E87E90EE2A5B11C70060396E /* ContentViewForMech.swift */,
 				E87E90F02A5B126E0060396E /* MechanicHistory.swift */,
 				9DAD42B52A602EA40026AE6E /* CustomerDetail.swift */,
 				E87E90F22A5B129B0060396E /* MechanicProfile.swift */,
-				9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */,
 				9DF45C4C2A47A3350058AC4F /* Mechanics_Home.swift */,
 				9DF45C502A47AC850058AC4F /* Mauthview.swift */,
 				9D7854372A6C6C0600144066 /* NotificationMechanic.swift */,
@@ -213,7 +214,6 @@
 				9DBE52452A78B21E000A6CFA /* EditOrderForMech.swift */,
 				9DC2D2CF2A7C243000A860B9 /* Notify.swift */,
 				9DC2D2D12A7C244800A860B9 /* Reason.swift */,
-				9DC2D2D32A7C246600A860B9 /* Notification.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";

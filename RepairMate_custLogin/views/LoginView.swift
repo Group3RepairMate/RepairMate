@@ -17,10 +17,7 @@ struct LoginView: View {
     @State private var showingAlert = false
     @State private var forgotPass : Int? = nil
     private func isValidPassword(_ password : String) -> Bool{
-        
-        //atleast 6 characters Long
-        //1 upper case letter
-        //1 special character
+
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
         
         return passwordRegex.evaluate(with: password)
@@ -63,6 +60,7 @@ struct LoginView: View {
                         .stroke(Color.black,lineWidth: 1)
                 )
                 .padding(11)
+                Text("")
                 Button(action : {
                     withAnimation{
                         self.forgotPass = 1
@@ -122,7 +120,7 @@ struct LoginView: View {
                             .frame(maxWidth: .infinity)
                             .background(Color("darkgray"))
                             .cornerRadius(8)
-                            .padding(.top,20)
+                            .padding(.top,15)
                     }
                     .alert("User not found", isPresented: $showingAlert) {
                         Button("OK", role: .cancel) { }

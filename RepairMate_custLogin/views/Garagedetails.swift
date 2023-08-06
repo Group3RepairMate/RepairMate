@@ -18,17 +18,25 @@ struct Garagedetails: View {
 
     var body: some View {
         VStack {
-            Text(detailsview.name)
+            Text("Garage Details")
                 .foregroundColor(Color("darkgray"))
-                .font(.title2)
+                .font(.title)
                 .fontWeight(.semibold)
-                .padding(.top,-50)
-            
+                .padding(.top, -66)
+        
             VStack {
+                Text(detailsview.name)
+                    .foregroundColor(.brown)
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    
+//                    .padding(.top, -70)
+                Text("")
                 Text("Location: \(detailsview.location)")
-                    .fontWeight(.semibold)
+                    .fontWeight(.regular)
                     .font(.system(size: 17))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
+//                    .padding(.top, -60)
                 Text("")
                 Map(coordinateRegion: $region, annotationItems: place) { place in
                     MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
@@ -122,15 +130,12 @@ struct Garagedetails: View {
                                         .cornerRadius(8)
                                         .padding(.top,20)
                                 }
-//                                .foregroundColor(.white)
-//                                .font(.headline)
-//                                .frame(maxWidth: .infinity)
-//                                .background(Color("darkgray"))
-//                                .cornerRadius(8)
+
                                 .padding(5)
-//                                .padding(.top,50)
+
                             }
                             .navigationBarTitle("", displayMode: .inline)
+                            
             }
             
 

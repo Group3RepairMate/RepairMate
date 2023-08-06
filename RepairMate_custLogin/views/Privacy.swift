@@ -7,7 +7,7 @@ struct Privacy: View {
                 Text("Privacy Policy")
                     .font(.title)
                     .foregroundColor(Color("darkgray"))
-                    .padding(.top, -20)
+                    .padding(.top, -52)
                     .frame(alignment: .center)
                     .fontWeight(.semibold)
 

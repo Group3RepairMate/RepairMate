@@ -41,9 +41,7 @@ struct SplashScreenView: View {
                 }
             }
         }
-        //.animation(.easeOut(duration: 2.5))
-        //.transition(.scale)
-//        .animation(.linear(duration: 1.5))
+
     }
 }
 

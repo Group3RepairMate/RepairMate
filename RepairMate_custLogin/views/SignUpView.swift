@@ -1,10 +1,3 @@
-//
-//  SignUpView.swift
-//  RepairMate_custLogin
-//
-//  Created by Arjun Roperia on 2023-05-23.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore

@@ -5,10 +5,13 @@ struct NotificationScreen: View {
     @State private var notifications: [Notify] = []
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack {
             Text("Notifications")
                 .font(.title)
-                .bold()
+                .foregroundColor(Color("darkgray"))
+                .padding(.top, -37)
+                .frame(alignment: .center)
+                .fontWeight(.semibold)
             
             List(notifications, id: \.id) { item in
                 NavigationLink(destination: Notification(notification: item)) {
@@ -22,6 +25,7 @@ struct NotificationScreen: View {
                 }
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
         .onAppear(){
             notifications=[]
             fetchNotifications()

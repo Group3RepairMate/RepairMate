@@ -16,6 +16,7 @@ struct MechanicLoginView: View {
     @Binding var currentShowingView: String
     @State private var showingAlert = false
     @EnvironmentObject var garagehelper: Garagehelper
+    @State private var forgotPass : Int? = nil
     
     private func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
@@ -29,6 +30,7 @@ struct MechanicLoginView: View {
                     .font(.largeTitle)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                   
                 
                 HStack{
                     Image(systemName: "envelope.fill")
@@ -59,7 +61,18 @@ struct MechanicLoginView: View {
                         .stroke(Color.black,lineWidth: 1)
                 )
                 .padding(.top,5)
-                
+                Text("")
+                Text("")
+                NavigationLink(destination: ForgotPassCustomer(), tag: 1, selection:self.$forgotPass){}
+                Button(action : {
+                    withAnimation{
+                        self.forgotPass = 1
+                    }
+                }){
+                    Text("Forgot Password")
+                        .foregroundColor(Color("darkgray").opacity(0.7))
+                        .padding(1)
+                }
                 Button(action: {
                     Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                         if let error = error {

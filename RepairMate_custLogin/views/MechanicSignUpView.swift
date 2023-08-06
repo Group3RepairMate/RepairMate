@@ -34,6 +34,8 @@ struct MechanicSignUpView: View {
                     .font(.largeTitle)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.blue)
+                
                 
                 Section{
                     Text("Garage Details")

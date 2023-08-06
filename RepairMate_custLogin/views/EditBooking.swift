@@ -25,7 +25,7 @@ struct EditBooking: View {
             Text("Booking Details")
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -10)
+                .padding(.top, -44)
                 .frame(alignment: .center)
                 .fontWeight(.semibold)
             
@@ -167,6 +167,17 @@ struct EditBooking: View {
             }
         }
         .padding(10)
+        .onAppear(){
+            time = order.date
+//            street = order.streetname
+//            postalcode = order.postalcode
+//            unit = order.apartment
+//            email = order.email
+//            contact = order.contactNo
+//            problem = order.problemDisc
+        }
+        
+        
     }
     
     private func updateBooking() {

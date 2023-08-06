@@ -18,7 +18,7 @@ struct Updateprofile: View {
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
                 .fontWeight(.semibold)
-                .padding(.top, -10)
+                .padding(.top,-33)
             Text("")
             VStack {
                 VStack(alignment: .leading, spacing: 10) {

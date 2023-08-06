@@ -19,7 +19,7 @@ struct ForgotPassCustomer: View {
             Text("Forgot Password")
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -10)
+                .padding(.top, -48)
                 .frame(alignment: .center)
                 .fontWeight(.semibold)
             Text("")
@@ -43,7 +43,7 @@ struct ForgotPassCustomer: View {
             Button(action : {
                 forgotPassword()
             }){
-                Text("Forget Password")
+                Text("Forgot Password")
                     .foregroundColor(.white)
                     .font(.headline)
                     .padding()

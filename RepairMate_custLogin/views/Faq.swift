@@ -6,9 +6,9 @@ struct Faq: View {
             VStack{
                 VStack(alignment: .center, spacing: 20){
                     Text("Frequently Asked Questions")
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(Color("darkgray"))
-                        .padding(.top, -10)
+                        .padding(.top, -52)
                         .frame(alignment: .center)
                         .fontWeight(.semibold)
                     Text("")
