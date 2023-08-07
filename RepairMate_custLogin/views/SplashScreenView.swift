@@ -25,11 +25,11 @@ struct SplashScreenView: View {
                         .foregroundColor(Color("darkgray"))
                     
                     
-                    Image(systemName: "wrench.fill")
+                    Image("wrench")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(Color("darkgray"))
+                        .frame(width: 250, height: 200)
+//                        .background(Color("darkgray"))
                         .padding()
                 }
             }

@@ -189,10 +189,12 @@ struct Viewhistory: View {
         }
         .onReceive(timer) { _ in
                 fetchOrderList()
-            }
+        }
         
     }
+    
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
         private func fetchOrderList() {
             guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                 print("User document ID not found")

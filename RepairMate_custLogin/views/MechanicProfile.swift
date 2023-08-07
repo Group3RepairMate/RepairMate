@@ -15,6 +15,7 @@ struct MechanicProfile: View {
     @State private var isShowingImagePicker = false
     @State private var historyselection:Int? = nil
     @State private var notificationselection:Int? = nil
+    @State private var mechanicedit:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
     @State private var fullName:String = ""
     @State private var email:String = ""
@@ -22,6 +23,7 @@ struct MechanicProfile: View {
     @AppStorage("mechanicId") var mechanicId: String = ""
     @AppStorage("mechanicPassword") var mechanicPassword: String = ""
     @EnvironmentObject var garagehelper: Garagehelper
+    
     
     var selectedUIImage: UIImage? {
         if let imageData = selectedImage {
@@ -60,23 +62,9 @@ struct MechanicProfile: View {
                     NavigationLink(destination: MechanicHistory(), tag: 1, selection:self.$historyselection){}
                     NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                     NavigationLink(destination: NotificationMechanic(), tag: 1, selection:self.$notificationselection){}
+                    NavigationLink(destination: EditMechanic(), tag: 1, selection:self.$mechanicedit){}
                     List {
-//                        Button(action: {
-//                            self.historyselection = 1
-//                        }) {
-//                            HStack {
-//                                Image(systemName: "text.book.closed")
-//                                    .foregroundColor(.red) // Change symbol color
-//                                    .imageScale(.large)
-//                                Text("")
-//                                Text("View History")
-//                                    .foregroundColor(.black) // Font color
-//                                    .font(.headline)
-//                            }
-//                            .padding(3)
-//                            .cornerRadius(20)
-//                        }
-//                        .padding(.vertical, 3)
+
                         Button(action: {
                             self.notificationselection = 1
                         }) {
@@ -142,14 +130,14 @@ struct MechanicProfile: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            isSheetPresented.toggle()
+                            self.mechanicedit = 1
                         } label: {
                             Image(systemName: "square.and.pencil")
                                 .foregroundColor(.black)
                         }
-                        .sheet(isPresented: $isSheetPresented) {
-                            EditMechanic()
-                        }
+//                        .sheet(isPresented: $isSheetPresented) {
+//                            EditMechanic()
+//                        }
                     }
                 }
             }

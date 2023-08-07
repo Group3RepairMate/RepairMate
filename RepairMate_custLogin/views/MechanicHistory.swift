@@ -183,17 +183,18 @@ struct MechanicHistory: View {
                     }
                 }
             }
+            
         }
         .onAppear {
             orderList = []
             fetchOrderList()
         }
 //        .onReceive(timer) { _ in
-//            orderList = []
+//
 //            fetchOrderList()
 //        }
     }
-//    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+   // private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func fetchOrderList() {
         Firestore.firestore().collection("customers").getDocuments { (snapshot, error) in
