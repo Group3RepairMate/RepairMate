@@ -11,19 +11,15 @@ struct Notification: View {
     var notification: Notify
     
     var body: some View {
-        VStack(alignment: .center, spacing: 8) {
-            HStack {
-                Image(systemName: "envelope")
-                    .foregroundColor(.brown)
-                    .padding(.top, -20)
-                Text("\(notification.from)")
-                    .font(.title)
-                    .foregroundColor(.blue)
-                Text("")
-                Text("")
-                Text("")
+        Text("\(notification.from)")
+            .font(.title2)
+            .foregroundColor(Color("darkgray"))
+            .padding(.top, -37)
+            .frame(alignment: .center)
+            .fontWeight(.semibold)
 
-            }
+        VStack(alignment: .center, spacing: 8) {
+                Text("")
             Text(notification.msg)
                 .foregroundColor(.black)
                 .font(.body)
@@ -31,9 +27,10 @@ struct Notification: View {
                 .padding()
             Spacer()
         }
+        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+        
         .padding()
       
-        .cornerRadius(10)
-        .shadow(color: Color.gray.opacity(0.4), radius: 4, x: 0, y: 2)
+       
     }
 }

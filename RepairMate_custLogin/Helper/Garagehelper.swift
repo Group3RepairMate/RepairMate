@@ -5,7 +5,7 @@ class Garagehelper: ObservableObject{
     @Published var garagelist = [Garage]()
     @Published var garagelistSize:Int = 1
     
-    private let baseURL = "http://localhost:8080/garages"
+    private let baseURL = "https://dark-pear-scallop-toga.cyclic.app/garages"
     
     init() {
         fetchGaragelist()

@@ -29,7 +29,7 @@ struct CustomerDetail: View {
                 .foregroundColor(Color("darkgray"))
                 .font(.title)
                 .fontWeight(.semibold)
-                .padding(.top, -37)
+                .padding(.top, -43)
                 .padding(5)
             Text("\(detailsview.firstName) \(detailsview.lastName)")
                 .foregroundColor(.brown)
@@ -145,10 +145,10 @@ struct CustomerDetail: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 20))
                                 .padding(15)
-                                .frame(maxWidth: 120)
+                                .frame(maxWidth: .infinity)
                         }
                         .background(Color.green)
-                        .cornerRadius(0)
+                        .cornerRadius(8)
                         .overlay(
                             RoundedRectangle(cornerRadius: 60)
                                 .stroke(Color.blue,lineWidth: 0)
@@ -179,10 +179,10 @@ struct CustomerDetail: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 20))
                                     .padding(15)
-                                    .frame(maxWidth: 120)
+                                    .frame(maxWidth: .infinity)
                             }
                             .background(Color.red)
-                            .cornerRadius(0)
+                            .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 60)
                                     .stroke(Color.red,lineWidth: 0)

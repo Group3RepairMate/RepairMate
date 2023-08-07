@@ -18,7 +18,7 @@ struct Updateprofile: View {
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
                 .fontWeight(.semibold)
-                .padding(.top,-33)
+                .padding(.top,-39)
             Text("")
             VStack {
                 VStack(alignment: .leading, spacing: 10) {
@@ -97,12 +97,12 @@ struct Updateprofile: View {
                     }
                     
                 }
-                //                .padding(.horizontal, 9)
+                //          
                 .padding()
             }
-            // .padding()
+   
             Spacer()
-            // .padding(.horizontal, 20)
+            
             Button(action: {
                 if fullName.isEmpty || streetName.isEmpty || postal.isEmpty || city.isEmpty {
                     show = true

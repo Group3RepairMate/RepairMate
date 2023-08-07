@@ -88,7 +88,7 @@ struct CustomerDetailsForm: View {
                 .foregroundColor(Color("darkgray"))
                 .font(.title)
                 .fontWeight(.semibold)
-                .padding(.top,-33.5)
+                .padding(.top,-33)
             
             NavigationLink(destination: Homescreen(), tag: 1, selection: self.$linkselection) {}
             
@@ -235,7 +235,7 @@ struct CustomerDetailsForm: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-        
+     
         Spacer()
     }
     

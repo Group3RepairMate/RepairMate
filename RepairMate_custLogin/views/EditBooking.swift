@@ -25,7 +25,7 @@ struct EditBooking: View {
             Text("Booking Details")
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -44)
+                .padding(.top, -50)
                 .frame(alignment: .center)
                 .fontWeight(.semibold)
             
@@ -122,7 +122,7 @@ struct EditBooking: View {
                         .font(.title2.weight(.medium))
                 }
             }
-            if(!(order.status == "deleted")){
+            if(order.status == "accepted"){
                 Button(action: {
                     if firstName.isEmpty || lastName.isEmpty || email.isEmpty || contact.isEmpty || unit.isEmpty || street.isEmpty || postalcode.isEmpty || problem.isEmpty {
                         showAlert = true

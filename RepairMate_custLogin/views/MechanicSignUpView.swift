@@ -157,7 +157,7 @@ struct MechanicSignUpView: View {
     
     func getRegistrationOfGarage(name:String,email:String,contact:String,location:String,availability:String){
         
-        guard let url = URL(string: "http://localhost:8080/addGarage") else {
+        guard let url = URL(string: "https://dark-pear-scallop-toga.cyclic.app/addGarage") else {
             print("Invalid URL")
             return
         }

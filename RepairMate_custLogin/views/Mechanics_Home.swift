@@ -21,13 +21,13 @@ struct Mechanics_Home: View {
             VStack {
                 if orderList.isEmpty {
                     Text("No orders found")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.red)
                         .padding()
                 }
                 else{
                     Text("Your Orders")
                         .foregroundColor(Color("darkgray"))
-                        .font(.largeTitle)
+                        .font(.title)
                         .fontWeight(.semibold)
                     List(){
                         ForEach(orderList, id: \.id) { order in
@@ -42,7 +42,7 @@ struct Mechanics_Home: View {
                                         .fontWeight(.bold)
                                         .font(.system(size: 15))
                                     Text("Street Name : \(order.streetname)")
-                                       
+                                    
                                 }
                                 .padding(10)
                             }
@@ -55,10 +55,15 @@ struct Mechanics_Home: View {
                 orderList = []
                 fetchOrderList()
             }
+//            .onReceive(timer) { _ in
+//                fetchOrderList()
+//            }
+            
             .navigationBarBackButtonHidden()
         }
-            
+        
     }
+//    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private func fetchOrderList() {
         Firestore.firestore().collection("customers").getDocuments { (snapshot, error) in
@@ -80,7 +85,7 @@ struct Mechanics_Home: View {
                         print("Error fetching orders: \(err.localizedDescription)")
                         return
                     }
-                        
+                    
                     guard let orders = snap?.documents else {
                         print("No orders found in customers collection")
                         return
@@ -104,17 +109,17 @@ struct Mechanics_Home: View {
                             let date = data["dateTime"] as? Timestamp ?? Timestamp()
                             let garageemail = data["garageemail"] as? String ?? ""
                             let avalability = data["garageAvailability"] as? String ?? ""
-                       
+                            
                             
                             return Order(bookingId: id,firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail,garageName: garage,avalability: avalability)
                         }
                         
                         for i in fetchedOrder{
-                            if(i.garageemail == mechanicId){
+                            if((i.garageemail == mechanicId) && (i.status=="processing")  ){
                                 self.orderList.append(i)
                             }
-                            
                         }
+                        
                     }
                 }
             }

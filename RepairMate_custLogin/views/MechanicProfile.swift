@@ -17,6 +17,7 @@ struct MechanicProfile: View {
     @State private var notificationselection:Int? = nil
     @State private var resetPasswordSelection:Int? = nil
     @State private var fullName:String = ""
+    @State private var email:String = ""
     @State private var isSheetPresented = false
     @AppStorage("mechanicId") var mechanicId: String = ""
     @AppStorage("mechanicPassword") var mechanicPassword: String = ""
@@ -37,86 +38,78 @@ struct MechanicProfile: View {
             NavigationView {
                 VStack {
                     HStack {
-                        VStack(alignment: .leading, spacing: -1) {
-                            if let uiImage = selectedUIImage {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 90, height: 90)
-                                    .clipShape(Circle())
-                                    .alignmentGuide(.leading) { _ in -30 }
-                                    .padding(.top, 15)
-                            } else {
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 90, height: 90)
-                                    .foregroundColor(.white)
-                                    .alignmentGuide(.leading) { _ in -30 }
-                                    .padding(.top, 15)
-                            }
-                            
-                            Button(action: {
-                                isShowingImagePicker = true
-                            }) {
-                                Text("Edit")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 22))
-                                    .padding()
-                                    .cornerRadius(10)
-                                    .bold()
-                                
-                            }
-                            .padding(.leading, 40)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .sheet(isPresented: $isShowingImagePicker, onDismiss: loadimage) {
-                                ImagePicker(selectedImage: $selectedImage)
-                            }
-                        }
+                 
                         VStack {
                             Text(fullName)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, -59)
-                                .padding(.top, -50)
-                                .font(.system(size: 23))
+                                .foregroundColor(Color("darkgray"))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .font(.system(size: 22.5))
+                                .fontWeight(.semibold)
+                            Text("")
+                            
+                            Text(email)
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 5)
+                                .font(.system(size: 22.5))
+                          
+                            Text("")
                         }
                     }
-                    .background(Color.gray)
                     
                     NavigationLink(destination: MechanicHistory(), tag: 1, selection:self.$historyselection){}
                     NavigationLink(destination: ResetPassCustomer(), tag: 1, selection:self.$resetPasswordSelection){}
                     NavigationLink(destination: NotificationMechanic(), tag: 1, selection:self.$notificationselection){}
                     List {
-                        Button(action: {
-                            self.historyselection = 1
-                        }) {
-                            Label("View History", systemImage: "text.book.closed")
-                                .foregroundColor(.black)
-                                .font(.headline)
-                                .padding()
-                                .cornerRadius(20)
-                        }
-                        
+//                        Button(action: {
+//                            self.historyselection = 1
+//                        }) {
+//                            HStack {
+//                                Image(systemName: "text.book.closed")
+//                                    .foregroundColor(.red) // Change symbol color
+//                                    .imageScale(.large)
+//                                Text("")
+//                                Text("View History")
+//                                    .foregroundColor(.black) // Font color
+//                                    .font(.headline)
+//                            }
+//                            .padding(3)
+//                            .cornerRadius(20)
+//                        }
+//                        .padding(.vertical, 3)
                         Button(action: {
                             self.notificationselection = 1
                         }) {
-                            Label("Notifications", systemImage: "text.book.closed")
-                                .foregroundColor(.black)
-                                .font(.headline)
-                                .padding()
-                                .cornerRadius(20)
+                            HStack {
+                                Image(systemName: "bell.fill")
+                                    .foregroundColor(.red) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Notifications")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
+                            .cornerRadius(20)
                         }
+                        .padding(.vertical, 3)
+                        
                         Button(action: {
-                            // Add action for "reset password" button
                             self.resetPasswordSelection = 1
                         }) {
-                            Label("Reset password", systemImage: "key.horizontal.fill")
-                                .foregroundColor(.black)
-                                .font(.headline)
-                                .padding()
-                                .cornerRadius(20)
+                            HStack {
+                                Image(systemName: "key.horizontal.fill")
+                                    .foregroundColor(.orange) // Change symbol color
+                                    .imageScale(.large)
+                                Text("")
+                                Text("Reset Password")
+                                    .foregroundColor(.black) // Font color
+                                    .font(.headline)
+                            }
+                            .padding(3)
+                            .cornerRadius(20)
                         }
+                        .padding(.vertical, 3)
                     }
                     .listStyle(GroupedListStyle())
                     
@@ -144,6 +137,7 @@ struct MechanicProfile: View {
                     }
                     Spacer()
                 }
+                
                 .navigationBarTitle("", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -151,7 +145,7 @@ struct MechanicProfile: View {
                             isSheetPresented.toggle()
                         } label: {
                             Image(systemName: "square.and.pencil")
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                         }
                         .sheet(isPresented: $isSheetPresented) {
                             EditMechanic()
@@ -163,6 +157,7 @@ struct MechanicProfile: View {
                 for i in garagehelper.garagelist{
                     if i.email == mechanicId{
                         fullName = i.name
+                        email = i.email
                     }
                 }
             }

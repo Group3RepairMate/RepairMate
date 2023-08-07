@@ -9,7 +9,7 @@ struct NotificationScreen: View {
             Text("Notifications")
                 .font(.title)
                 .foregroundColor(Color("darkgray"))
-                .padding(.top, -37)
+                .padding(.top, -39)
                 .frame(alignment: .center)
                 .fontWeight(.semibold)
             

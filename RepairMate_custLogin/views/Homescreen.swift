@@ -26,9 +26,9 @@ struct Homescreen: View {
             VStack {
                 Text("Garage List")
                     .foregroundColor(Color("darkgray"))
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.semibold)
-                
+                    .padding(.top, -93)
                 Picker("Service", selection: $selectedServiceType) {
                     Text("All").tag(ServiceType.all)
                         .fontWeight(.semibold)
@@ -73,6 +73,7 @@ struct Homescreen: View {
             .searchable(text: $searchlocation)
             .autocorrectionDisabled()
             .navigationBarTitle("", displayMode: .inline)
+            
             .navigationBarBackButtonHidden(true)
         }
         .navigationBarTitle("", displayMode: .inline)
