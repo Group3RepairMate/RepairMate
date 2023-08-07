@@ -133,6 +133,22 @@ struct CustomerDetail: View {
                             isAccepted = true
                         }
                     }
+                    
+                    let detail: [String: Any] = [
+                        "from": detailsview.garageemail,
+                        "name":detailsview.garageName,
+                        "to": detailsview.email,
+                        "msg": "Your order is accepted. \(detailsview.garageName) will attend you on \(detailsview.date). Please, be present on the day with your vehicle."
+                    ]
+                    
+                    Firestore.firestore().collection("notifications").addDocument(data: detail)
+                    { error in
+                        if let error = error {
+                            print("Error adding document: \(error)")
+                        } else {
+                            print("Document added successfully!")
+                        }
+                    }
                 })
                 {
                     Text("Accept")

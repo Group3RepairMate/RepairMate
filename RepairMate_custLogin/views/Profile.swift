@@ -2,6 +2,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct Profile: View {
     @State private var selectedImage: Data?
@@ -12,6 +13,7 @@ struct Profile: View {
     @State private var resetPasswordSelection:Int? = nil
     @State private var fullName:String = ""
     @AppStorage("uid") var userID: String = ""
+    @State private var profileImageUrl: URL?
     
     var selectedUIImage: UIImage? {
         if let imageData = selectedImage {
@@ -158,15 +160,12 @@ struct Profile: View {
                 }
             }
         }
-            .onAppear(){
-                let db = Firestore.firestore()
-                let userID = Auth.auth().currentUser?.uid
-             
-                guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
-                    print("User document ID not found")
-                    return
-                }
-                
+        .onAppear() {
+            let db = Firestore.firestore()
+            let userID = Auth.auth().currentUser?.uid
+
+            loadProfileData()
+            if let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") {
                 db.collection("customers").document(userDocumentID).getDocument { document, error in
                     if let document = document, document.exists {
                         let data = document.data()
@@ -175,53 +174,100 @@ struct Profile: View {
                         print("User document does not exist")
                     }
                 }
+            } else {
+                print("User document ID not found")
             }
-        
+        }
+
     }
-    
+    func loadProfileData() {
+        let db = Firestore.firestore()
+        guard let email = UserDefaults.standard.string(forKey: "EMAIL") else {
+            print("User email not found in UserDefaults.")
+            return
+        }
+
+        // Fetch user document from Firestore
+        db.collection("customers").document(email).getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data()
+                fullName = data?["fullName"] as? String ?? ""
+                if let imageUrlString = data?["profileImageUrl"] as? String {
+                    profileImageUrl = URL(string: imageUrlString)
+                } else {
+                    profileImageUrl = nil
+                }
+            } else {
+                print("User document does not exist or there was an error fetching it.")
+            }
+        }
+    }
     func loadimage() {
         guard let uiImage = selectedUIImage,
               let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
             print("Error converting image to data.")
             return
         }
-        
+
         // Create a unique file name for the image
         let imageFileName = UUID().uuidString
-        
+
         // Create a reference to the Firebase Storage bucket
         let storageRef = Storage.storage().reference().child("profileImages/\(imageFileName).jpeg")
-        
+
         // Upload the image data to Firebase Storage
         storageRef.putData(imageData, metadata: nil) { (_, error) in
             if let error = error {
                 print("Error uploading image: \(error.localizedDescription)")
                 return
             }
-            
+
             // Retrieve the download URL of the uploaded image
             storageRef.downloadURL { (url, error) in
                 if let error = error {
                     print("Error retrieving download URL: \(error.localizedDescription)")
                     return
                 }
-                
+
                 if let imageUrl = url?.absoluteString {
                     // Store the image URL in Firestore
                     let db = Firestore.firestore()
-                    let userRef = db.collection("customers").document(userID) // Using userID directly here
-                    userRef.updateData(["profileImageUrl": imageUrl]) { (error) in
-                        if let error = error {
-                            print("Error updating profile image URL: \(error.localizedDescription)")
-                        } else {
-                            print("Profile image URL updated successfully.")
+                    let userID = Auth.auth().currentUser?.uid
+
+                    // Assuming email represents the user's email address
+                    let email = UserDefaults.standard.string(forKey: "EMAIL") ?? ""// Replace with the actual email variable
+
+                    if email.isEmpty {
+                        print("Error: Email is empty.")
+                        return
+                    }
+
+                    // Check if the userID is not nil before updating the document
+                    if let userID = userID {
+                        let userRef = db.collection("customers").document(email) // Use the email as the document ID
+                        userRef.getDocument { (document, error) in
+                            if let document = document, document.exists {
+                                // The document exists, proceed with updating the profile image URL
+                                userRef.updateData(["profileImageUrl": imageUrl]) { (error) in
+                                    if let error = error {
+                                        print("Error updating profile image URL: \(error.localizedDescription)")
+                                    } else {
+                                        print("Profile image URL updated successfully.")
+                                    }
+                                }
+                            } else {
+                                print("User document does not exist")
+                            }
                         }
+                    } else {
+                        print("User ID not found.")
                     }
                 }
             }
         }
     }
-    
+
+
 }
 
 struct Profile_Previews: PreviewProvider {

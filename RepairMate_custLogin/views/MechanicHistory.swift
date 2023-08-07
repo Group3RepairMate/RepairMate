@@ -6,9 +6,8 @@ import Firebase
 
 struct MechanicHistory: View {
     @State private var orderList: [Order] = []
-    @EnvironmentObject var garagehelper: Garagehelper
     @AppStorage("mechanicId") var mechanicId: String = ""
-    enum Status {
+    enum Status:String {
         case accepted
         case done
         case undone
@@ -29,9 +28,9 @@ struct MechanicHistory: View {
                     .padding()
             } else {
                 Picker("Service", selection: $status) {
-                    Text("All").tag(Viewhistory.Status.all)
+                    Text("All").tag(MechanicHistory.Status.all)
                     if orderList.contains(where: { $0.status == "accepted" }) {
-                        Text("Processing").tag(MechanicHistory.Status.accepted)
+                        Text("Accepted").tag(MechanicHistory.Status.accepted)
                     }
                     if orderList.contains(where: { $0.status == "done" }) {
                         Text("Done").tag(MechanicHistory.Status.done)
@@ -43,37 +42,139 @@ struct MechanicHistory: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
                 
-                List(orderList, id: \.id) { order in
-                    NavigationLink(
-                        destination: EditOrderForMech(order: order),
-                        tag: order,
-                        selection: $selectedOrder
-                    ) {
-                        VStack(alignment: .leading) {
-                            Text("\(order.garageName)")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .font(.system(size: 18))
-                            Text("")
-                            Text("Date and Time: \(formattedDateTime(order.date))")
-                                .font(.system(size: 13))
-                            Button(action: {
-                                // Set the selected order when the button is tapped
-                                selectedOrder = order
-                            }) {
-                                Label("Edit", systemImage: "pencil.circle")
+                if(status==Status.all){
+                    List(orderList, id: \.id) { order in
+                        NavigationLink(
+                            destination: EditOrderForMech(order: order),
+                            tag: order,
+                            selection: $selectedOrder
+                        ) {
+                            VStack(alignment: .leading) {
+                                Text("\(order.garageName)")
+                                    .fontWeight(.semibold)
                                     .foregroundColor(.black)
-                                    .font(.headline)
-                                    .padding()
-                                    .cornerRadius(20)
+                                    .font(.system(size: 18))
+                                Text("")
+                                Text("Date and Time: \(formattedDateTime(order.date))")
+                                    .font(.system(size: 13))
+                                Button(action: {
+                                    // Set the selected order when the button is tapped
+                                    selectedOrder = order
+                                }) {
+                                    Label("Edit", systemImage: "pencil.circle")
+                                        .foregroundColor(.black)
+                                        .font(.headline)
+                                        .padding()
+                                        .cornerRadius(20)
+                                }
+                            }
+                            .padding()
+                        }
+                    }
+                }
+                
+                if(status==Status.accepted){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="accepted"){
+                            NavigationLink(
+                                destination: EditOrderForMech(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
                             }
                         }
-                        .padding()
+                    }
+                }
+                
+                if(status==Status.done){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="done"){
+                            NavigationLink(
+                                destination: EditOrderForMech(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                }
+                
+                if(status==Status.undone){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="deleted"){
+                            NavigationLink(
+                                destination: EditOrderForMech(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
                     }
                 }
             }
         }
-        .onAppear(){
+        .onAppear {
+            orderList = []
             fetchOrderList()
         }
     }
@@ -98,7 +199,7 @@ struct MechanicHistory: View {
                         print("Error fetching orders: \(err.localizedDescription)")
                         return
                     }
-                        
+                    
                     guard let orders = snap?.documents else {
                         print("No orders found in customers collection")
                         return
@@ -122,16 +223,14 @@ struct MechanicHistory: View {
                             let date = data["dateTime"] as? Timestamp ?? Timestamp()
                             let garageemail = data["garageemail"] as? String ?? ""
                             let avalability = data["garageAvailability"] as? String ?? ""
-                       
+                            
                             
                             return Order(bookingId: id,firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail,garageName: garage,avalability: avalability)
                         }
                         
                         for i in fetchedOrder{
                             if(i.garageemail == mechanicId){
-                                if(i.status=="accepted"){
-                                    self.orderList.append(i)
-                                }
+                                self.orderList.append(i)
                             }
                         }
                     }

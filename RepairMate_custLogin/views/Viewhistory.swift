@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 struct Viewhistory: View {
     @State private var orderList: [Order] = []
-    enum Status {
+    enum Status:String {
         case accepted
         case done
         case undone
@@ -26,7 +26,7 @@ struct Viewhistory: View {
                 Picker("Service", selection: $status) {
                     Text("All").tag(Viewhistory.Status.all)
                     if orderList.contains(where: { $0.status == "accepted" }) {
-                        Text("Processing").tag(Viewhistory.Status.accepted)
+                        Text("Accepted").tag(Viewhistory.Status.accepted)
                     }
                     if orderList.contains(where: { $0.status == "done" }) {
                         Text("Done").tag(Viewhistory.Status.done)
@@ -38,32 +38,133 @@ struct Viewhistory: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
                 
-                List(orderList, id: \.id) { order in
-                    NavigationLink(
-                        destination: EditBooking(order: order),
-                        tag: order,
-                        selection: $selectedOrder
-                    ) {
-                        VStack(alignment: .leading) {
-                            Text("\(order.garageName)")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .font(.system(size: 18))
-                            Text("")
-                            Text("Date and Time: \(formattedDateTime(order.date))")
-                                .font(.system(size: 13))
-                            Button(action: {
-                                // Set the selected order when the button is tapped
-                                selectedOrder = order
-                            }) {
-                                Label("Edit", systemImage: "pencil.circle")
+                if(status==Status.all){
+                    List(orderList, id: \.id) { order in
+                        NavigationLink(
+                            destination: EditBooking(order: order),
+                            tag: order,
+                            selection: $selectedOrder
+                        ) {
+                            VStack(alignment: .leading) {
+                                Text("\(order.garageName)")
+                                    .fontWeight(.semibold)
                                     .foregroundColor(.black)
-                                    .font(.headline)
-                                    .padding()
-                                    .cornerRadius(20)
+                                    .font(.system(size: 18))
+                                Text("")
+                                Text("Date and Time: \(formattedDateTime(order.date))")
+                                    .font(.system(size: 13))
+                                Button(action: {
+                                    // Set the selected order when the button is tapped
+                                    selectedOrder = order
+                                }) {
+                                    Label("Edit", systemImage: "pencil.circle")
+                                        .foregroundColor(.black)
+                                        .font(.headline)
+                                        .padding()
+                                        .cornerRadius(20)
+                                }
+                            }
+                            .padding()
+                        }
+                    }
+                }
+                
+                if(status==Status.accepted){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="accepted"){
+                            NavigationLink(
+                                destination: EditBooking(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
                             }
                         }
-                        .padding()
+                    }
+                }
+                
+                if(status==Status.done){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="done"){
+                            NavigationLink(
+                                destination: EditBooking(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                }
+                
+                if(status==Status.undone){
+                    List(orderList, id: \.id) { order in
+                        if(order.status=="deleted"){
+                            NavigationLink(
+                                destination: EditBooking(order: order),
+                                tag: order,
+                                selection: $selectedOrder
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text("\(order.garageName)")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 18))
+                                    Text("")
+                                    Text("Date and Time: \(formattedDateTime(order.date))")
+                                        .font(.system(size: 13))
+                                    Button(action: {
+                                        // Set the selected order when the button is tapped
+                                        selectedOrder = order
+                                    }) {
+                                        Label("Edit", systemImage: "pencil.circle")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding()
+                                            .cornerRadius(20)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
                     }
                 }
             }
@@ -112,7 +213,7 @@ struct Viewhistory: View {
                     
                     return Order(bookingId: id,firstName: fname, lastName: lname, email: email, date: date.dateValue(), contactNo: contactNo, apartment:apartment,streetname:streetname,postalcode: postalcode,city: city, status: status, problemDisc: problem,garageemail: garageemail,garageName: garage,avalability: avalability)
                 }
-                
+
                 self.orderList = orders
             }
         }

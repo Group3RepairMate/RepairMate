@@ -46,6 +46,10 @@
 		9EF43E582A2FE425001A4A66 /* RoleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */; };
 		9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */; };
 		9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */; };
+		E800F56C2A79D23A003C6527 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E800F56B2A79D23A003C6527 /* SDWebImageSwiftUI */; };
+		E800F56E2A79FA29003C6527 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = E800F56D2A79FA29003C6527 /* Reason.swift */; };
+		E82C24562A7B969700C44E20 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82C24552A7B969700C44E20 /* Notification.swift */; };
+		E82C24582A7BADCF00C44E20 /* Notify.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82C24572A7BADCF00C44E20 /* Notify.swift */; };
 		E85D06112A6B93BC00F987F9 /* NotificationMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */; };
 		E85D06152A6B946200F987F9 /* EditMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D06142A6B946200F987F9 /* EditMechanic.swift */; };
 		E87ACDA02A71E05C00495BC8 /* EditOrderForMech.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87ACD9F2A71E05C00495BC8 /* EditOrderForMech.swift */; };
@@ -89,6 +93,9 @@
 		9EF43E572A2FE425001A4A66 /* RoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionView.swift; sourceTree = "<group>"; };
 		9EF43E592A2FE44A001A4A66 /* MechanicLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicLoginView.swift; sourceTree = "<group>"; };
 		9EF43E5B2A2FE47A001A4A66 /* MechanicSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MechanicSignUpView.swift; sourceTree = "<group>"; };
+		E800F56D2A79FA29003C6527 /* Reason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
+		E82C24552A7B969700C44E20 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E82C24572A7BADCF00C44E20 /* Notify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notify.swift; sourceTree = "<group>"; };
 		E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMechanic.swift; sourceTree = "<group>"; };
 		E85D06142A6B946200F987F9 /* EditMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMechanic.swift; sourceTree = "<group>"; };
 		E87ACD9F2A71E05C00495BC8 /* EditOrderForMech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderForMech.swift; sourceTree = "<group>"; };
@@ -113,6 +120,7 @@
 				9D24E2A92A41EFDB0015F274 /* StripePaymentSheet in Frameworks */,
 				9D24E2A52A41EFDB0015F274 /* StripeCardScan in Frameworks */,
 				9D24E2AD2A41EFDB0015F274 /* StripePaymentsUI in Frameworks */,
+				E800F56C2A79D23A003C6527 /* SDWebImageSwiftUI in Frameworks */,
 				9D24E2AB2A41EFDB0015F274 /* StripePayments in Frameworks */,
 				9D24E2A12A41EFDB0015F274 /* Stripe in Frameworks */,
 			);
@@ -173,10 +181,13 @@
 				E85D06142A6B946200F987F9 /* EditMechanic.swift */,
 				9DF6AB772A34F71500DA095B /* Homescreen.swift */,
 				9DF6AB7D2A34F75D00DA095B /* Updateprofile.swift */,
+				E82C24552A7B969700C44E20 /* Notification.swift */,
 				E85D06102A6B93BC00F987F9 /* NotificationMechanic.swift */,
 				9D4EDF052A3CC80100CA8390 /* Editview.swift */,
 				9EF43E552A2FE3C6001A4A66 /* SplashScreenView.swift */,
 				9DF6AB872A34F77D00DA095B /* ImagePicker.swift */,
+				E800F56D2A79FA29003C6527 /* Reason.swift */,
+				E82C24572A7BADCF00C44E20 /* Notify.swift */,
 				9DF6AB7B2A34F75600DA095B /* Profile.swift */,
 				9DF6AB812A34F76E00DA095B /* Garagedetails.swift */,
 				E87E90F22A5B129B0060396E /* MechanicProfile.swift */,
@@ -250,6 +261,7 @@
 				9D24E2AA2A41EFDB0015F274 /* StripePayments */,
 				9D24E2AC2A41EFDB0015F274 /* StripePaymentsUI */,
 				9D526DA12A55F6790057EB16 /* FirebaseStorage */,
+				E800F56B2A79D23A003C6527 /* SDWebImageSwiftUI */,
 			);
 			productName = RepairMate_custLogin;
 			productReference = 038630A22A1C1824004BD44F /* RepairMate.app */;
@@ -285,6 +297,7 @@
 			packageReferences = (
 				038630C22A1D7F10004BD44F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9D24E29F2A41EFDB0015F274 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
+				E800F56A2A79D23A003C6527 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 038630A32A1C1824004BD44F /* Products */;
 			projectDirPath = "";
@@ -313,9 +326,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E82C24582A7BADCF00C44E20 /* Notify.swift in Sources */,
 				9EF43E562A2FE3C6001A4A66 /* SplashScreenView.swift in Sources */,
 				9DF6AB7E2A34F75D00DA095B /* Updateprofile.swift in Sources */,
 				038630B72A1C4861004BD44F /* LoginView.swift in Sources */,
+				E800F56E2A79FA29003C6527 /* Reason.swift in Sources */,
 				9DF6AB7C2A34F75600DA095B /* Profile.swift in Sources */,
 				E85D06112A6B93BC00F987F9 /* NotificationMechanic.swift in Sources */,
 				9EF43E5A2A2FE44A001A4A66 /* MechanicLoginView.swift in Sources */,
@@ -329,6 +344,7 @@
 				9EF43E5C2A2FE47A001A4A66 /* MechanicSignUpView.swift in Sources */,
 				9DF45C4D2A47A3350058AC4F /* Mechanics_Home.swift in Sources */,
 				038630BF2A1D7AA9004BD44F /* AuthView.swift in Sources */,
+				E82C24562A7B969700C44E20 /* Notification.swift in Sources */,
 				038630A82A1C1824004BD44F /* ContentView.swift in Sources */,
 				9EF43E582A2FE425001A4A66 /* RoleSelectionView.swift in Sources */,
 				9DF6AB822A34F76E00DA095B /* Garagedetails.swift in Sources */,
@@ -568,6 +584,14 @@
 				minimumVersion = 23.0.0;
 			};
 		};
+		E800F56A2A79D23A003C6527 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -620,6 +644,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 038630C22A1D7F10004BD44F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		E800F56B2A79D23A003C6527 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E800F56A2A79D23A003C6527 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -90,6 +90,7 @@ struct LoginView: View {
                                     print("No documents found in customers collection")
                                     return
                                 }
+                                
                                 var isCustomer:Bool = false
                                 for document in documents {
                                     let customerId = document.documentID

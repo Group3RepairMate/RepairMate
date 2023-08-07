@@ -18,6 +18,7 @@ struct EditBooking: View {
     @State private var isChanged:Bool = false
     @State private var linkselection : Int? = nil
     @Environment(\.dismiss) var dismiss
+    @State private var isSheetPresented = false
     var body: some View {
         VStack {
             Text("Booking Details")
@@ -121,72 +122,69 @@ struct EditBooking: View {
                 }
             }
 
-            Button(action: {
-                
-                Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
-                    "firstName":firstName,
-                    "lastName":lastName,
-                    "emailAddress": email,
-                    "contactNumber":contact,
-                    "apartmentNum":unit,
-                    "streetName":street,
-                    "postalcode":postalcode,
-                    "dateTime":time,
-                    "problemDesc":problem
-                ])
-                { error in
-                    if let error = error {
-                        showAlert = true
+            if(!(order.status == "deleted")){
+                Button(action: {
+                    Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
+                        "firstName":firstName,
+                        "lastName":lastName,
+                        "emailAddress": email,
+                        "contactNumber":contact,
+                        "apartmentNum":unit,
+                        "streetName":street,
+                        "postalcode":postalcode,
+                        "dateTime":time,
+                        "problemDesc":problem
+                    ])
+                    { error in
+                        if let error = error {
+                            showAlert = true
+                        } else {
+                            showAlert = true
+                            isChanged = true
+                        }
+                    }
+                    
+                }) {
+                    Text("Update")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 200)
+                }
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+                .alert(isPresented: $showAlert) {
+                    if isChanged {
+                        return Alert(title: Text("Successful"), message: Text("Changes made"), dismissButton: .default(Text("OK")))
+                        
                     } else {
-                        showAlert = true
-                        isChanged = true
+                        return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
                     }
                 }
                 
-            }) {
-                Text("Update")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 200)
-            }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
-            .alert(isPresented: $showAlert) {
-                if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Changes made"), dismissButton: .default(Text("OK")))
-                    
-                } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                Button(action: {
+                    isSheetPresented = true
+                }) {
+                    Text("Cancel Order")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("darkgray"))
+                        .cornerRadius(8)
+                        .padding(.top,30)
                 }
+                .sheet(isPresented: $isSheetPresented, content: {
+                    Reason(order: order, role: "c")
+                })
             }
             
-            Button(action: {
-                deleteOrder()
-                dismiss()
-            }) {
-                Text("Cancel Order")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 200)
-            }
-            .background(Color.red)
-            .cornerRadius(70)
-            .alert(isPresented: $showAlert) {
-                if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Order Delete Successfully"), dismissButton: .default(Text("OK")))
-                } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
-                }
-            }
         }
         .padding(10)
         .onAppear(){
@@ -197,26 +195,6 @@ struct EditBooking: View {
             email = order.email
             contact = order.contactNo
             problem = order.problemDisc
-        }
-    }
-    
-    private func deleteOrder() {
-        guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
-            print("User document ID not found")
-            return
-        }
-        
-        Firestore.firestore().collection("customers").document(userDocumentID).collection("Orderlist").document(order.bookingId).updateData(
-            ["status":"deleted"]) { error in
-            if let error = error {
-                print("Error deleting order: \(error)")
-                showAlert = true
-            } else {
-               
-                showAlert = true
-                isChanged = true
-              
-            }
         }
     }
 }

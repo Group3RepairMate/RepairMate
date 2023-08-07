@@ -161,7 +161,8 @@ struct SignUpView: View {
                             }
                         }
                     }
-                })  {
+                })
+                {
                     Text("Create Account")
                         .foregroundColor(.white)
                         .font(.headline)
@@ -170,7 +171,8 @@ struct SignUpView: View {
                         .background(Color("darkgray"))
                         .cornerRadius(8)
                         .padding(10)
-                }            }
+                }
+            }
             Spacer()
                 .navigationBarTitle("", displayMode: .inline)
             //.navigationBarHidden(true)

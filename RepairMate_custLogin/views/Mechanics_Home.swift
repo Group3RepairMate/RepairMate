@@ -105,10 +105,9 @@ struct Mechanics_Home: View {
                         }
                         
                         for i in fetchedOrder{
-                            if(i.garageemail == mechanicId){
+                            if((i.garageemail == mechanicId) && !(i.status=="deleted")){
                                 self.orderList.append(i)
                             }
-                            
                         }
                     }
                 }

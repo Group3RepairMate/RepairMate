@@ -14,6 +14,7 @@ struct EditOrderForMech: View {
     @State private var showAlert:Bool = false
     @State private var isChanged:Bool = false
     @Environment(\.dismiss) var dismiss
+    @State private var isSheetPresented = false
     var body: some View {
         VStack {
             Text("Booking Details")
@@ -90,114 +91,96 @@ struct EditOrderForMech: View {
                         )
                 }
             }
-
-            Button(action: {
-                
-                Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
-                    "dateTime":time,
-                ])
-                { error in
-                    if let error = error {
-                        showAlert = true
-                    } else {
-                        showAlert = true
-                        isChanged = true
+            
+            if(!(order.status == "deleted")){
+                Button(action: {
+                    Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData([
+                        "dateTime":time,
+                    ])
+                    { error in
+                        if let error = error {
+                            showAlert = true
+                        } else {
+                            showAlert = true
+                            isChanged = true
+                        }
                     }
-                }
-                dismiss()
-                
-            }) {
-                Text("Update")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 200)
-            }
-            .background(Color("darkgray"))
-            .cornerRadius(70)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.blue,lineWidth: 0)
-                    .foregroundColor(.black)
-            )
-            .alert(isPresented: $showAlert) {
-                if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Changes made"), dismissButton: .default(Text("OK")))
+                    dismiss()
                     
-                } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                }) {
+                    Text("Update")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(15)
+                        .frame(maxWidth: 200)
                 }
-            }
-            
-            Button(action: {
-                Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
-                    ["status":"done"]) { error in
-                    if let error = error {
-                        print("Error deleting order: \(error)")
-                        showAlert = true
+                .background(Color("darkgray"))
+                .cornerRadius(70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.blue,lineWidth: 0)
+                        .foregroundColor(.black)
+                )
+                .alert(isPresented: $showAlert) {
+                    if isChanged {
+                        return Alert(title: Text("Successful"), message: Text("Changes made"), dismissButton: .default(Text("OK")))
+                        
                     } else {
-                        showAlert = true
-                        isChanged = true
+                        return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
                     }
                 }
-            })
-            {
-                Text("Done")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color("darkgray"))
-                    .cornerRadius(8)
-                    .padding(.top,20)
-            }
-            .alert(isPresented: $showAlert) {
-                if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Order completed Successfully"), dismissButton: .default(Text("OK")))
-                } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the order done"), dismissButton: .default(Text("OK")))
+                
+                Button(action: {
+                    Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
+                        ["status":"done"]) { error in
+                            if let error = error {
+                                print("Error deleting order: \(error)")
+                                showAlert = true
+                            } else {
+                                showAlert = true
+                                isChanged = true
+                            }
+                        }
+                })
+                {
+                    Text("Done")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("darkgray"))
+                        .cornerRadius(8)
+                        .padding(.top,20)
                 }
-            }
-            
-            Button(action: {
-                deleteOrder()
-                dismiss()
-            }) {
-                Text("Cancel Order")
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(15)
-                    .frame(maxWidth: 200)
-            }
-            .background(Color.red)
-            .cornerRadius(70)
-            .alert(isPresented: $showAlert) {
-                if isChanged {
-                    return Alert(title: Text("Successful"), message: Text("Order Delete Successfully"), dismissButton: .default(Text("OK")))
-                } else {
-                    return Alert(title: Text("Failed"), message: Text("Cannot make the changes"), dismissButton: .default(Text("OK")))
+                .alert(isPresented: $showAlert) {
+                    if isChanged {
+                        return Alert(title: Text("Successful"), message: Text("Order completed Successfully"), dismissButton: .default(Text("OK")))
+                    } else {
+                        return Alert(title: Text("Failed"), message: Text("Cannot make the order done"), dismissButton: .default(Text("OK")))
+                    }
                 }
+                
+                Button(action: {
+                    isSheetPresented = true
+                }) {
+                    Text("Cancel Order")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("darkgray"))
+                        .cornerRadius(8)
+                        .padding(.top,30)
+                }
+                .sheet(isPresented: $isSheetPresented, content: {
+                    Reason(order: order, role: "m")
+                })
             }
         }
         .padding(10)
         .onAppear(){
             time = order.date
-        }
-    }
-    
-    private func deleteOrder() {
-        
-        Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
-            ["status":"deleted"]) { error in
-            if let error = error {
-                print("Error deleting order: \(error)")
-                showAlert = true
-            } else {
-                showAlert = true
-                isChanged = true
-            }
         }
     }
 }
