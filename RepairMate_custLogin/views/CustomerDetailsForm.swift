@@ -211,18 +211,7 @@ struct CustomerDetailsForm: View {
                     .padding(.top,20)
                     .padding(5)
             }
-//            .background(Color("darkgray"))
-//            .cornerRadius(70)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 0)
-//                    .stroke(Color.blue, lineWidth: 0)
-//                    .foregroundColor(.black)
-//            )
             
-//            .onAppear() {
-//                print("email address \(UserDefaults.standard.string(forKey: "EMAIL") ?? "")")
-//                print("garage name \(UserDefaults.standard.string(forKey: "GARAGE") ?? "")")
-//            }
         }
         .alert(isPresented: $showAlert) {
             if showsuccess {
@@ -235,7 +224,7 @@ struct CustomerDetailsForm: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-     
+        
         Spacer()
     }
     

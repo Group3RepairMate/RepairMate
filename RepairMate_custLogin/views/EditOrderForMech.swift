@@ -169,8 +169,7 @@ struct EditOrderForMech: View {
                     }
                 }
             }
-            //            .padding(.top, 30)
-            //            .padding(.bottom, 30)
+   
         }
     }
         .padding(10)

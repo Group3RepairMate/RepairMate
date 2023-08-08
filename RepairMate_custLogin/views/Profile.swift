@@ -40,7 +40,7 @@ struct Profile: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .font(.system(size: 22.5))
                             .fontWeight(.semibold)
-                            
+                        
                         Text("")
                         
                         Text(email)
@@ -48,14 +48,14 @@ struct Profile: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.top, 5)
                             .font(.system(size: 22.5))
-                      
+                        
                         Text("")
-                      
+                        
                         
                     }
-                 
+                    
                 }
-//                .background(Color("darkgray"))
+                //                .background(Color("darkgray"))
                 
                 NavigationLink(destination: Updateprofile(), tag: 1, selection:self.$update){}
                 NavigationLink(destination: Viewhistory(), tag: 1, selection:self.$historyselection){}
@@ -72,25 +72,25 @@ struct Profile: View {
                         }) {
                             HStack {
                                 Image(systemName: "bell.fill")
-                                    .foregroundColor(.red) // Change symbol color
+                                    .foregroundColor(.red)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Notifications")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black) 
                                     .font(.headline)
                             }
                             .padding(3)
                             .cornerRadius(20)
                         }
                         .padding(.vertical, 3)
-
+                        
                         Button(action: {
                             // Add action for "reset password" button
                             self.resetPasswordSelection = 1
                         }) {
                             HStack {
                                 Image(systemName: "key.horizontal.fill")
-                                    .foregroundColor(.orange) 
+                                    .foregroundColor(.orange)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Reset Password")
@@ -102,7 +102,7 @@ struct Profile: View {
                         }
                         .padding(.vertical, 5)
                     }
-
+                    
                     Section(header: Text("Help & Support")) {
                         Button(action: {
                             self.faq = 1
@@ -120,7 +120,7 @@ struct Profile: View {
                             .cornerRadius(20)
                         }
                         .padding(.vertical, 3)
-
+                        
                         Button(action: {
                             self.policy = 1
                         }) {
@@ -130,34 +130,34 @@ struct Profile: View {
                                     .imageScale(.large)
                                 Text("")
                                 Text("Privacy")
-                                    .foregroundColor(.black) 
+                                    .foregroundColor(.black)
                                     .font(.headline)
                             }
                             .padding(3)
                             .cornerRadius(20)
                         }
                         .padding(.vertical, 3)
-
+                        
                         Button(action: {
                             self.contact = 1
                         }) {
                             HStack {
                                 Image(systemName: "phone.circle.fill")
-                                    .foregroundColor(.gray) // Change symbol color
+                                    .foregroundColor(.gray)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Contact Us")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black)
                                     .font(.headline)
                             }
                             .padding(3)
                             .cornerRadius(20)
                         }
-                        .padding(.vertical, 3) // Add vertical margin
+                        .padding(.vertical, 3)
                     }
                 }
                 .listStyle(GroupedListStyle())
-
+                
                 Button(action:{
                     let firebaseAuth = Auth.auth()
                     do {
@@ -186,7 +186,7 @@ struct Profile: View {
                         .padding(.top,1)
                         .padding(5)
                 }
-//                Spacer()
+                //                Spacer()
             }
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
@@ -202,7 +202,7 @@ struct Profile: View {
             .onAppear(){
                 let db = Firestore.firestore()
                 let userID = Auth.auth().currentUser?.uid
-             
+                
                 
                 guard let userDocumentID = UserDefaults.standard.string(forKey: "EMAIL") else {
                     print("User document ID not found")
@@ -214,7 +214,7 @@ struct Profile: View {
                         let data = document.data()
                         fullName = data?["fullName"] as? String ?? ""
                         email = data?["email"] as? String ?? ""
-                     
+                        
                     } else {
                         print("User document does not exist")
                     }
@@ -224,50 +224,6 @@ struct Profile: View {
         }
         
     }
-    
-    func loadimage() {
-        guard let uiImage = selectedUIImage,
-              let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
-            print("Error converting image to data.")
-            return
-        }
-        
-        // Create a unique file name for the image
-        let imageFileName = UUID().uuidString
-        
-        // Create a reference to the Firebase Storage bucket
-        let storageRef = Storage.storage().reference().child("profileImages/\(imageFileName).jpeg")
-        
-        // Upload the image data to Firebase Storage
-        storageRef.putData(imageData, metadata: nil) { (_, error) in
-            if let error = error {
-                print("Error uploading image: \(error.localizedDescription)")
-                return
-            }
-            
-            // Retrieve the download URL of the uploaded image
-            storageRef.downloadURL { (url, error) in
-                if let error = error {
-                    print("Error retrieving download URL: \(error.localizedDescription)")
-                    return
-                }
-                
-                if let imageUrl = url?.absoluteString {
-                    // Store the image URL in Firestore
-                    let db = Firestore.firestore()
-                    let userRef = db.collection("customers").document(userID) // Using userID directly here
-                    userRef.updateData(["profileImageUrl": imageUrl]) { (error) in
-                        if let error = error {
-                            print("Error updating profile image URL: \(error.localizedDescription)")
-                        } else {
-                            print("Profile image URL updated successfully.")
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
 }
 
 struct Profile_Previews: PreviewProvider {

@@ -59,7 +59,7 @@ struct MechanicHistory: View {
                                     .foregroundColor(.gray)
                                     .bold()
                                 Button(action: {
-                                    // Set the selected order when the button is tapped
+                                  
                                     selectedOrder = order
                                 }) {
                                     Label("", systemImage: "square.and.pencil")
@@ -189,12 +189,8 @@ struct MechanicHistory: View {
             orderList = []
             fetchOrderList()
         }
-//        .onReceive(timer) { _ in
-//
-//            fetchOrderList()
-//        }
+
     }
-   // private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func fetchOrderList() {
         Firestore.firestore().collection("customers").getDocuments { (snapshot, error) in

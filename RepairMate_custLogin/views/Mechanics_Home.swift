@@ -1,10 +1,3 @@
-//
-//  Mechanics_Home.swift
-//  RepairMate
-//
-//  Created by Patel Chintan on 2023-06-24.
-//
-
 import SwiftUI
 import FirebaseAuth
 import Firebase
@@ -55,15 +48,13 @@ struct Mechanics_Home: View {
                 orderList = []
                 fetchOrderList()
             }
-//            .onReceive(timer) { _ in
-//                fetchOrderList()
-//            }
+
             
             .navigationBarBackButtonHidden()
         }
         
     }
-//    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     
     private func fetchOrderList() {
         Firestore.firestore().collection("customers").getDocuments { (snapshot, error) in

@@ -1,10 +1,3 @@
-//
-//  MechanicProfile.swift
-//  RepairMate
-//
-//  Created by Harshil Vaghani on 2023-07-09.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -40,7 +33,7 @@ struct MechanicProfile: View {
             NavigationView {
                 VStack {
                     HStack {
-                 
+                        
                         VStack {
                             Text(fullName)
                                 .foregroundColor(Color("darkgray"))
@@ -54,7 +47,7 @@ struct MechanicProfile: View {
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .padding(.top, 5)
                                 .font(.system(size: 22.5))
-                          
+                            
                             Text("")
                         }
                     }
@@ -64,7 +57,7 @@ struct MechanicProfile: View {
                     NavigationLink(destination: NotificationMechanic(), tag: 1, selection:self.$notificationselection){}
                     NavigationLink(destination: EditMechanic(), tag: 1, selection:self.$mechanicedit){}
                     List {
-
+                        
                         Button(action: {
                             self.notificationselection = 1
                         }) {
@@ -135,9 +128,7 @@ struct MechanicProfile: View {
                             Image(systemName: "square.and.pencil")
                                 .foregroundColor(.black)
                         }
-//                        .sheet(isPresented: $isSheetPresented) {
-//                            EditMechanic()
-//                        }
+                        
                     }
                 }
             }
@@ -152,49 +143,9 @@ struct MechanicProfile: View {
         }
     }
     
-    func loadimage() {
-        guard let uiImage = selectedUIImage,
-              let imageData = uiImage.jpegData(compressionQuality: 0.5) else {
-            print("Error converting image to data.")
-            return
-        }
-        
-        // Create a unique file name for the image
-        let imageFileName = UUID().uuidString
-        
-        // Create a reference to the Firebase Storage bucket
-        let storageRef = Storage.storage().reference().child("profileImages/\(imageFileName).jpeg")
-        
-        // Upload the image data to Firebase Storage
-        storageRef.putData(imageData, metadata: nil) { (_, error) in
-            if let error = error {
-                print("Error uploading image: \(error.localizedDescription)")
-                return
-            }
-            
-            // Retrieve the download URL of the uploaded image
-            storageRef.downloadURL { (url, error) in
-                if let error = error {
-                    print("Error retrieving download URL: \(error.localizedDescription)")
-                    return
-                }
-                
-                if let imageUrl = url?.absoluteString {
-                    // Store the image URL in Firestore
-                    let db = Firestore.firestore()
-                    let userRef = db.collection("customers").document(mechanicId) // Using userID directly here
-                    userRef.updateData(["profileImageUrl": imageUrl]) { (error) in
-                        if let error = error {
-                            print("Error updating profile image URL: \(error.localizedDescription)")
-                        } else {
-                            print("Profile image URL updated successfully.")
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 }
+
 
 struct MechanicProfile_Previews: PreviewProvider {
     static var previews: some View {

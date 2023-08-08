@@ -1,10 +1,3 @@
-//
-//  MechanicLoginView.swift
-//  RepairMate
-//
-//  Created by Bhuvesh Aggarwal on 2023-06-06.
-//
-
 import SwiftUI
 import FirebaseAuth
 import Firebase

@@ -1,10 +1,3 @@
-//
-//  ContentViewForMech.swift
-//  RepairMate
-//
-//  Created by Harshil Vaghani on 2023-07-09.
-//
-
 import SwiftUI
 
 struct ContentViewForMech: View {

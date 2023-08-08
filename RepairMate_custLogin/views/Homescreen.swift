@@ -42,7 +42,7 @@ struct Homescreen: View {
                 .pickerStyle(SegmentedPickerStyle())
                 //.padding(10)
                 .padding(.horizontal)
-            
+                
                 List {
                     ForEach(searchlist, id: \.self) { index in
                         NavigationLink(destination: Garagedetails(detailsview: self.garagehelper.garagelist[index])) {
@@ -78,8 +78,8 @@ struct Homescreen: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-       
-       
+        
+        
     }
     
     var searchlist: [Int] {
@@ -103,7 +103,7 @@ struct Homescreen: View {
         
         return sortedList
     }
-
+    
     func typegarage(_ garage: Garage) -> Bool {
         switch selectedServiceType {
         case .immediate:

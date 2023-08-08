@@ -1,10 +1,3 @@
-
-//  LoginView.swift
-//  RepairMate_custLogin
-//
-//  Created by Arjun Roperia on 2023-05-22.
-//
-
 import SwiftUI
 import FirebaseAuth
 import Firebase
@@ -16,8 +9,11 @@ struct LoginView: View {
     @State private var password : String = ""
     @State private var showingAlert = false
     @State private var forgotPass : Int? = nil
+    @State private var show = false
+    @State private var showSuccessAlert = false
+    
     private func isValidPassword(_ password : String) -> Bool{
-
+        
         let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.[a-z])(?=.[$@$#!%?&])(?=.[A-Z]).{6,}$")
         
         return passwordRegex.evaluate(with: password)
@@ -77,6 +73,11 @@ struct LoginView: View {
                                 print(error)
                                 return
                             }
+                            if email.isEmpty || password.isEmpty {
+                                 show = true
+                                 showSuccessAlert = false
+                                 return
+                             }
                             if let authResult = authResult{
                                 let customersCollection = Firestore.firestore().collection("customers")
                                 customersCollection.getDocuments { (snapshot, error) in
@@ -87,6 +88,7 @@ struct LoginView: View {
                                     
                                     guard let documents = snapshot?.documents else {
                                         print("No documents found in customers collection")
+                                        
                                         return
                                     }
                                     var isCustomer:Bool = false
@@ -106,7 +108,7 @@ struct LoginView: View {
                                         }
                                     }
                                     else{
-                                        showingAlert = true
+                                        show = true
                                     }
                                 }
                             }
@@ -122,8 +124,22 @@ struct LoginView: View {
                             .cornerRadius(8)
                             .padding(.top,15)
                     }
-                    .alert("User not found", isPresented: $showingAlert) {
-                        Button("OK", role: .cancel) { }
+                    .alert(isPresented:$show){
+                        
+                        if (showSuccessAlert){
+                            return Alert(
+                                title: Text("Failed"),
+                                message: Text("User Not Found."),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
+                        else{
+                            return Alert(
+                                title: Text("Error"),
+                                message: Text("Please enter all the details."),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
                     }
                     
                     Button(action : {

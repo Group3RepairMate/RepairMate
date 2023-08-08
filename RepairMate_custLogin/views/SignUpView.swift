@@ -107,7 +107,7 @@ struct SignUpView: View {
             .padding(11)
             
             Text("")
-        
+            
             
             Button(action: {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -158,6 +158,5 @@ struct SignUpView: View {
                     .padding(.top,10)
             }            }
         .navigationBarTitle("", displayMode: .inline)
-        //.navigationBarHidden(true)
     }
 }

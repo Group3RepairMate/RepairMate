@@ -11,11 +11,11 @@ struct Garagedetails: View {
     var detailsview: Garage
     @State private var place: [Place] = []
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.6532, longitude: -79.3832), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-
+    
     @StateObject private var placeManager = PlaceManager()
     @State var goToCustomerDetailScreen: Bool = false
     
-
+    
     var body: some View {
         VStack {
             Text("Garage Details")
@@ -23,20 +23,20 @@ struct Garagedetails: View {
                 .font(.title)
                 .fontWeight(.semibold)
                 .padding(.top, -66)
-        
+            
             VStack {
                 Text(detailsview.name)
                     .foregroundColor(.brown)
                     .font(.title2)
                     .fontWeight(.medium)
-                    
-//                    .padding(.top, -70)
+                
+                
                 Text("")
                 Text("Location: \(detailsview.location)")
                     .fontWeight(.regular)
                     .font(.system(size: 17))
                     .foregroundColor(.black)
-//                    .padding(.top, -60)
+                
                 Text("")
                 Map(coordinateRegion: $region, annotationItems: place) { place in
                     MapMarker(coordinate: place.coordinate, tint: Color("darkgray"))
@@ -51,13 +51,12 @@ struct Garagedetails: View {
                     HStack {
                         Spacer()
                         Image("direction")
-//                            .foregroundColor(Color("darkgray"))
+                        
                             .resizable()
                             .frame(width: 60, height: 60)
                             .padding(.trailing,12)
                             .padding(.top,-32)
-//                            .frame(width: 1)
-//
+                        
                     }
                 }
             }
@@ -68,7 +67,7 @@ struct Garagedetails: View {
                 guard let userLocation = location else { return }
                 region.center = userLocation.coordinate
             }
-
+            
             VStack {
                 
                 Button(action: {
@@ -115,33 +114,33 @@ struct Garagedetails: View {
                         Spacer()
                     }
                 }
-
+                
                 .padding(4)
                 NavigationLink(destination: CustomerDetailsForm(detailsview: detailsview), isActive: $goToCustomerDetailScreen) {
-                                Button(action: {
-                                    self.goToCustomerDetailScreen = true
-                                }) {
-                                    Text("Book Now")
-                                        .foregroundColor(.white)
-                                        .font(.headline)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(Color("darkgray"))
-                                        .cornerRadius(8)
-                                        .padding(.top,20)
-                                }
-
-                                .padding(5)
-
-                            }
-                            .navigationBarTitle("", displayMode: .inline)
-                            
+                    Button(action: {
+                        self.goToCustomerDetailScreen = true
+                    }) {
+                        Text("Book Now")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color("darkgray"))
+                            .cornerRadius(8)
+                            .padding(.top,20)
+                    }
+                    
+                    .padding(5)
+                    
+                }
+                .navigationBarTitle("", displayMode: .inline)
+                
             }
             
-
+            
         }
     }
-
+    
     func forwardGeocoding(address: String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -149,7 +148,7 @@ struct Garagedetails: View {
                 print("Failed to retrieve location")
                 return
             }
-
+            
             if let placemark = placemarks?.first,
                let location = placemark.location {
                 let coordinate = location.coordinate
@@ -161,12 +160,12 @@ struct Garagedetails: View {
             }
         }
     }
-
+    
     func openAppleMaps(latitude: CLLocationDegrees?, longitude: CLLocationDegrees?) {
         guard let latitude = latitude, let longitude = longitude else {
             return
         }
-
+        
         let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
@@ -178,19 +177,19 @@ struct Garagedetails: View {
 class PlaceManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var lastKnownLocation: CLLocation?
-
+    
     override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.lastKnownLocation = location
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager error: \(error.localizedDescription)")
     }

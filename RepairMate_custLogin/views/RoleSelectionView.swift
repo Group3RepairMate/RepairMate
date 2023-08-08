@@ -1,10 +1,3 @@
-//
-//  RoleSelectionView.swift
-//  RepairMate
-//
-//  Created by Bhuvesh Aggarwal on 2023-06-06.
-//
-
 import SwiftUI
 
 struct RoleSelectionView: View {
@@ -90,7 +83,7 @@ struct RoleSelectionView: View {
                     MechanicLoginView(currentShowingView: $currentShowingView)
                 case "mechanic_signup":
                     MechanicSignUpView(currentShowingView: $currentShowingView)
-               
+                    
                 default:
                     EmptyView()
                 }

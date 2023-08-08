@@ -2,9 +2,9 @@
 import SwiftUI
 
 struct SplashScreenView: View {
-  
+    
     @State var isActive: Bool = false
-
+    
     var body: some View {
         VStack {
             if self.isActive {
@@ -29,7 +29,6 @@ struct SplashScreenView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 250, height: 200)
-//                        .background(Color("darkgray"))
                         .padding()
                 }
             }
@@ -41,7 +40,7 @@ struct SplashScreenView: View {
                 }
             }
         }
-
+        
     }
 }
 

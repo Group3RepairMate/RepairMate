@@ -50,6 +50,7 @@ struct MechanicSignUpView: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.black, lineWidth: 1)
                         )
+                        .autocorrectionDisabled()
                         .padding(.top,5)
                     
                     TextField("Garage Contact No.", text: $contactNo)
@@ -59,6 +60,7 @@ struct MechanicSignUpView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .padding(.top,5)
+                        .autocorrectionDisabled()
                     
                     TextField("Garage Address", text: $garageAddress)
                         .padding()
@@ -67,11 +69,13 @@ struct MechanicSignUpView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .padding(.top,5)
+                        .autocorrectionDisabled()
                     
                     Text("Select your booking service:")
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top,5)
+                        .autocorrectionDisabled()
                     Picker(selection: $selectedBookingType, label: Text("Booking Type")) {
                         ForEach(0..<bookingTypes.count) { index in
                             Text(bookingTypes[index]).tag(index)
@@ -95,6 +99,7 @@ struct MechanicSignUpView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .padding(.top,5)
+                        .autocorrectionDisabled()
                     
                     SecureField("Set Password", text: $password)
                         .padding()
@@ -103,6 +108,7 @@ struct MechanicSignUpView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .padding(.top,5)
+                        .autocorrectionDisabled()
                 }
                 
                 Button(action: {
@@ -196,6 +202,8 @@ struct MechanicSignUpView: View {
                         }
                         if let authResult = authResult {
                             print("account created successfully.")
+                            mechanicId = email
+                            
                         }
                     }
                 }

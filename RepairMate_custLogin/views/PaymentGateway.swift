@@ -52,15 +52,12 @@ struct PaymentGateway: View {
                         .background(RoundedRectangle(cornerRadius: 10).stroke(Color("darkgray"), lineWidth: 1))
                         .padding()
                         .autocorrectionDisabled()
-                    
-//                    NavigationLink(destination: Viewhistory(), tag: 1, selection: self.$linkselection) {}
                 }
                 .padding()
                 Spacer()
-                // Payment button
+            
                 Button(action: {
                     processPayment()
-//                    linkselection = 1
                     Viewhistory()
                     print("PRess pay")
                     
@@ -85,7 +82,7 @@ struct PaymentGateway: View {
                 Alert(title: Text("Payment Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
         }
-//        .navigationBarBackButtonHidden(true)
+
     }
     
     
