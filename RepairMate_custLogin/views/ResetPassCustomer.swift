@@ -1,10 +1,3 @@
-//
-//  ResetPassCustomer.swift
-//  RepairMate
-//
-//  Created by Arjun Roperia on 2023-06-28.
-//
-
 import SwiftUI
 import Firebase
 

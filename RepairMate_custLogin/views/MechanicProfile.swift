@@ -17,13 +17,7 @@ struct MechanicProfile: View {
     @AppStorage("mechanicPassword") var mechanicPassword: String = ""
     @EnvironmentObject var garagehelper: Garagehelper
     
-    
-    var selectedUIImage: UIImage? {
-        if let imageData = selectedImage {
-            return UIImage(data: imageData)
-        }
-        return nil
-    }
+
     
     var body: some View {
         if mechanicId == "" {
@@ -63,11 +57,11 @@ struct MechanicProfile: View {
                         }) {
                             HStack {
                                 Image(systemName: "bell.fill")
-                                    .foregroundColor(.red) // Change symbol color
+                                    .foregroundColor(.red)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Notifications")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black) 
                                     .font(.headline)
                             }
                             .padding(3)
@@ -80,11 +74,11 @@ struct MechanicProfile: View {
                         }) {
                             HStack {
                                 Image(systemName: "key.horizontal.fill")
-                                    .foregroundColor(.orange) // Change symbol color
+                                    .foregroundColor(.orange)
                                     .imageScale(.large)
                                 Text("")
                                 Text("Reset Password")
-                                    .foregroundColor(.black) // Font color
+                                    .foregroundColor(.black)
                                     .font(.headline)
                             }
                             .padding(3)
@@ -131,15 +125,18 @@ struct MechanicProfile: View {
                         
                     }
                 }
-            }
-            .onAppear(){
-                for i in garagehelper.garagelist{
-                    if i.email == mechanicId{
-                        fullName = i.name
-                        email = i.email
+                .onAppear(){
+         
+                    
+                    for i in garagehelper.garagelist{
+                        if i.email == mechanicId{
+                            fullName = i.name
+                            email = i.email
+                        }
                     }
                 }
             }
+       
         }
     }
     

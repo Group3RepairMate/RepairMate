@@ -1,10 +1,3 @@
-//
-//  Mauthview.swift
-//  RepairMate
-//
-//  Created by Patel Chintan on 2023-06-24.
-//
-
 import SwiftUI
 
 struct Mauthview: View {

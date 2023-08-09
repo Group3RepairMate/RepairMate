@@ -1,10 +1,3 @@
-//
-//  String.swift
-//  RepairMate_custLogin
-//
-//  Created by Arjun Roperia on 2023-05-22.
-//
-
 import Foundation
 
 extension String {

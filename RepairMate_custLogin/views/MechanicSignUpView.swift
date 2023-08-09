@@ -1,10 +1,3 @@
-//
-//  MechanicSignUpView.swift
-//  RepairMate
-//
-//  Created by Bhuvesh Aggarwal on 2023-06-06.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -19,6 +12,7 @@ struct MechanicSignUpView: View {
     @State private var selectedBookingType: Int = 0
     @State private var showingAlert = false
     @AppStorage("mechanicId") var mechanicId: String = ""
+    @EnvironmentObject var garagehelper: Garagehelper
     
     private let bookingTypes = ["Advance", "Immediate", "Both"]
     
@@ -201,7 +195,10 @@ struct MechanicSignUpView: View {
                             return
                         }
                         if let authResult = authResult {
+                            UserDefaults.standard.set(email, forKey: "MEMAIL")
+                            UserDefaults.standard.set(password, forKey: "MPASS")
                             print("account created successfully.")
+                            garagehelper.fetchGaragelist()
                             mechanicId = email
                             
                         }

@@ -1,10 +1,3 @@
-//
-//  Notify.swift
-//  RepairMate
-//
-//  Created by Patel Chintan on 2023-08-03.
-//
-
 import Foundation
 struct Notify: Identifiable,Equatable,Hashable {
     let id = UUID()

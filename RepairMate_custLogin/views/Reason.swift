@@ -1,10 +1,3 @@
-//
-//  Reason.swift
-//  RepairMate
-//
-//  Created by Harshil Vaghani on 2023-08-01.
-//
-
 import SwiftUI
 import Firebase
 

@@ -23,7 +23,7 @@ struct MechanicLoginView: View {
                     .font(.largeTitle)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                   
+                
                 
                 HStack{
                     Image(systemName: "envelope.fill")
@@ -86,7 +86,8 @@ struct MechanicLoginView: View {
                                 }
                                 
                                 if(isMechanicPresent){
-                                    UserDefaults.standard.set(email,forKey: "EMAIL")
+                                    UserDefaults.standard.set(email, forKey: "MEMAIL")
+                                    UserDefaults.standard.set(password, forKey: "MPASS")
                                     withAnimation{
                                         mechanicId = email
                                         self.currentShowingView = "mechanichome"
@@ -136,5 +137,5 @@ struct MechanicLoginView: View {
         }
         .navigationBarTitle("", displayMode: .inline)
     }
-       
+    
 }

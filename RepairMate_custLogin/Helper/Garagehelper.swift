@@ -11,6 +11,7 @@ class Garagehelper: ObservableObject{
         fetchGaragelist()
     }
     func fetchGaragelist() {
+        print("fetchGaragelist start")
         guard let api = URL(string: baseURL) else{
             print(#function, "Unable to convert string to URL")
             return
@@ -34,6 +35,7 @@ class Garagehelper: ObservableObject{
                                         DispatchQueue.main.async {
                                             self.garagelist = garages.list
                                         }
+                                        print("fetchGaragelist garagelist --> \(self.garagelist)")
                                     }
                                     else{
                                         print(#function, "Unable to get the JSON data")
@@ -56,6 +58,7 @@ class Garagehelper: ObservableObject{
                     print(#function, "Unable to get HTTP Response")
                 }
             }
+            print("fetchGaragelist end")
         }
         task.resume()
     }

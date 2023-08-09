@@ -19,13 +19,6 @@ struct Profile: View {
     @State private var email:String = ""
     @AppStorage("uid") var userID: String = ""
     
-    var selectedUIImage: UIImage? {
-        if let imageData = selectedImage {
-            return UIImage(data: imageData)
-        }
-        return nil
-    }
-    
     var body: some View {
         if userID == "" {
             AuthView()

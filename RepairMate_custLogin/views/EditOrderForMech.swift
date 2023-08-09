@@ -1,10 +1,3 @@
-//
-//  EditOrderForMech.swift
-//  RepairMate
-//
-//  Created by Harshil Vaghani on 2023-07-26.
-//
-
 import SwiftUI
 import Firebase
 
