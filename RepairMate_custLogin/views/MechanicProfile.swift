@@ -93,6 +93,8 @@ struct MechanicProfile: View {
                         let firebaseAuth = Auth.auth()
                         do {
                             try firebaseAuth.signOut()
+                            UserDefaults.standard.removeObject(forKey: "MEMAIL")
+                            UserDefaults.standard.removeObject(forKey: "MPASS")
                             withAnimation{
                                 mechanicId = ""
                             }

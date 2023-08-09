@@ -20,8 +20,8 @@ struct Reason: View {
             
             if(role=="m"){
                 Picker("Select a reason", selection: $selectedIndex) {
-                    ForEach(reasonsForMech, id: \.self) {
-                        Text($0)
+                    ForEach(0..<reasonsForMech.count, id: \.self) {
+                        Text(reasonsForMech[$0])
                     }
                 }
                 .pickerStyle(InlinePickerStyle())
@@ -39,8 +39,8 @@ struct Reason: View {
             }
             else{
                 Picker("Select a reason", selection: $selectedIndex) {
-                    ForEach(reasonsForCustomers, id: \.self) {
-                        Text($0)
+                    ForEach(0..<reasonsForCustomers.count, id: \.self) {
+                        Text(reasonsForCustomers[$0])
                     }
                 }
                 .pickerStyle(InlinePickerStyle())
@@ -85,6 +85,7 @@ struct Reason: View {
     }
     
     func deleteOrder(role:String){
+        print("selected reason \(selectedIndex)")
         Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData([
             "status":"deleted"
         ])
@@ -97,12 +98,13 @@ struct Reason: View {
         }
         
         if(role=="m"){
-            if(!(selectedIndex==2)){
+            if(selectedIndex==2){
                 let detail: [String: Any] = [
                     "from": order.garageemail,
                     "name":order.garageName,
                     "to": order.email,
-                    "msg": "Your order is declined. \(order.garageName) won't attend you on \(order.date) due to following reason.\n Reason: \(reason)"
+                    "msg": "Your order is declined. \(order.garageName) won't attend you on \(order.date) due to following reason.\n Reason: \(reason)",
+                    "date": order.date
                 ]
                 
                 addNotification(data: detail)
@@ -112,19 +114,21 @@ struct Reason: View {
                     "from": order.garageemail,
                     "name":order.garageName,
                     "to": order.email,
-                    "msg": "Your order is declined. \(order.garageName) won't attend you on \(order.date) due to following reason.\n Reason: \(reasonsForMech[selectedIndex])"
+                    "msg": "Your order is declined. \(order.garageName) won't attend you on \(order.date) due to following reason.\n Reason: \(reasonsForMech[selectedIndex])",
+                    "date": order.date
                 ]
                 
                 addNotification(data: detail)
             }
         }
         else{
-            if(!(selectedIndex==3)){
+            if(selectedIndex==3){
                 let detail: [String: Any] = [
                     "from": order.email,
                     "name":order.firstName+" "+order.lastName,
                     "to": order.garageemail,
-                    "msg": "\(order.firstName) \(order.lastName) has declined the order due to following reason.\n Reason: \(reasonsForCustomers[selectedIndex])"
+                    "msg": "\(order.firstName) \(order.lastName) has declined the order due to following reason.\n Reason: \(reason)",
+                    "date": order.date
                 ]
                 
                 addNotification(data: detail)
@@ -134,7 +138,8 @@ struct Reason: View {
                     "from": order.email,
                     "name":order.firstName+" "+order.lastName,
                     "to": order.garageemail,
-                    "msg": "\(order.firstName) \(order.lastName) has declined the order due to following reason.\n Reason: \(reason)"
+                    "msg": "\(order.firstName) \(order.lastName) has declined the order due to following reason.\n Reason: \(reasonsForCustomers[selectedIndex])",
+                    "date": order.date
                 ]
                 
                 addNotification(data: detail)

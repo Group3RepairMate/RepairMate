@@ -56,8 +56,8 @@ struct NotificationScreen: View {
                 let from = data["from"] as? String ?? ""
                 let to = data["to"] as? String ?? ""
                 let msg = data["msg"] as? String ?? ""
-                
-                return Notify(name: name, from: from, to: to, msg: msg)
+                let date = data["date"] as? Date ?? Date.now
+                return Notify(name: name, from: from, to: to, msg: msg, date: date)
             }
             for i in list{
                 if(i.to == userDocumentID){

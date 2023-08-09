@@ -6,7 +6,6 @@ struct EditBooking: View {
     var order: Order
     @State private var firstName: String = ""
     @State private var lastName: String = ""
-    @State private var email: String = ""
     @State private var contact: String = ""
     @State private var unit: String = ""
     @State private var time: Date = Date()
@@ -39,15 +38,6 @@ struct EditBooking: View {
                         .font(.title2.weight(.medium))
                     
                     TextField("\(order.lastName)", text: $lastName)
-                        .autocorrectionDisabled()
-                        .multilineTextAlignment(.leading)
-                        .accentColor(.blue)
-                        .foregroundColor(.blue)
-                        .font(.title2.weight(.medium))
-                }
-                
-                Section(header: Text("Your Email:")) {
-                    TextField("\(order.email)", text: $email)
                         .autocorrectionDisabled()
                         .multilineTextAlignment(.leading)
                         .accentColor(.blue)
@@ -122,9 +112,9 @@ struct EditBooking: View {
                         .font(.title2.weight(.medium))
                 }
             }
-            if(order.status == "accepted"){
+            if((order.status == "processing") || (order.status == "accepted")){
                 Button(action: {
-                    if firstName.isEmpty || lastName.isEmpty || email.isEmpty || contact.isEmpty || unit.isEmpty || street.isEmpty || postalcode.isEmpty || problem.isEmpty {
+                    if firstName.isEmpty || lastName.isEmpty  || contact.isEmpty || unit.isEmpty || street.isEmpty || postalcode.isEmpty || problem.isEmpty {
                         showAlert = true
                     } else {
                         updateBooking()
@@ -179,7 +169,6 @@ struct EditBooking: View {
         Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
             "firstName":firstName,
             "lastName":lastName,
-            "emailAddress": email,
             "contactNumber":contact,
             "apartmentNum":unit,
             "streetName":street,

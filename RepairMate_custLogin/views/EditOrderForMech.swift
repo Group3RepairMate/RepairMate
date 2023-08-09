@@ -64,7 +64,7 @@ struct EditOrderForMech: View {
             }
             
             VStack() {
-                if(order.status == "accepted"){
+                if((order.status == "processing") || (order.status == "accepted")){
                     HStack{
                     Button(action: {
                         Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData(
@@ -127,7 +127,7 @@ struct EditOrderForMech: View {
                     })
                 }
                 Button(action: {
-                    Firestore.firestore().collection("customers").document(UserDefaults.standard.string(forKey: "EMAIL") ?? "").collection("Orderlist").document(order.bookingId).updateData([
+                    Firestore.firestore().collection("customers").document(order.email).collection("Orderlist").document(order.bookingId).updateData([
                         "dateTime":time,
                     ]) { error in
                         if let error = error {
