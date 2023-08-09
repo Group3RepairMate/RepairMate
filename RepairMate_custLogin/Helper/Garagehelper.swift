@@ -13,14 +13,14 @@ class Garagehelper: ObservableObject{
     func fetchGaragelist() {
         print("fetchGaragelist start")
         guard let api = URL(string: baseURL) else{
-            print(#function, "Unable to convert string to URL")
+            print(#function, "Unable to convert string to url method")
             return
         }
 
         let task = URLSession.shared.dataTask(with: api){ (data : Data?, response : URLResponse?, error : Error?) in
             
             if let error = error{
-                print(#function, "Error while connecting to network \(error)")
+                print(#function, "Error while connecting \(error)")
             }
             else{
                 if let httpResponse = response as? HTTPURLResponse{
