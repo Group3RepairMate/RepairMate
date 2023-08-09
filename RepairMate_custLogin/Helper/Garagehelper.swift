@@ -20,7 +20,7 @@ class Garagehelper: ObservableObject{
         let task = URLSession.shared.dataTask(with: api){ (data : Data?, response : URLResponse?, error : Error?) in
             
             if let error = error{
-                print(#function, "Error while connecting \(error)")
+                print(#function, "Error connecting \(error)")
             }
             else{
                 if let httpResponse = response as? HTTPURLResponse{
@@ -38,7 +38,7 @@ class Garagehelper: ObservableObject{
                                         print("fetchGaragelist garagelist --> \(self.garagelist)")
                                     }
                                     else{
-                                        print(#function, "Unable to get the JSON data")
+                                        print(#function, "Unable to get the JSON")
                                     }
                                 }
                                 else{
