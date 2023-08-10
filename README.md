@@ -13,8 +13,6 @@ Some of the key features implemented:
 - Search and booking mechanics
 - Appointment scheduling
 - Payment integration
-- In-app messaging
-- Ratings and reviews
 - Tech Stack
 - SwiftUI based iOS application
 - Firebase for authentication, database, storage
