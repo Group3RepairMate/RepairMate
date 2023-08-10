@@ -37,8 +37,9 @@ The iOS app contains the following key flows:
 - User signup and login
 - Browsing nearby mechanics
 - Booking appointments
-- Messaging mechanics
+- Mechanics Details
 - Payment checkout
+- Edit profile
 - Roadmap
 
 ## Branching Strategy
