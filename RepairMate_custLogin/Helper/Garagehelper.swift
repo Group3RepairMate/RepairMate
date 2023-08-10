@@ -46,12 +46,12 @@ class Garagehelper: ObservableObject{
                                 }
                             }
                             catch let error{
-                                print(#function, "Error while extracting data : \(error)")
+                                print(#function, "Error while extracting : \(error)")
                             }
                         }
                     }
                     else{
-                        print(#function, "Unsuccessful response. Response Code : \(httpResponse.statusCode)")
+                        print(#function, "Unsuccessful response. Response : \(httpResponse.statusCode)")
                     }
                 }
                 else{

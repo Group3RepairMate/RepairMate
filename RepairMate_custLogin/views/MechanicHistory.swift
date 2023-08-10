@@ -94,7 +94,7 @@ struct MechanicHistory: View {
                                         .foregroundColor(.gray)
                                         .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                                        
                                         selectedOrder = order
                                     }) {
                                         Label("", systemImage: "square.and.pencil")
@@ -130,7 +130,7 @@ struct MechanicHistory: View {
                                         .foregroundColor(.gray)
                                         .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                                     
                                         selectedOrder = order
                                     }) {
                                         Label("", systemImage: "square.and.pencil")
@@ -166,7 +166,7 @@ struct MechanicHistory: View {
                                         .foregroundColor(.gray)
                                         .bold()
                                     Button(action: {
-                                        // Set the selected order when the button is tapped
+                              
                                         selectedOrder = order
                                     }) {
                                         Label("", systemImage: "square.and.pencil")

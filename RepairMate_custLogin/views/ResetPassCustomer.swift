@@ -79,7 +79,6 @@ struct ResetPassCustomer: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.black, lineWidth: 1)
                 )
-//                .padding(.horizontal, 9)
             }
             .padding()
             Spacer()
